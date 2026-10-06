@@ -58,6 +58,8 @@ data/processed/*
 # Docker
 .docker/
 
-# Archive
+# Archive & Documentation
 *.tar.gz
 *.zip
+*.docx
+docs_txt/
