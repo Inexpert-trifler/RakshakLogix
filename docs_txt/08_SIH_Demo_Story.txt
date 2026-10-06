@@ -1,0 +1,47 @@
+RakshakLogix — SIH Demo & Presentation Story
+
+Predict → Detect → Simulate → Optimize → Act
+
+Opening Pitch
+
+“Logistics failure is rarely caused by not having data. It is caused by discovering the problem too late. RakshakLogix turns fragmented logistics data into an early-warning and decision-support system.”
+
+5-Minute Demo Flow
+
+Open dashboard: readiness, inventory, alerts and map.
+
+Open a forward location and show stock plus predicted runway.
+
+Generate a 30-day demand forecast and show confidence/metrics.
+
+Show a predicted stockout alert.
+
+Create a replenishment shipment.
+
+Run route/vehicle optimization and show ranked alternatives.
+
+Launch ‘main route unavailable for 5 days’ simulation.
+
+Show baseline versus scenario readiness and affected locations.
+
+Show recommended mitigation plan.
+
+Close with Predict → Detect → Simulate → Optimize → Act.
+
+Judge Questions
+
+Where is the AI? — Demand forecasting, risk prediction and constrained optimization.
+
+What if data is incomplete? — Data-quality checks plus baseline/fallback models.
+
+Why PostGIS? — Logistics is geographic and needs spatial queries.
+
+Can real data be used? — Yes, through the normalized ingestion layer; MVP uses synthetic data.
+
+Does AI act autonomously? — No, it provides explainable recommendations for human approval.
+
+What is novel? — One integrated forward-looking loop across forecasting, inventory, routing and disruption simulation.
+
+One-Line Pitch
+
+RakshakLogix predicts supply needs, detects future shortages, optimizes movement, and simulates disruptions before they become logistics failures.

@@ -1,0 +1,57 @@
+RakshakLogix — Security, Privacy & AI Governance
+
+Hackathon-safe implementation
+
+Data Policy
+
+The MVP should use synthetic or publicly shareable data. Do not place classified, restricted, personally identifying or operationally sensitive defence information in the prototype.
+
+Authentication
+
+Hash passwords using Argon2id or bcrypt.
+
+Use short-lived access tokens.
+
+Enforce role-based authorization.
+
+Never store plaintext credentials.
+
+Keep secrets outside source control.
+
+API Security
+
+Validate every request.
+
+Use ORM/parameterized queries.
+
+Rate-limit authentication and expensive jobs.
+
+Restrict CORS.
+
+Validate upload size, type and content.
+
+Do not expose production stack traces.
+
+Data Governance
+
+Separate synthetic demo data from future authorized data.
+
+Audit imports and material modifications.
+
+Encrypt data in transit and use encrypted storage.
+
+Apply least privilege.
+
+Define retention before production deployment.
+
+AI Governance
+
+AI recommendations remain advisory and require human approval.
+
+Display uncertainty/confidence.
+
+Record model version and input timestamp.
+
+Provide fallback behavior when models fail.
+
+Do not claim field accuracy without validation.

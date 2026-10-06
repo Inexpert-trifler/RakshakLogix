@@ -1,0 +1,63 @@
+# ============================================================
+# RakshakLogix — Root .gitignore
+# ============================================================
+
+# Environment & Secrets — NEVER commit real secrets
+.env
+.env.local
+.env.*.local
+*.env
+
+# SQLite Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+.venv/
+venv/
+env/
+ENV/
+pip-wheel-metadata/
+
+# Testing & Caching
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# OS & IDE
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+.kilo/
+
+# Logs
+*.log
+logs/
+
+# Data directories (keep directory structure via .gitkeep)
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Docker
+.docker/
+
+# Archive
+*.tar.gz
+*.zip

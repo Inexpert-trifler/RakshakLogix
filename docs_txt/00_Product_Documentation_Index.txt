@@ -1,0 +1,45 @@
+RakshakLogix — Product Documentation Index
+
+Master source of truth | SIH PS 26251
+
+Locked Product Scope
+
+Demand forecasting
+
+Inventory prediction and replenishment
+
+Risk and alerts
+
+Transportation and shipment management
+
+GIS-aware route optimization
+
+What-if disruption simulation
+
+Dashboard aggregation APIs
+
+Documentation Set
+
+01_PRD.docx — product scope and requirements.
+
+02_Technical_Architecture.docx — backend architecture and stack.
+
+03_Data_Model.docx — database and data dictionary.
+
+04_API_Specification.docx — REST API surface.
+
+05_ML_Optimization_Spec.docx — AI and optimization design.
+
+06_Security_Governance.docx — security and AI governance.
+
+07_Roadmap_DOD.docx — engineering plan.
+
+08_SIH_Demo_Story.docx — pitch and judge demo.
+
+Source-of-Truth Rule
+
+Any new feature must first be added to the PRD and its relevant technical document before implementation. This prevents frontend, backend and ML work from drifting apart.
+
+Next Build Step
+
+Create the FastAPI + PostgreSQL/PostGIS + Redis/Celery repository, write the first Alembic migration, seed the synthetic dataset, and implement Location/Item/Inventory/Consumption APIs first.

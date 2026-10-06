@@ -1,0 +1,91 @@
+RakshakLogix — Data Model & Data Dictionary
+
+PostgreSQL/PostGIS schema
+
+Core Tables
+
+users — id, name, email, password_hash, role, status, created_at.
+
+locations — id, name, type, latitude, longitude, elevation, terrain_type, capacity, priority, status.
+
+items — id, name, category, unit, criticality, shelf_life_days, min_stock, safety_stock.
+
+inventory — location_id, item_id, quantity, reserved_quantity, updated_at.
+
+inventory_transactions — location_id, item_id, type, quantity, reference_id, occurred_at.
+
+consumption_records — location_id, item_id, date, quantity, source.
+
+vehicles — name, type, capacity, availability_status, home_location_id.
+
+shipments — source, destination, status, priority, planned_departure, planned_arrival.
+
+shipment_items — shipment_id, item_id, quantity.
+
+routes — name, status, base_risk_score.
+
+route_segments — route_id, from/to locations, distance, travel time, terrain risk, road risk.
+
+weather_records — location, timestamp, temperature, precipitation, wind, severity.
+
+demand_forecasts — location, item, horizon, model_version, metrics.
+
+forecast_points — forecast_id, target_date, prediction, lower/upper bounds.
+
+risk_predictions — entity, risk_type, score, severity, explanation.
+
+alerts — severity, type, title, entity, status, created_at.
+
+simulations — scenario type, parameters, creator, status.
+
+simulation_results — baseline value, scenario value, delta, details.
+
+audit_logs — actor, action, entity, metadata, timestamp.
+
+Relationships
+
+Location 1→N Inventory and Consumption.
+
+Item 1→N Inventory and Consumption.
+
+Location 1→N Shipments as source/destination.
+
+Shipment 1→N ShipmentItems.
+
+Route 1→N RouteSegments.
+
+Location 1→N WeatherRecords.
+
+Forecast 1→N ForecastPoints.
+
+Simulation 1→N SimulationResults.
+
+Data Quality Rules
+
+Reject invalid coordinates and impossible quantities.
+
+Flag missing time periods rather than silently filling them.
+
+Detect duplicate imports with stable record keys.
+
+Mark outliers while retaining them for auditability.
+
+Require foreign-key integrity for inventory, shipments and forecasts.
+
+Demo Dataset
+
+50 synthetic locations.
+
+20 generic supply categories.
+
+180 days historical consumption.
+
+30 vehicles.
+
+100+ synthetic route segments.
+
+180 days weather observations.
+
+10,000+ inventory transactions.
+
+1,000+ synthetic shipments.

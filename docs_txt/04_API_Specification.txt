@@ -1,0 +1,89 @@
+RakshakLogix — API Specification v1
+
+REST/JSON contracts
+
+Authentication
+
+POST /api/v1/auth/login
+
+GET /api/v1/auth/me
+
+POST /api/v1/auth/refresh
+
+Locations & Items
+
+GET/POST /api/v1/locations
+
+GET/PATCH /api/v1/locations/{id}
+
+GET/POST /api/v1/items
+
+Inventory & Consumption
+
+GET /api/v1/inventory
+
+GET /api/v1/inventory/{id}
+
+POST /api/v1/inventory/transactions
+
+POST /api/v1/consumption/import
+
+GET /api/v1/inventory/risk
+
+Forecasting
+
+POST /api/v1/forecast/demand
+
+GET /api/v1/forecast/jobs/{job_id}
+
+GET /api/v1/forecast/demand/{id}
+
+GET /api/v1/forecast/models
+
+Transportation & Routes
+
+GET/POST /api/v1/vehicles
+
+GET/POST /api/v1/shipments
+
+GET /api/v1/routes
+
+POST /api/v1/routes/optimize
+
+GET /api/v1/optimization/jobs/{job_id}
+
+Risk & Alerts
+
+GET /api/v1/risks
+
+POST /api/v1/risks/recalculate
+
+GET /api/v1/alerts
+
+PATCH /api/v1/alerts/{id}
+
+Simulation
+
+POST /api/v1/simulations
+
+POST /api/v1/simulations/{id}/run
+
+GET /api/v1/simulations/{id}
+
+GET /api/v1/simulations/{id}/results
+
+Dashboard
+
+GET /api/v1/dashboard/summary
+
+GET /api/v1/dashboard/map
+
+GET /api/v1/dashboard/trends
+
+Example Contracts
+
+Forecast request: {"location_id":"uuid","item_id":"uuid","horizon_days":30}
+
+Forecast response contains forecast_id, model, metrics and dated prediction points.
+
+Error response: {"error":{"code":"VALIDATION_ERROR","message":"...","details":{},"request_id":"..."}}

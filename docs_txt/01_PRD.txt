@@ -1,0 +1,139 @@
+RakshakLogix — Product Requirements Document
+
+Predictive Logistics & Forward Supply Chain | SIH PS 26251
+
+Product Definition
+
+RakshakLogix is an AI-assisted logistics decision-support platform that predicts supply demand, identifies future inventory shortages, evaluates route/transport risk, optimizes replenishment and simulates disruptions before they affect logistics operations.
+
+Problem
+
+Demand, inventory, transportation capacity, geography, terrain, weather and consumption data may exist in separate streams. The product creates a common operational picture and turns those streams into forward-looking recommendations.
+
+Goals
+
+Predict what supplies will be needed, where and over configurable horizons.
+
+Predict inventory depletion and replenishment requirements before stockouts.
+
+Score logistics risk using inventory, demand, weather, route and delivery factors.
+
+Recommend feasible transportation and routing plans under constraints.
+
+Simulate disruptions and compare baseline versus scenario outcomes.
+
+Provide explainable recommendations with human approval.
+
+Non-Goals
+
+Not an autonomous command-and-control system.
+
+Does not issue real-world military orders or control vehicles.
+
+Does not use classified operational data in the hackathon MVP.
+
+Does not provide weapon targeting or combat decision support.
+
+Does not replace qualified logistics personnel.
+
+Primary Users
+
+Logistics Planner — forecasting, inventory, replenishment and shipment planning.
+
+Transport Coordinator — vehicles, shipments, routes and ETA.
+
+Command/Operations Viewer — readiness, alerts, risks and recommendations.
+
+Data/ML Analyst — ingestion, model quality and forecast evaluation.
+
+System Administrator — users, permissions, locations and audit.
+
+MVP Modules
+
+Authentication & RBAC
+
+Location/GIS management
+
+Inventory and consumption
+
+Demand forecasting
+
+Inventory/risk engine
+
+Vehicles and shipments
+
+Route optimization
+
+Alerts
+
+What-if disruption simulation
+
+Weather integration as a P1 enhancement
+
+Core User Journeys
+
+Import consumption history → validate → forecast demand → review confidence.
+
+Open location → inspect inventory runway → detect predicted stockout → receive replenishment recommendation.
+
+Create shipment → evaluate vehicles/routes → optimize → review ranked options → approve.
+
+Create disruption scenario → simulate → compare baseline vs scenario → inspect mitigation plan.
+
+Open command dashboard → see readiness, critical alerts, affected locations and top recommendations.
+
+Functional Requirements
+
+FR-01 JWT authentication and role-based permissions.
+
+FR-02 Location and supply-item management.
+
+FR-03 Inventory levels and transactions.
+
+FR-04 Historical consumption ingestion.
+
+FR-05 7/14/30/90-day demand forecasting.
+
+FR-06 Forecast confidence and evaluation metrics.
+
+FR-07 Inventory runway and stockout risk.
+
+FR-08 Vehicle, shipment and capacity management.
+
+FR-09 Route ranking and optimization.
+
+FR-10 Risk alerts and acknowledgement.
+
+FR-11 Scenario simulation without mutating live state.
+
+FR-12 Audit trail for material changes and model runs.
+
+Success Metrics
+
+Forecast beats a simple baseline on holdout data.
+
+High-risk synthetic stockouts are detected with useful lead time.
+
+Optimization returns a feasible plan within demo time.
+
+Simulation completes in seconds/low tens of seconds for the demo dataset.
+
+Critical APIs have automated test coverage.
+
+Recommendations expose their major contributing factors.
+
+MVP Acceptance Criteria
+
+Seed synthetic dataset loads end-to-end.
+
+Location, item, inventory and consumption CRUD/import works.
+
+Forecast is generated and persisted.
+
+Inventory runway and risk are calculated.
+
+Shipment and route optimization work.
+
+Route disruption simulation works without changing live state.
+
+Dashboard summary API returns readiness, alerts, forecast and recommendations.
