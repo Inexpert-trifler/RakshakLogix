@@ -85,9 +85,7 @@ class ConsumptionImporter:
                 continue
 
             if valid_loc_ids and loc_id not in valid_loc_ids:
-                errors.append(
-                    f"Row {line_num}: Location ID '{loc_id}' does not exist in database."
-                )
+                errors.append(f"Row {line_num}: Location ID '{loc_id}' does not exist in database.")
                 continue
 
             # 2. Parse Item UUID
@@ -98,9 +96,7 @@ class ConsumptionImporter:
                 continue
 
             if valid_item_ids and item_id not in valid_item_ids:
-                errors.append(
-                    f"Row {line_num}: Item ID '{item_id}' does not exist in database."
-                )
+                errors.append(f"Row {line_num}: Item ID '{item_id}' does not exist in database.")
                 continue
 
             # 3. Parse Date
@@ -116,9 +112,7 @@ class ConsumptionImporter:
             try:
                 qty = float(qty_str)
                 if qty < 0.0:
-                    errors.append(
-                        f"Row {line_num}: Negative quantity '{qty}' is invalid."
-                    )
+                    errors.append(f"Row {line_num}: Negative quantity '{qty}' is invalid.")
                     continue
             except ValueError:
                 errors.append(f"Row {line_num}: Invalid numeric quantity '{qty_str}'.")
@@ -147,9 +141,7 @@ class ConsumptionImporter:
             db.add_all(valid_records)
             await db.commit()
 
-        status_label = (
-            "SUCCESS" if not errors else ("WARNING" if valid_records else "FAILED")
-        )
+        status_label = "SUCCESS" if not errors else ("WARNING" if valid_records else "FAILED")
 
         return {
             "status": status_label,
