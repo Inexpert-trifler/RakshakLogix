@@ -46,9 +46,7 @@ class ShipmentPlanner:
                 "status": "INVALID_REQUEST",
                 "recommended_plan": None,
                 "alternative_plans": [],
-                "reasoning": [
-                    "Requested replenishment quantity must be greater than zero."
-                ],
+                "reasoning": ["Requested replenishment quantity must be greater than zero."],
             }
 
         # 1. Identify Candidate Source Locations with Sufficient Stock
@@ -173,9 +171,7 @@ class ShipmentPlanner:
             }
 
         # Rank candidate plans by overall score descending
-        all_candidate_plans.sort(
-            key=lambda p: (p["overall_score"], -p["risk_score"]), reverse=True
-        )
+        all_candidate_plans.sort(key=lambda p: (p["overall_score"], -p["risk_score"]), reverse=True)
 
         recommended = all_candidate_plans[0]
         alternatives = all_candidate_plans[1:3]
