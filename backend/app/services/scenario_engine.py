@@ -159,9 +159,7 @@ class ScenarioEngine:
         )
 
         # Re-evaluate routing using graph builder
-        graph = RouteGraphBuilder.build_graph(
-            locations, routes, avoid_blocked_routes=True
-        )
+        graph = RouteGraphBuilder.build_graph(locations, routes, avoid_blocked_routes=True)
 
         # Calculate travel time & distance changes for sample origin -> destination
         depot = next(
@@ -353,11 +351,7 @@ class ScenarioEngine:
         target_loc_name = "Forward Operating Posts"
         if target_location_id:
             loc_match = next(
-                (
-                    l
-                    for l in locations
-                    if str(l.get("id")).lower() == target_location_id
-                ),
+                (l for l in locations if str(l.get("id")).lower() == target_location_id),
                 None,
             )
             if loc_match:
@@ -392,12 +386,8 @@ class ScenarioEngine:
                 if scen_r <= 3.0:
                     stockouts_scen += 1
 
-        avg_base_runway = (
-            sum(runways_base) / max(1, len(runways_base)) if runways_base else 14.0
-        )
-        avg_scen_runway = (
-            sum(runways_scen) / max(1, len(runways_scen)) if runways_scen else 8.5
-        )
+        avg_base_runway = sum(runways_base) / max(1, len(runways_base)) if runways_base else 14.0
+        avg_scen_runway = sum(runways_scen) / max(1, len(runways_scen)) if runways_scen else 8.5
         min_scen_runway = min(runways_scen) if runways_scen else 2.1
 
         # Mitigation options for demand spike
@@ -462,9 +452,7 @@ class ScenarioEngine:
                     "stockout_locations": stockouts_scen,
                 },
                 "delta": {
-                    "average_runway_days_delta": round(
-                        avg_scen_runway - avg_base_runway, 1
-                    ),
+                    "average_runway_days_delta": round(avg_scen_runway - avg_base_runway, 1),
                     "new_stockout_locations": max(0, stockouts_scen - stockouts_base),
                 },
             },
@@ -475,9 +463,7 @@ class ScenarioEngine:
             },
             "risk": {
                 "baseline": {"risk_level": "MODERATE"},
-                "scenario": {
-                    "risk_level": "HIGH" if stockouts_scen > 0 else "MODERATE"
-                },
+                "scenario": {"risk_level": "HIGH" if stockouts_scen > 0 else "MODERATE"},
                 "delta": {"runway_critical": min_scen_runway < 3.0},
             },
             "mitigation_options": mitigations,
@@ -552,9 +538,7 @@ class ScenarioEngine:
             ):
                 impacted_routes_count += 1
                 r_scen_time = r_time * multiplier
-                r["base_risk_score"] = min(
-                    1.0, float(r.get("base_risk_score", 0.3)) + 0.35
-                )
+                r["base_risk_score"] = min(1.0, float(r.get("base_risk_score", 0.3)) + 0.35)
                 scen_travel_sum += r_scen_time
             else:
                 scen_travel_sum += r_time
@@ -614,12 +598,8 @@ class ScenarioEngine:
             },
             "risk": {
                 "baseline": {"weather_risk_index": 0.25},
-                "scenario": {
-                    "weather_risk_index": 0.75 if severity == "EXTREME" else 0.60
-                },
-                "delta": {
-                    "weather_risk_delta": 0.50 if severity == "EXTREME" else 0.35
-                },
+                "scenario": {"weather_risk_index": 0.75 if severity == "EXTREME" else 0.60},
+                "delta": {"weather_risk_delta": 0.50 if severity == "EXTREME" else 0.35},
             },
             "mitigation_options": mitigations,
         }
@@ -672,9 +652,7 @@ class ScenarioEngine:
             for v in vehicles
             if v.get("availability_status") == "AVAILABLE"
         )
-        count_base = sum(
-            1 for v in vehicles if v.get("availability_status") == "AVAILABLE"
-        )
+        count_base = sum(1 for v in vehicles if v.get("availability_status") == "AVAILABLE")
 
         # Mark vehicle unavailable in scenario ONLY
         impacted_veh = None
@@ -688,9 +666,7 @@ class ScenarioEngine:
             impacted_veh = vehicles[0]
 
         impacted_veh_name = (
-            impacted_veh.get("name", "Target Heavy Vehicle")
-            if impacted_veh
-            else "Fleet Unit"
+            impacted_veh.get("name", "Target Heavy Vehicle") if impacted_veh else "Fleet Unit"
         )
 
         if impacted_veh:
@@ -701,9 +677,7 @@ class ScenarioEngine:
             for v in vehicles
             if v.get("availability_status") == "AVAILABLE"
         )
-        count_scen = sum(
-            1 for v in vehicles if v.get("availability_status") == "AVAILABLE"
-        )
+        count_scen = sum(1 for v in vehicles if v.get("availability_status") == "AVAILABLE")
 
         mitigations = [
             {
