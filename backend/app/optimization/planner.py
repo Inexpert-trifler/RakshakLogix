@@ -84,9 +84,7 @@ class OptimizationPlanner:
                 "vehicle_type": v.vehicle_type,
                 "capacity_kg": v.capacity_kg,
                 "availability_status": v.availability_status,
-                "home_location_id": (
-                    str(v.home_location_id) if v.home_location_id else None
-                ),
+                "home_location_id": (str(v.home_location_id) if v.home_location_id else None),
             }
             for v in veh_res.scalars().all()
         ]
