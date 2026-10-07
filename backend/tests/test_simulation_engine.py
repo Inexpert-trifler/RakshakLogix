@@ -28,26 +28,12 @@ class TestSimulationEngineUnit:
     """Unit tests for ScenarioEngine and isolated transformations."""
 
     async def test_scenario_type_normalization(self):
-        assert (
-            ScenarioEngine._normalize_scenario_type("ROUTE_BLOCK")
-            == "ROUTE_UNAVAILABLE"
-        )
-        assert (
-            ScenarioEngine._normalize_scenario_type("route_unavailable")
-            == "ROUTE_UNAVAILABLE"
-        )
-        assert (
-            ScenarioEngine._normalize_scenario_type("WEATHER_DISRUPTION")
-            == "SEVERE_WEATHER"
-        )
-        assert (
-            ScenarioEngine._normalize_scenario_type("VEHICLE_SHORTAGE")
-            == "VEHICLE_UNAVAILABLE"
-        )
+        assert ScenarioEngine._normalize_scenario_type("ROUTE_BLOCK") == "ROUTE_UNAVAILABLE"
+        assert ScenarioEngine._normalize_scenario_type("route_unavailable") == "ROUTE_UNAVAILABLE"
+        assert ScenarioEngine._normalize_scenario_type("WEATHER_DISRUPTION") == "SEVERE_WEATHER"
+        assert ScenarioEngine._normalize_scenario_type("VEHICLE_SHORTAGE") == "VEHICLE_UNAVAILABLE"
 
-    async def test_route_unavailable_simulation_isolation(
-        self, db_session: AsyncSession
-    ):
+    async def test_route_unavailable_simulation_isolation(self, db_session: AsyncSession):
         # Fetch live routes
         routes_db = (await db_session.execute(select(Route))).scalars().all()
         assert len(routes_db) > 0
@@ -179,9 +165,7 @@ class TestSimulationAPIEndpoints:
         token = resp.json()["access_token"]
         return {"Authorization": f"Bearer {token}"}
 
-    async def test_simulation_lifecycle_api(
-        self, client: AsyncClient, db_session: AsyncSession
-    ):
+    async def test_simulation_lifecycle_api(self, client: AsyncClient, db_session: AsyncSession):
         headers = await self._get_auth_headers(client)
 
         # 1. Create Simulation
@@ -191,18 +175,14 @@ class TestSimulationAPIEndpoints:
             "description": "Simulating heavy landslide on Zojila Pass",
             "parameters": {"duration_hours": 48},
         }
-        res_create = await client.post(
-            "/api/v1/simulations", json=create_payload, headers=headers
-        )
+        res_create = await client.post("/api/v1/simulations", json=create_payload, headers=headers)
         assert res_create.status_code == 201
         sim_data = res_create.json()
         sim_id = sim_data["id"]
         assert sim_data["status"] == "PENDING"
 
         # 2. Run Simulation
-        res_run = await client.post(
-            f"/api/v1/simulations/{sim_id}/run", headers=headers
-        )
+        res_run = await client.post(f"/api/v1/simulations/{sim_id}/run", headers=headers)
         assert res_run.status_code == 200
         run_data = res_run.json()
         assert run_data["status"] == "COMPLETED"
@@ -215,9 +195,7 @@ class TestSimulationAPIEndpoints:
         assert res_get.json()["id"] == sim_id
 
         # 4. Get Results metrics
-        res_metrics = await client.get(
-            f"/api/v1/simulations/{sim_id}/results", headers=headers
-        )
+        res_metrics = await client.get(f"/api/v1/simulations/{sim_id}/results", headers=headers)
         assert res_metrics.status_code == 200
         assert len(res_metrics.json()) > 0
 
@@ -227,9 +205,7 @@ class TestSimulationAPIEndpoints:
             "scenario_type": "INVALID_SCENARIO_XYZ",
             "parameters": {},
         }
-        res = await client.post(
-            "/api/v1/simulations", json=bad_payload, headers=headers
-        )
+        res = await client.post("/api/v1/simulations", json=bad_payload, headers=headers)
         assert res.status_code in (400, 422)
 
     async def test_dashboard_intelligence_endpoints(self, client: AsyncClient):
@@ -253,9 +229,7 @@ class TestSimulationAPIEndpoints:
         assert len(map_data["routes"]) > 0
 
         # Trends
-        res_trends = await client.get(
-            "/api/v1/dashboard/trends?days=30", headers=headers
-        )
+        res_trends = await client.get("/api/v1/dashboard/trends?days=30", headers=headers)
         assert res_trends.status_code == 200
         trends_data = res_trends.json()
         assert "trends" in trends_data
