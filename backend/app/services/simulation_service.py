@@ -278,9 +278,7 @@ class SimulationService:
         return (await db.execute(stmt)).scalar_one()
 
     @classmethod
-    async def get_simulation(
-        cls, db: AsyncSession, simulation_id: uuid.UUID
-    ) -> Simulation:
+    async def get_simulation(cls, db: AsyncSession, simulation_id: uuid.UUID) -> Simulation:
         """Retrieves simulation status, parameters, summary, and comparative metrics."""
         stmt = (
             select(Simulation)
@@ -299,7 +297,5 @@ class SimulationService:
         """Retrieves comparative result metrics for a simulation."""
         # Ensure simulation exists
         await cls.get_simulation(db, simulation_id)
-        stmt = select(SimulationResult).where(
-            SimulationResult.simulation_id == simulation_id
-        )
+        stmt = select(SimulationResult).where(SimulationResult.simulation_id == simulation_id)
         return list((await db.execute(stmt)).scalars().all())

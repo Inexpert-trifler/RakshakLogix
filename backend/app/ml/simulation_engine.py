@@ -17,7 +17,6 @@ from typing import Any
 
 
 class ScenarioSimulationEngine:
-
     @classmethod
     def run_simulation(
         cls,
@@ -66,12 +65,12 @@ class ScenarioSimulationEngine:
             )
 
             # Calculate network risk delta
-            avg_risk_baseline = sum(
-                r.get("base_risk_score", 0.0) for r in live_routes
-            ) / max(1, len(live_routes))
-            avg_risk_scenario = sum(
-                r.get("base_risk_score", 0.0) for r in sim_routes
-            ) / max(1, len(sim_routes))
+            avg_risk_baseline = sum(r.get("base_risk_score", 0.0) for r in live_routes) / max(
+                1, len(live_routes)
+            )
+            avg_risk_scenario = sum(r.get("base_risk_score", 0.0) for r in sim_routes) / max(
+                1, len(sim_routes)
+            )
 
             results.append(
                 {
@@ -94,10 +93,7 @@ class ScenarioSimulationEngine:
             runways_scenario = []
 
             for inv in sim_inventory:
-                if (
-                    not target_location_id
-                    or str(inv.get("location_id")) == target_location_id
-                ):
+                if not target_location_id or str(inv.get("location_id")) == target_location_id:
                     qty = float(inv.get("quantity", 100.0))
                     daily_cons = float(inv.get("daily_avg_consumption", 10.0))
 
@@ -108,14 +104,10 @@ class ScenarioSimulationEngine:
                     runways_scenario.append(runway_scen)
 
             avg_base_runway = (
-                sum(runways_baseline) / max(1, len(runways_baseline))
-                if runways_baseline
-                else 14.0
+                sum(runways_baseline) / max(1, len(runways_baseline)) if runways_baseline else 14.0
             )
             avg_scen_runway = (
-                sum(runways_scenario) / max(1, len(runways_scenario))
-                if runways_scenario
-                else 7.0
+                sum(runways_scenario) / max(1, len(runways_scenario)) if runways_scenario else 7.0
             )
 
             results.append(
@@ -126,9 +118,7 @@ class ScenarioSimulationEngine:
                     "delta": round(avg_scen_runway - avg_base_runway, 1),
                     "details": {
                         "disruption": f"Demand spike factor {spike_factor}x applied to consumption rates.",
-                        "stockouts_predicted": sum(
-                            1 for r in runways_scenario if r < 3.0
-                        ),
+                        "stockouts_predicted": sum(1 for r in runways_scenario if r < 3.0),
                         "mitigation": "Trigger emergency resupply shipment from Central Depot within 24 hours.",
                     },
                 }
