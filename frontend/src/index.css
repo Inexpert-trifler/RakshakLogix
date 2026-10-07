@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* Operational GIS & Tactical Grid Patterns */
+.gis-grid-pattern, .tactical-grid-bg {
+  background-size: 24px 24px;
+  background-image: 
+    linear-gradient(to right, rgba(115, 120, 115, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(115, 120, 115, 0.1) 1px, transparent 1px);
+}
+
+.radar-sweep {
+  animation: radarSweep 6s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes radarSweep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #ecefe7;
+}
+::-webkit-scrollbar-thumb {
+  background: #c3c8c2;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #737873;
+}
