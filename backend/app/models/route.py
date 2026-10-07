@@ -43,9 +43,7 @@ class Route(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     )
 
     def __repr__(self) -> str:
-        return (
-            f"<Route {self.name!r} status={self.status!r} risk={self.base_risk_score}>"
-        )
+        return f"<Route {self.name!r} status={self.status!r} risk={self.base_risk_score}>"
 
 
 class RouteSegment(UUIDPrimaryKeyMixin, Base):
@@ -76,9 +74,7 @@ class RouteSegment(UUIDPrimaryKeyMixin, Base):
     road_risk: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
 
     # Relationships
-    route: Mapped[Route] = relationship(
-        "Route", back_populates="segments", lazy="select"
-    )
+    route: Mapped[Route] = relationship("Route", back_populates="segments", lazy="select")
     from_location: Mapped[Location] = relationship(
         "Location", foreign_keys=[from_location_id], lazy="select"
     )  # noqa: F821

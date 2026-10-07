@@ -63,15 +63,11 @@ class Shipment(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     planned_departure: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
-    planned_arrival: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    planned_arrival: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     actual_departure: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
-    actual_arrival: Mapped[datetime | None] = mapped_column(
-        DateTime(timezone=True), nullable=True
-    )
+    actual_arrival: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     # Relationships
     source_location: Mapped[Location] = relationship(  # noqa: F821
@@ -91,9 +87,7 @@ class Shipment(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     )
 
     def __repr__(self) -> str:
-        return (
-            f"<Shipment id={self.id} status={self.status!r} priority={self.priority!r}>"
-        )
+        return f"<Shipment id={self.id} status={self.status!r} priority={self.priority!r}>"
 
 
 class ShipmentItem(UUIDPrimaryKeyMixin, Base):
@@ -114,9 +108,7 @@ class ShipmentItem(UUIDPrimaryKeyMixin, Base):
     quantity: Mapped[float] = mapped_column(Float, nullable=False)
 
     # Relationships
-    shipment: Mapped[Shipment] = relationship(
-        "Shipment", back_populates="items", lazy="select"
-    )
+    shipment: Mapped[Shipment] = relationship("Shipment", back_populates="items", lazy="select")
     item: Mapped[Item] = relationship("Item", lazy="select")  # noqa: F821
 
     def __repr__(self) -> str:
