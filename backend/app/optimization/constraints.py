@@ -75,9 +75,7 @@ class OptimizationConstraintValidator:
 
         # 3. HARD: Blocked Route Exclusion
         for seg in path_segments:
-            r_status = (
-                seg.get("route_status") or seg.get("status") or "ACTIVE"
-            ).upper()
+            r_status = (seg.get("route_status") or seg.get("status") or "ACTIVE").upper()
             if r_status == "BLOCKED":
                 violations.append(
                     f"BLOCKED_ROUTE_EXCLUSION: Path utilizes blocked route segment '{seg.get('route_name', 'Corridor')}'."
