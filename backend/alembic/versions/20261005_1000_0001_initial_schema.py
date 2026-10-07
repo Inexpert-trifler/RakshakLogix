@@ -127,9 +127,7 @@ def upgrade() -> None:
         sa.Column("name", sa.String(255), nullable=False),
         sa.Column("category", sa.String(64), nullable=False),
         sa.Column("unit", sa.String(32), nullable=False, server_default="UNIT"),
-        sa.Column(
-            "criticality", sa.String(32), nullable=False, server_default="MEDIUM"
-        ),
+        sa.Column("criticality", sa.String(32), nullable=False, server_default="MEDIUM"),
         sa.Column("shelf_life_days", sa.Integer(), nullable=True),
         sa.Column("min_stock", sa.Float(), nullable=False, server_default="0"),
         sa.Column("safety_stock", sa.Float(), nullable=False, server_default="0"),
@@ -240,9 +238,7 @@ def upgrade() -> None:
         "inventory_transactions",
         ["location_id"],
     )
-    op.create_index(
-        "ix_inventory_transactions_item_id", "inventory_transactions", ["item_id"]
-    )
+    op.create_index("ix_inventory_transactions_item_id", "inventory_transactions", ["item_id"])
     op.create_index(
         "ix_inventory_transactions_type", "inventory_transactions", ["transaction_type"]
     )
@@ -300,12 +296,8 @@ def upgrade() -> None:
         ),
     )
     op.create_index("ix_consumption_records_id", "consumption_records", ["id"])
-    op.create_index(
-        "ix_consumption_records_location_id", "consumption_records", ["location_id"]
-    )
-    op.create_index(
-        "ix_consumption_records_item_id", "consumption_records", ["item_id"]
-    )
+    op.create_index("ix_consumption_records_location_id", "consumption_records", ["location_id"])
+    op.create_index("ix_consumption_records_item_id", "consumption_records", ["item_id"])
     op.create_index("ix_consumption_records_date", "consumption_records", ["date"])
     op.create_index(
         "ix_consumption_records_import_batch_id",
