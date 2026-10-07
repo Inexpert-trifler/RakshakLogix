@@ -113,12 +113,7 @@ class CompositeRiskEngine:
         weather_map = {"LOW": 0.0, "MODERATE": 0.25, "SEVERE": 0.6, "EXTREME": 0.9}
         w_score = weather_map.get(weather_severity.upper(), 0.0)
 
-        composite = (
-            base_risk_score * 0.4
-            + terrain_risk * 0.25
-            + road_risk * 0.20
-            + w_score * 0.15
-        )
+        composite = base_risk_score * 0.4 + terrain_risk * 0.25 + road_risk * 0.20 + w_score * 0.15
         composite = min(1.0, max(0.0, composite))
 
         if composite >= 0.75:
