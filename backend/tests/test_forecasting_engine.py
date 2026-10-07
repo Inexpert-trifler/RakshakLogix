@@ -30,7 +30,6 @@ from app.ml.forecasting.xgboost_model import MLFeatureForecaster
 
 
 class TestForecastingMetrics:
-
     def test_metrics_calculation(self) -> None:
         y_true = np.array([10.0, 20.0, 30.0, 40.0])
         y_pred = np.array([12.0, 18.0, 33.0, 37.0])
@@ -50,7 +49,6 @@ class TestForecastingMetrics:
 
 
 class TestCandidateForecasters:
-
     @pytest.fixture
     def sample_time_series(self) -> np.ndarray:
         # 60 days of synthetic series with 7-day pattern
@@ -100,7 +98,6 @@ class TestCandidateForecasters:
 
 
 class TestDemandPredictorPipeline:
-
     def test_demand_predictor_predict(self) -> None:
         start_d = date.today() - timedelta(days=60)
         history = [
@@ -128,10 +125,7 @@ class TestDemandPredictorPipeline:
 
     def test_demand_forecaster_facade(self) -> None:
         start_d = date.today() - timedelta(days=30)
-        history = [
-            {"date": start_d + timedelta(days=i), "quantity": 50.0 + i}
-            for i in range(30)
-        ]
+        history = [{"date": start_d + timedelta(days=i), "quantity": 50.0 + i} for i in range(30)]
 
         res = DemandForecaster.forecast(
             history=history, horizon_days=7, preferred_model="HOLT_WINTERS"
