@@ -67,9 +67,7 @@ async def get_vehicle(
     return VehicleResponse.model_validate(v)
 
 
-@router.post(
-    "/vehicles", response_model=VehicleResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/vehicles", response_model=VehicleResponse, status_code=status.HTTP_201_CREATED)
 async def create_vehicle(
     payload: VehicleCreate,
     db: AsyncSession = Depends(get_db),
@@ -114,9 +112,7 @@ async def list_shipments(
 ) -> list[ShipmentResponse]:
     """Retrieves all planned and active supply shipments."""
     stmt = (
-        select(Shipment)
-        .options(selectinload(Shipment.items))
-        .order_by(Shipment.created_at.desc())
+        select(Shipment).options(selectinload(Shipment.items)).order_by(Shipment.created_at.desc())
     )
     result = await db.execute(stmt)
     shipments = result.scalars().all()
@@ -130,9 +126,7 @@ async def get_shipment(
     current_user: User = Depends(get_current_user),
 ) -> ShipmentResponse:
     """Retrieves specific shipment details."""
-    stmt = (
-        select(Shipment).options(selectinload(Shipment.items)).where(Shipment.id == id)
-    )
+    stmt = select(Shipment).options(selectinload(Shipment.items)).where(Shipment.id == id)
     result = await db.execute(stmt)
     s = result.scalar_one_or_none()
     if not s:
@@ -140,9 +134,7 @@ async def get_shipment(
     return ShipmentResponse.model_validate(s)
 
 
-@router.post(
-    "/shipments", response_model=ShipmentResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/shipments", response_model=ShipmentResponse, status_code=status.HTTP_201_CREATED)
 async def create_shipment(
     payload: ShipmentCreate,
     db: AsyncSession = Depends(get_db),
@@ -170,11 +162,7 @@ async def create_shipment(
 
     await db.commit()
     await db.refresh(shipment)
-    stmt = (
-        select(Shipment)
-        .options(selectinload(Shipment.items))
-        .where(Shipment.id == shipment.id)
-    )
+    stmt = select(Shipment).options(selectinload(Shipment.items)).where(Shipment.id == shipment.id)
     shipment = (await db.execute(stmt)).scalar_one()
     return ShipmentResponse.model_validate(shipment)
 
@@ -187,9 +175,7 @@ async def update_shipment(
     current_user: User = Depends(get_current_user),
 ) -> ShipmentResponse:
     """Updates shipment status (PLANNED, IN_TRANSIT, DELIVERED, CANCELLED) or vehicle assignment."""
-    stmt = (
-        select(Shipment).options(selectinload(Shipment.items)).where(Shipment.id == id)
-    )
+    stmt = select(Shipment).options(selectinload(Shipment.items)).where(Shipment.id == id)
     result = await db.execute(stmt)
     s = result.scalar_one_or_none()
     if not s:
@@ -229,9 +215,7 @@ async def optimize_route(
 ) -> RouteOptimizeResponse:
     """Calculates optimal forward logistics route options using Graph and OR-Tools optimization."""
     # Convert item models to dicts
-    items_data = [
-        {"item_id": str(i.item_id), "quantity": i.quantity} for i in payload.items
-    ]
+    items_data = [{"item_id": str(i.item_id), "quantity": i.quantity} for i in payload.items]
 
     # Run OptimizationPlanner
     plan_res = await OptimizationPlanner.run_optimization(
