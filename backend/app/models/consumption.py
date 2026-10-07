@@ -60,9 +60,7 @@ class ConsumptionRecord(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     source: Mapped[str] = mapped_column(
         String(32), nullable=False, default=ConsumptionSource.MANUAL
     )
-    import_batch_id: Mapped[str | None] = mapped_column(
-        String(64), nullable=True, index=True
-    )
+    import_batch_id: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     is_outlier: Mapped[bool] = mapped_column(default=False, nullable=False)
 
     # Relationships

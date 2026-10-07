@@ -43,9 +43,7 @@ class RiskPrediction(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     __tablename__ = "risk_predictions"
 
     entity_type: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
-    entity_id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True), nullable=False, index=True
-    )
+    entity_id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), nullable=False, index=True)
     risk_type: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
     score: Mapped[float] = mapped_column(Float, nullable=False)
     severity: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
