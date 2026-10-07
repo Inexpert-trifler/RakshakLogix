@@ -66,9 +66,7 @@ class RouteGraphBuilder:
                 terrain = float(seg.get("terrain_risk", 0.0))
                 road = float(seg.get("road_risk", 0.0))
 
-                seg_risk = min(
-                    1.0, max(0.0, base_risk * 0.4 + terrain * 0.3 + road * 0.3)
-                )
+                seg_risk = min(1.0, max(0.0, base_risk * 0.4 + terrain * 0.3 + road * 0.3))
 
                 # Composite traversal weight
                 weight = dist * (1.0 + seg_risk * 2.0)
@@ -105,8 +103,6 @@ class RouteGraphBuilder:
             return []
 
         try:
-            return list(nx.shortest_simple_paths(G, s_str, d_str, weight="weight"))[
-                :max_paths
-            ]
+            return list(nx.shortest_simple_paths(G, s_str, d_str, weight="weight"))[:max_paths]
         except (nx.NetworkXNoPath, nx.NodeNotFound):
             return []
