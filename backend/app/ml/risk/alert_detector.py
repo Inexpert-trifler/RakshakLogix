@@ -105,9 +105,7 @@ class AlertDetector:
                 db=db,
                 alert_type="LOGISTICS_RISK",
                 severity=(
-                    AlertSeverity.CRITICAL.value
-                    if risk_score >= 85
-                    else AlertSeverity.HIGH.value
+                    AlertSeverity.CRITICAL.value if risk_score >= 85 else AlertSeverity.HIGH.value
                 ),
                 title=title,
                 message=msg,
