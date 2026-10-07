@@ -24,9 +24,7 @@ logger = get_logger(__name__)
 # Password Hashing
 # ──────────────────────────────────────────────────────────────────────────────
 
-_SCHEMES = (
-    ["argon2", "bcrypt"] if settings.password_hash_scheme == "argon2id" else ["bcrypt"]
-)
+_SCHEMES = ["argon2", "bcrypt"] if settings.password_hash_scheme == "argon2id" else ["bcrypt"]
 
 pwd_context = CryptContext(schemes=_SCHEMES, deprecated="auto")
 
@@ -53,9 +51,7 @@ def create_access_token(
     extra_claims: dict[str, Any] | None = None,
 ) -> str:
     """Create a signed JWT access token."""
-    expire = datetime.now(UTC) + timedelta(
-        minutes=settings.jwt_access_token_expire_minutes
-    )
+    expire = datetime.now(UTC) + timedelta(minutes=settings.jwt_access_token_expire_minutes)
     payload: dict[str, Any] = {
         "sub": subject,
         "role": role,
@@ -68,9 +64,7 @@ def create_access_token(
     if extra_claims:
         payload.update(extra_claims)
 
-    return jwt.encode(
-        payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
-    )
+    return jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
 
 
 def create_refresh_token(subject: str) -> str:
@@ -82,9 +76,7 @@ def create_refresh_token(subject: str) -> str:
         "iat": datetime.now(UTC),
         "type": "refresh",
     }
-    return jwt.encode(
-        payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm
-    )
+    return jwt.encode(payload, settings.jwt_secret_key, algorithm=settings.jwt_algorithm)
 
 
 def decode_token(token: str) -> dict[str, Any]:
