@@ -62,9 +62,7 @@ class DemandForecaster:
         if n_samples < 5:
             # Simple fallback for extremely small data
             mean_val = float(np.mean(y)) if n_samples > 0 else 10.0
-            return cls._constant_forecast(
-                end_date.date(), horizon_days, mean_val, "NAIVE_BASELINE"
-            )
+            return cls._constant_forecast(end_date.date(), horizon_days, mean_val, "NAIVE_BASELINE")
 
         # Train / Validation Split (Last 20% or max 14 days for validation)
         val_size = min(14, max(3, int(n_samples * 0.2)))
@@ -72,9 +70,7 @@ class DemandForecaster:
         val_y = y[-val_size:]
 
         # Candidate Model 1: Naive (Moving Average)
-        naive_val_pred = np.full(
-            val_size, np.mean(train_y[-7:] if len(train_y) >= 7 else train_y)
-        )
+        naive_val_pred = np.full(val_size, np.mean(train_y[-7:] if len(train_y) >= 7 else train_y))
         naive_mae, naive_rmse, naive_mape = cls._compute_metrics(val_y, naive_val_pred)
 
         # Candidate Model 2: Holt-Winters Exponential Smoothing
@@ -192,9 +188,7 @@ class DemandForecaster:
         }
 
     @staticmethod
-    def _compute_metrics(
-        actual: np.ndarray, predicted: np.ndarray
-    ) -> tuple[float, float, float]:
+    def _compute_metrics(actual: np.ndarray, predicted: np.ndarray) -> tuple[float, float, float]:
         mae = float(np.mean(np.abs(actual - predicted)))
         rmse = float(np.sqrt(np.mean((actual - predicted) ** 2)))
         denom = np.where(actual == 0, 1.0, actual)
@@ -208,15 +202,11 @@ class DemandForecaster:
         data["is_weekend"] = data["dayofweek"].isin([5, 6]).astype(int)
         data["lag_1"] = data["quantity"].shift(1).bfill()
         data["lag_7"] = data["quantity"].shift(7).bfill()
-        data["rolling_7_mean"] = (
-            data["quantity"].shift(1).rolling(7, min_periods=1).mean().bfill()
-        )
+        data["rolling_7_mean"] = data["quantity"].shift(1).rolling(7, min_periods=1).mean().bfill()
         return data
 
     @classmethod
-    def _recursive_ml_forecast(
-        cls, model: Any, df: pd.DataFrame, horizon: int
-    ) -> np.ndarray:
+    def _recursive_ml_forecast(cls, model: Any, df: pd.DataFrame, horizon: int) -> np.ndarray:
         history_df = df.copy()
         predictions = []
         last_date = history_df["date"].max()
