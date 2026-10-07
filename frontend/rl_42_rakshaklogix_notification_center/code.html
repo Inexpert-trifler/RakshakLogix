@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RakshakLogix // RL-42 - Notification Center</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "outline-variant": "#c3c8c2",
+            "inverse-surface": "#2d312c",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#7c8f69",
+            "secondary": "#516446",
+            "on-secondary-container": "#55684a",
+            "on-surface": "#191d18",
+            "on-primary-fixed": "#111e16",
+            "surface-container-high": "#e6e9e1",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#3a4c30",
+            "on-secondary-fixed": "#0f1f08",
+            "tertiary-fixed-dim": "#b9cda3",
+            "on-primary": "#ffffff",
+            "secondary-container": "#d1e6c1",
+            "tertiary-fixed": "#d5e9be",
+            "surface-dim": "#d8dbd3",
+            "secondary-fixed-dim": "#b8cda9",
+            "on-surface-variant": "#434844",
+            "tertiary": "#040e00",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#bacbbd",
+            "surface-container-highest": "#e0e4dc",
+            "primary-fixed-dim": "#bacbbd",
+            "surface": "#f7faf2",
+            "surface-container": "#ecefe7",
+            "primary-container": "#17251c",
+            "outline": "#737873",
+            "surface-variant": "#e0e4dc",
+            "tertiary-container": "#17260a",
+            "on-primary-container": "#7d8d81",
+            "inverse-on-surface": "#eff2ea",
+            "on-background": "#191d18",
+            "surface-container-low": "#f2f5ec",
+            "background": "#f7faf2",
+            "secondary-fixed": "#d4e9c4",
+            "primary-fixed": "#d6e7d8",
+            "surface-tint": "#536257",
+            "on-tertiary-fixed": "#111f05",
+            "primary": "#030e07",
+            "error": "#ba1a1a",
+            "surface-bright": "#f7faf2",
+            "on-primary-fixed-variant": "#3b4a40",
+            "on-tertiary-fixed-variant": "#3b4c2c",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter-desktop": "1.5rem",
+            "space-md": "0.75rem",
+            "margin-desktop": "2rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin": "1rem",
+            "gutter": "1rem"
+          },
+          "fontFamily": {
+            "label-sm": ["IBM Plex Sans"],
+            "headline-sm": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "body-lg": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"],
+            "headline-xl-mobile": ["IBM Plex Sans"],
+            "label-xs": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "mono": ["IBM Plex Mono", "monospace"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-xs": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Custom Scrollbar for dense telemetry data feeds */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f2f5ec;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c3c8c2;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #737873;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-x-hidden font-body-md text-body-md select-none">
+<!-- ================= TOP NAV BAR (Shared Component Execution) ================= -->
+<header class="w-full h-14 px-gutter-desktop flex items-center justify-between border-b border-surface-container-highest bg-surface-container-lowest z-30 sticky top-0">
+<div class="flex items-center gap-space-md">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-wider text-primary uppercase flex items-center gap-2">
+<span class="w-2.5 h-2.5 bg-secondary rotate-45 inline-block"></span>
+        RakshakLogix // RL-42
+      </span>
+<span class="text-surface-dim font-light">|</span>
+<!-- Left Search Integration -->
+<div class="relative w-64 hidden lg:block">
+<span class="absolute inset-y-0 left-2.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full h-8 pl-8 pr-2 bg-surface text-on-surface text-body-sm rounded border border-surface-dim focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary" placeholder="Global asset / token query..." type="text"/>
+</div>
+</div>
+<!-- Center Navigation Links -->
+<nav class="hidden md:flex items-center gap-space-lg h-full">
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md py-4 transition-colors" href="#">Operations</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md py-4 transition-colors" href="#">Telemetry</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md py-4 transition-colors" href="#">Convoy Routing</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md py-4 transition-colors" href="#">Depot Inventory</a>
+<a class="text-on-surface-variant hover:text-on-surface text-label-md font-label-md py-4 transition-colors" href="#">Audit Logs</a>
+</nav>
+<!-- Trailing Actions & DEFCON indicator -->
+<div class="flex items-center gap-space-sm">
+<div class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-high rounded border border-surface-dim">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-label-xs font-label-xs uppercase text-on-surface font-semibold tracking-wider">DEFCON 4 Nominal</span>
+</div>
+<button class="hidden lg:flex items-center gap-1.5 px-3 py-1.5 bg-primary-container text-on-primary rounded text-label-sm font-label-sm uppercase hover:bg-secondary transition-colors">
+<span class="material-symbols-outlined text-[15px]">send_time_extension</span>
+        Transmit Telemetry
+      </button>
+<div class="flex items-center gap-1 border-l border-surface-container-highest pl-2">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" title="Security Enclave">
+<span class="material-symbols-outlined">security</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-secondary hover:bg-surface-container-high rounded transition-colors relative" title="Alerts Stream">
+<span class="material-symbols-outlined fill">notifications_active</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded transition-colors" title="Tactical Documentation">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="pl-2 flex items-center gap-2 border-l border-surface-container-highest">
+<div class="w-7 h-7 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-xs border border-secondary" title="Major General V. Sharma Quartermaster General Depot Command">
+          VS
+        </div>
+</div>
+</div>
+</header>
+<!-- ================= SIDEBAR (Shared Component Rail Fixed) ================= -->
+<aside class="fixed left-0 top-14 h-[calc(100vh-3.5rem)] w-[280px] z-20 flex flex-col justify-between py-space-md px-space-sm border-r border-surface-container-highest bg-surface-container-low select-none overflow-y-auto">
+<div class="space-y-4">
+<!-- Rail Header -->
+<div class="px-space-sm pb-3 border-b border-surface-dim">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center text-label-xs font-mono font-bold">RL</span>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-semibold text-primary uppercase tracking-wide leading-none">RakshakLogix</h2>
+<span class="text-label-xs font-label-xs text-outline tracking-wider block mt-1">BASE HQ - CORPS 14</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-error-container text-on-error-container text-label-xs font-mono font-bold border border-error/30">DEFCON 2</span>
+</div>
+<div class="mt-2 text-[10px] text-outline font-mono flex items-center justify-between">
+<span>PING: 0.2s LIVE</span>
+<span class="text-secondary font-semibold">SEC-LOG ACTIVE</span>
+</div>
+</div>
+<!-- Quick Dispatch Action CTA -->
+<div class="px-space-sm">
+<button class="w-full h-8 bg-primary-container hover:bg-secondary text-on-primary rounded text-label-sm font-label-sm uppercase flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">bolt</span>
+          Quick Dispatch
+        </button>
+</div>
+<!-- Section: Operational Domains -->
+<div>
+<p class="px-space-sm text-[10px] font-label-xs text-outline uppercase tracking-wider mb-1">Operational Domains</p>
+<ul class="space-y-0.5">
+<li>
+<a class="flex items-center gap-2.5 text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Command Dashboard</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2.5 text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span>Tactical Supply</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2.5 text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span>Fleet Convoy</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2.5 text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">ac_unit</span>
+<span>Cold-Chain Telemetry</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Section: Administration & System -->
+<div>
+<p class="px-space-sm text-[10px] font-label-xs text-outline uppercase tracking-wider mb-1">Administration Suite</p>
+<ul class="space-y-0.5">
+<li>
+<a class="flex items-center justify-between text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5"><span class="material-symbols-outlined">badge</span> User Management</span>
+<span class="text-label-xs font-mono text-outline">RL-37</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5"><span class="material-symbols-outlined">shield_person</span> Roles &amp; Permissions</span>
+<span class="text-label-xs font-mono text-outline">RL-38</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5"><span class="material-symbols-outlined">receipt_long</span> Audit Trail</span>
+<span class="text-label-xs font-mono text-outline">RL-39</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5"><span class="material-symbols-outlined">settings_suggest</span> System Settings</span>
+<span class="text-label-xs font-mono text-outline">RL-40</span>
+</a>
+</li>
+</ul>
+</div>
+<!-- Section: Account & Notifications (Active) -->
+<div>
+<p class="px-space-sm text-[10px] font-label-xs text-outline uppercase tracking-wider mb-1">Account &amp; Security</p>
+<ul class="space-y-0.5">
+<li>
+<a class="flex items-center justify-between text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5"><span class="material-symbols-outlined">person</span> My Profile</span>
+<span class="text-label-xs font-mono text-outline">RL-41</span>
+</a>
+</li>
+<!-- ACTIVE ITEM -->
+<li>
+<a class="bg-secondary-container text-on-secondary-container font-semibold border-l-2 border-secondary px-space-md py-space-sm rounded flex items-center justify-between text-label-md font-label-md" href="#">
+<span class="flex items-center gap-2.5">
+<span class="material-symbols-outlined fill">notifications</span>
+<span>Notifications RL-42</span>
+</span>
+<div class="flex items-center gap-1">
+<span class="px-1.5 py-0.2 bg-error text-on-error rounded text-[9px] font-mono font-bold tracking-tight">2 CRIT</span>
+<span class="px-1 py-0.2 bg-secondary text-on-secondary rounded text-[9px] font-mono">14</span>
+</div>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2.5 text-on-surface-variant px-space-md py-space-sm hover:text-on-surface hover:bg-surface-container rounded transition-colors text-label-md font-label-md" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span>Security &amp; Access</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Footer User Card & Rail Utility -->
+<div class="pt-3 border-t border-surface-dim space-y-2">
+<div class="p-2 bg-surface rounded border border-surface-dim">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-label-xs">
+            AM
+          </div>
+<div class="overflow-hidden">
+<h4 class="text-label-sm font-label-sm text-primary font-bold truncate">Lt. Col. Arjun Mehta</h4>
+<p class="text-[10px] text-outline font-mono truncate">USR-0148 • L4 Enclave</p>
+</div>
+</div>
+<p class="text-[10px] text-secondary font-medium mt-1 truncate">Logistics Quartermaster HQ</p>
+</div>
+<div class="flex items-center justify-between text-outline text-[11px] px-1">
+<a class="hover:text-primary flex items-center gap-1" href="#"><span class="material-symbols-outlined text-[14px]">settings</span> Diagnostics</a>
+<a class="hover:text-error flex items-center gap-1" href="#"><span class="material-symbols-outlined text-[14px]">logout</span> Sign Out</a>
+</div>
+</div>
+</aside>
+<!-- ================= MAIN CORE WORKSPACE (Offset for 280px left rail) ================= -->
+<main class="ml-[280px] min-h-[calc(100vh-3.5rem)] flex flex-col justify-between">
+<div class="p-space-lg max-w-[1720px] mx-auto w-full space-y-4">
+<!-- ================= 2. TOP COMMAND HEADER ================= -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-3 pb-3 border-b border-surface-dim">
+<div>
+<div class="flex items-center gap-2 text-label-xs font-label-xs uppercase tracking-wider text-outline mb-1">
+<span>Account</span>
+<span>/</span>
+<span class="text-secondary font-bold">Notifications (RL-42)</span>
+<span class="text-surface-dim">•</span>
+<span class="font-mono text-outline">ENCLAVE: DEF-L4</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary font-bold tracking-tight">Notification Center</h1>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Operational alerts, predictive risk events, depot recommendations, and tactical queue dispatches.</p>
+</div>
+<div class="flex flex-wrap items-center gap-2">
+<!-- Sync status -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container rounded border border-surface-dim text-body-sm text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-[11px] font-mono">Synced: 30s ago (14:46 IST)</span>
+</div>
+<button class="h-8 px-3 bg-surface-container hover:bg-surface-container-high text-on-surface rounded text-label-sm font-label-sm uppercase border border-surface-dim flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-sm">done_all</span>
+            Mark All as Read
+          </button>
+<a class="h-8 px-3 bg-surface-container-lowest hover:bg-surface-container text-on-surface rounded text-label-sm font-label-sm uppercase border border-surface-dim flex items-center gap-1 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">tune</span>
+            Notification Settings (RL-41)
+          </a>
+<div class="flex items-center gap-1 px-2.5 py-1 bg-surface-container-high rounded border border-surface-dim text-label-xs font-label-xs font-mono text-secondary">
+<span class="material-symbols-outlined text-sm">sensors</span>
+            LIVE STREAM
+          </div>
+</div>
+</section>
+<!-- ================= 3. NOTIFICATION SUMMARY STRIP (Compact KPIs) ================= -->
+<section class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-2">
+<!-- Unread Card -->
+<div class="bg-surface-container-lowest p-2.5 rounded border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-outline uppercase tracking-wider">Unread</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-primary">14</span>
+<span class="text-[10px] text-secondary font-medium">Queue Total</span>
+</div>
+</div>
+<!-- Critical Card (Restrained dark earth red) -->
+<div class="bg-surface-container-lowest p-2.5 rounded border-l-4 border-l-error border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-error uppercase tracking-wider font-bold">Critical</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-error">02</span>
+<span class="px-1 py-0.5 rounded bg-error-container text-on-error-container text-[9px] font-bold">IMMEDIATE</span>
+</div>
+</div>
+<!-- High Priority Card (Muted amber) -->
+<div class="bg-surface-container-lowest p-2.5 rounded border-l-4 border-l-[#C49A45] border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-[#7A5B18] uppercase tracking-wider font-bold">High Priority</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-[#7A5B18]">05</span>
+<span class="text-[10px] text-[#7A5B18] font-medium">&lt; 2 Hrs</span>
+</div>
+</div>
+<!-- Operational -->
+<div class="bg-surface-container-lowest p-2.5 rounded border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-outline uppercase tracking-wider">Operational</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-on-surface">09</span>
+<span class="text-[10px] text-outline font-medium">Forward Ops</span>
+</div>
+</div>
+<!-- Security -->
+<div class="bg-surface-container-lowest p-2.5 rounded border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-outline uppercase tracking-wider">Security</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-on-surface">02</span>
+<span class="text-[10px] text-error font-medium">Enclave Audit</span>
+</div>
+</div>
+<!-- System -->
+<div class="bg-surface-container-lowest p-2.5 rounded border border-surface-dim flex flex-col justify-between">
+<span class="text-[10px] font-label-xs text-outline uppercase tracking-wider">System</span>
+<div class="flex items-baseline justify-between mt-1">
+<span class="text-2xl font-bold font-mono text-on-surface">03</span>
+<span class="text-[10px] text-secondary font-medium">Telemetry OK</span>
+</div>
+</div>
+<!-- Preferences Shortcut Callout -->
+<div class="bg-surface-container-low p-2 rounded border border-surface-dim col-span-2 sm:col-span-3 lg:col-span-1 flex flex-col justify-center">
+<div class="text-[10px] font-label-xs text-outline uppercase tracking-wider leading-tight">Preferences</div>
+<div class="text-[11px] font-body-sm text-on-surface mt-1 leading-snug">
+<span class="font-semibold text-secondary">Critical:</span> Always • 
+            <span class="font-semibold text-secondary">Sim:</span> In-App
+          </div>
+<a class="text-[10px] font-label-xs text-secondary font-bold uppercase tracking-wider hover:underline mt-1 flex items-center gap-0.5" href="#">
+            Manage Preferences (RL-41) <span class="material-symbols-outlined text-[11px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- ================= 4. MAIN CONTENT AREA (Bento / Two Column Grid) ================= -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-md items-start">
+<!-- LEFT COLUMN (~62% width -> 7 of 12 cols in 12-col grid) -->
+<div class="lg:col-span-7 space-y-3">
+<!-- Search & Filter Controls Toolbar -->
+<div class="bg-surface-container-lowest p-3 rounded border border-surface-dim space-y-2.5">
+<!-- Search bar -->
+<div class="relative w-full">
+<span class="absolute inset-y-0 left-2.5 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined">search</span>
+</span>
+<input class="w-full h-9 pl-9 pr-3 bg-surface text-on-surface text-body-sm rounded border border-surface-dim focus:outline-none focus:ring-1 focus:ring-secondary focus:border-secondary font-mono placeholder:font-body-md placeholder:text-outline" placeholder="Search notifications (title, LOC-, SHP-, REC-, RISK-, SIM-)..." type="text"/>
+</div>
+<!-- Filter Status Pills & Filters Grid -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-surface-dim">
+<!-- Status Pills -->
+<div class="flex flex-wrap items-center gap-1">
+<button class="px-2.5 py-1 rounded text-label-xs font-label-xs uppercase bg-primary-container text-on-primary">All</button>
+<button class="px-2.5 py-1 rounded text-label-xs font-label-xs uppercase bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim flex items-center gap-1 font-bold">
+                  Unread <span class="px-1 rounded bg-secondary text-on-secondary font-mono text-[9px]">14</span>
+</button>
+<button class="px-2.5 py-1 rounded text-label-xs font-label-xs uppercase bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim">Action Required (7)</button>
+<button class="px-2.5 py-1 rounded text-label-xs font-label-xs uppercase bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim">Resolved</button>
+<button class="px-2.5 py-1 rounded text-label-xs font-label-xs uppercase bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim">Archived</button>
+</div>
+<!-- Dropdown Selects -->
+<div class="flex items-center gap-1.5">
+<select class="h-7 text-label-xs font-label-xs bg-surface text-on-surface rounded border border-surface-dim px-2 py-0 focus:outline-none focus:ring-1 focus:ring-secondary">
+<option>Type: All Types</option>
+<option>Risk (3)</option>
+<option>Inventory (4)</option>
+<option>Shipment (2)</option>
+<option>Fleet (1)</option>
+<option>Simulation (1)</option>
+<option>Recommendation (2)</option>
+<option>Security (1)</option>
+</select>
+<select class="h-7 text-label-xs font-label-xs bg-surface text-on-surface rounded border border-surface-dim px-2 py-0 focus:outline-none focus:ring-1 focus:ring-secondary">
+<option>Priority: All</option>
+<option>Critical (2)</option>
+<option>High (5)</option>
+<option>Medium (4)</option>
+<option>Low / Info (3)</option>
+</select>
+</div>
+</div>
+<!-- Batch Selection Bar -->
+<div class="bg-surface-container px-3 py-1.5 rounded flex items-center justify-between text-body-sm border border-surface-dim">
+<div class="flex items-center gap-2">
+<input checked="" class="rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="text-label-xs font-label-xs text-on-surface font-semibold uppercase">4 Selected</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface border border-surface-dim text-label-xs font-label-xs uppercase">Mark as Read</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface border border-surface-dim text-label-xs font-label-xs uppercase">Mark as Unread</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface border border-surface-dim text-label-xs font-label-xs uppercase">Archive</button>
+</div>
+</div>
+</div>
+<!-- Notification Feed Rows -->
+<div class="space-y-2">
+<!-- ROW 1: SELECTED & UNREAD, CRITICAL -->
+<div class="bg-surface-container-lowest p-3.5 rounded border-2 border-secondary relative hover:bg-surface-container-low transition-colors cursor-pointer ring-1 ring-secondary/20 shadow-sm">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-error-container text-on-error-container flex items-center justify-center shrink-0 border border-error/30 mt-0.5">
+<span class="material-symbols-outlined fill text-error text-[16px]">emergency</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-0.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-error text-on-error text-[9px] font-label-xs font-bold uppercase tracking-wider">CRITICAL</span>
+<span class="text-label-sm font-label-sm text-primary font-bold">Fuel Stockout Risk Increased</span>
+<span class="text-outline text-body-sm">—</span>
+<span class="font-mono text-body-sm font-medium text-secondary">Forward Post Alpha (LOC-0042)</span>
+</div>
+<span class="text-[11px] font-mono text-outline shrink-0">6 min ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface mb-2">Projected fuel stockout probability surged to 74% within 6 days due to severe Fotu La blizzard warning.</p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-surface-dim text-[11px]">
+<div class="flex items-center gap-2 text-outline font-mono">
+<span>Source: Risk Engine (Confidence: 94%)</span>
+<span>•</span>
+<span>Related: <span class="text-primary font-semibold">RISK-1042</span>, <span class="text-primary font-semibold">REC-2048</span></span>
+</div>
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-primary-container text-on-primary hover:bg-secondary text-[10px] font-label-xs uppercase">Review Risk</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">View Location</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">Review Rec</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 2: UNREAD, HIGH -->
+<div class="bg-surface-container-lowest p-3.5 rounded border border-surface-dim hover:border-secondary transition-colors cursor-pointer">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-[#d5e9be] text-on-tertiary-container flex items-center justify-center shrink-0 border border-secondary mt-0.5">
+<span class="material-symbols-outlined text-[16px] text-secondary">local_shipping</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-0.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-[#C49A45]/20 text-[#7A5B18] border border-[#C49A45] text-[9px] font-label-xs font-bold uppercase tracking-wider">HIGH</span>
+<span class="text-label-sm font-label-sm text-primary font-bold">Shipment Delay Predicted</span>
+<span class="text-outline text-body-sm">—</span>
+<span class="font-mono text-body-sm text-on-surface">SHP-2048 (Arctic POL Bowser Sortie)</span>
+</div>
+<span class="text-[11px] font-mono text-outline shrink-0">18 min ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-2">Estimated transit delay increased by +38 minutes on Corridor RTE-021 due to BRO snow-clearing backlog.</p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-surface-dim text-[11px]">
+<div class="text-outline font-mono">
+                      Source: Fleet GPS &amp; Weather Telemetry
+                    </div>
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">View Shipment SHP-2048</button>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">Reroute Matrix</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 3: UNREAD, HIGH -->
+<div class="bg-surface-container-lowest p-3.5 rounded border border-surface-dim hover:border-secondary transition-colors cursor-pointer">
+<div class="flex items-start gap-3">
+<input checked="" class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 border border-secondary mt-0.5">
+<span class="material-symbols-outlined text-[16px]">smart_toy</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-0.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-[#C49A45]/20 text-[#7A5B18] border border-[#C49A45] text-[9px] font-label-xs font-bold uppercase tracking-wider">HIGH</span>
+<span class="text-label-sm font-label-sm text-primary font-bold">Recommendation Requires Review</span>
+<span class="text-outline text-body-sm">—</span>
+<span class="font-mono text-body-sm text-on-surface">REC-2048</span>
+</div>
+<span class="text-[11px] font-mono text-outline shrink-0">24 min ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-2">AI Engine advises +2,500 L Arctic Diesel replenishment increase prior to pass freeze.</p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-surface-dim text-[11px]">
+<div class="text-outline font-mono">
+                      Source: AI Recommendation Center • Confidence: 94%
+                    </div>
+<div class="flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-primary-container text-on-primary hover:bg-secondary text-[10px] font-label-xs uppercase">Review Recommendation</button>
+<button class="px-2 py-0.5 rounded bg-secondary hover:bg-primary-container text-on-secondary text-[10px] font-label-xs uppercase">Quick Approve</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 4: READ, MEDIUM -->
+<div class="bg-surface-container-low p-3.5 rounded border border-surface-dim hover:border-outline transition-colors cursor-pointer opacity-90">
+<div class="flex items-start gap-3">
+<input class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-surface-container-high text-on-surface-variant flex items-center justify-center shrink-0 border border-surface-dim mt-0.5">
+<span class="material-symbols-outlined text-[16px]">science</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-0.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant border border-surface-dim text-[9px] font-label-xs font-bold uppercase tracking-wider">MEDIUM</span>
+<span class="text-label-sm font-label-sm text-on-surface font-semibold">Simulation Completed</span>
+<span class="text-outline text-body-sm">—</span>
+<span class="font-mono text-body-sm text-outline">SIM-0084 (Winter Surge Scenario)</span>
+</div>
+<span class="text-[11px] font-mono text-outline shrink-0">42 min ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-2">Monte Carlo multi-echelon simulation completed with 6 operational impact points.</p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-surface-dim text-[11px]">
+<div class="text-outline font-mono">
+                      Source: Simulation Engine
+                    </div>
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">View Simulation Results</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 5: UNREAD, CRITICAL SECURITY -->
+<div class="bg-surface-container-lowest p-3.5 rounded border border-error/50 hover:border-error transition-colors cursor-pointer">
+<div class="flex items-start gap-3">
+<input class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-error-container text-on-error-container flex items-center justify-center shrink-0 border border-error/30 mt-0.5">
+<span class="material-symbols-outlined fill text-error text-[16px]">gpp_maybe</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-1 mb-0.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded bg-error text-on-error text-[9px] font-label-xs font-bold uppercase tracking-wider">CRITICAL</span>
+<span class="text-label-sm font-label-sm text-primary font-bold">Cross-Sector Unauthorized Dispatch Attempt</span>
+<span class="text-outline text-body-sm">—</span>
+<span class="font-mono text-body-sm text-error">SHP-2051</span>
+</div>
+<span class="text-[11px] font-mono text-outline shrink-0">1h ago</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-2">Sortie dispatch command blocked by DEF-L4 Enclave boundary. Security incident logged.</p>
+<div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-surface-dim text-[11px]">
+<div class="text-outline font-mono">
+                      Source: DISA-IDS Gateway • Incident: <span class="text-error font-semibold">#SEC-403</span>
+</div>
+<button class="px-2 py-0.5 rounded bg-error text-on-error hover:bg-[#93000A] text-[10px] font-label-xs uppercase">Review Security Dossier #INV-09</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ROW 6: GROUPED NOTIFICATION, READ -->
+<div class="bg-surface-container p-3 rounded border border-surface-dim">
+<div class="flex items-start gap-3">
+<input class="mt-1 rounded border-outline text-secondary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<div class="w-7 h-7 rounded bg-surface-container-highest text-on-surface-variant flex items-center justify-center shrink-0 border border-surface-dim mt-0.5">
+<span class="material-symbols-outlined text-[16px]">folder</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-1 mb-1">
+<span class="text-label-sm font-label-sm text-primary font-semibold flex items-center gap-1.5">
+                      3 Inventory Notifications — Bodhkharbu Depot <span class="font-mono text-outline font-normal">(DEP-0002)</span>
+</span>
+<span class="text-[11px] font-mono text-outline">2h ago</span>
+</div>
+<ul class="text-[11px] font-body-sm text-on-surface-variant space-y-1 my-1.5 pl-2 border-l border-surface-dim">
+<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-outline"></span> Stock level decreased (-12%) in Bay 4</li>
+<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#C49A45]"></span> Safety floor crossed for high-altitude rations</li>
+<li class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Consumption telemetry synchronized with HQ Northern Command</li>
+</ul>
+<div class="flex items-center justify-between pt-1">
+<span class="text-[10px] font-mono text-outline">Cluster Hash: #GRP-DEP02-881</span>
+<button class="px-2 py-0.5 rounded bg-surface-container-lowest hover:bg-surface-container-high text-on-surface border border-surface-dim text-[10px] font-label-xs uppercase">Expand Group (3)</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination Bar -->
+<div class="bg-surface-container-lowest p-2.5 rounded border border-surface-dim flex flex-col sm:flex-row items-center justify-between gap-2 text-body-sm">
+<span class="text-label-xs font-mono text-outline">
+              Showing 1–6 of 14 Unread (Total 438 archived) • Density: Compact
+            </span>
+<div class="flex items-center gap-1 font-mono text-label-xs">
+<button class="w-6 h-6 rounded bg-surface-container text-on-surface flex items-center justify-center border border-surface-dim disabled:opacity-50" disabled="">&lt;</button>
+<button class="w-6 h-6 rounded bg-primary-container text-on-primary font-bold flex items-center justify-center">1</button>
+<button class="w-6 h-6 rounded bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center border border-surface-dim">2</button>
+<button class="w-6 h-6 rounded bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center border border-surface-dim">3</button>
+<span class="px-1 text-outline">...</span>
+<button class="w-6 h-6 rounded bg-surface-container hover:bg-surface-container-high text-on-surface flex items-center justify-center border border-surface-dim">8</button>
+<button class="w-6 h-6 rounded bg-surface-container text-on-surface flex items-center justify-center border border-surface-dim">&gt;</button>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (~38% width -> 5 of 12 cols) - Interactive Notification Detail Drawer -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded border border-surface-dim p-4 space-y-4 shadow-sm">
+<!-- Detail Header -->
+<div class="border-b border-surface-dim pb-3">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded bg-error text-on-error text-[10px] font-label-xs font-bold uppercase tracking-wider">CRITICAL ESCALATION</span>
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-mono text-outline">REF: NTF-2026-1042</span>
+<button class="text-outline hover:text-on-surface" title="Close panel"><span class="material-symbols-outlined text-[16px]">close</span></button>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Fuel Stockout Risk Increased (Forward Post Alpha)</h3>
+<div class="flex items-center gap-2 mt-1 text-[11px] font-mono text-outline">
+<span class="text-error font-semibold">STATUS: UNREAD / ACTION REQUIRED</span>
+<span>•</span>
+<span>07 Oct 2026 · 14:42 IST</span>
+</div>
+</div>
+<!-- Context & Narrative -->
+<div class="bg-surface-container-low p-3 rounded border border-surface-dim">
+<p class="text-[10px] font-label-xs text-outline uppercase tracking-wider mb-1">Operational Assessment Context</p>
+<p class="text-body-sm font-body-sm text-on-surface leading-relaxed">
+              Projected fuel consumption at Forward Post Alpha (<span class="font-mono text-secondary font-semibold">LOC-0042</span>) has increased by +25% amid high-altitude sub-zero drops (-22°C), driving projected inventory below the mandatory 2,000 L safety-stock floor by Day 5. Fotu La pass closure imminent.
+            </p>
+</div>
+<!-- Key Metrics Grid -->
+<div>
+<p class="text-[10px] font-label-xs text-outline uppercase tracking-wider mb-2">Telemetry Snapshot &amp; Stock Projections</p>
+<div class="grid grid-cols-2 gap-2 text-center">
+<div class="bg-surface p-2 rounded border border-surface-dim">
+<span class="text-[10px] font-label-xs text-outline uppercase">Current Inventory</span>
+<p class="text-xl font-bold font-mono text-primary mt-0.5">4,200 <span class="text-xs font-normal text-outline">L</span></p>
+</div>
+<div class="bg-surface p-2 rounded border border-surface-dim">
+<span class="text-[10px] font-label-xs text-outline uppercase">Daily Demand</span>
+<p class="text-xl font-bold font-mono text-primary mt-0.5">850 <span class="text-xs font-normal text-outline">L/day</span></p>
+</div>
+<div class="bg-surface p-2 rounded border border-surface-dim">
+<span class="text-[10px] font-label-xs text-outline uppercase">Safety Stock Floor</span>
+<p class="text-xl font-bold font-mono text-[#7A5B18] mt-0.5">2,000 <span class="text-xs font-normal text-outline">L</span></p>
+</div>
+<div class="bg-surface p-2 rounded border border-surface-dim bg-error-container/20">
+<span class="text-[10px] font-label-xs text-error uppercase font-bold">Stockout Prob</span>
+<p class="text-xl font-bold font-mono text-error mt-0.5">74% <span class="text-[10px] font-normal text-error">(▲ +32%)</span></p>
+</div>
+</div>
+<div class="mt-2 p-2 rounded bg-surface-container text-center border border-surface-dim">
+<span class="text-[10px] font-label-xs text-outline uppercase">Estimated Time to Critical Impact</span>
+<p class="text-lg font-bold font-mono text-error mt-0.5">6 DAYS, 14 HOURS</p>
+</div>
+</div>
+<!-- Linked Platform Objects -->
+<div>
+<p class="text-[10px] font-label-xs text-outline uppercase tracking-wider mb-1.5">Linked Operational Gateways</p>
+<div class="flex flex-wrap gap-1.5">
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-surface-dim text-label-xs font-mono text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[12px] text-error">warning</span> RISK-1042 (RL-29)
+              </a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-surface-dim text-label-xs font-mono text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[12px] text-secondary">location_on</span> LOC-0042 Alpha (RL-09)
+              </a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-surface-dim text-label-xs font-mono text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[12px] text-secondary">inventory</span> REC-2048 (+2.5k L, RL-36)
+              </a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-surface-dim text-label-xs font-mono text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[12px] text-outline">route</span> RTE-021 Fotu La (RL-28)
+              </a>
+<a class="px-2 py-1 rounded bg-surface-container hover:bg-surface-container-high border border-surface-dim text-label-xs font-mono text-primary flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[12px] text-outline">science</span> SIM-0084 (RL-33)
+              </a>
+</div>
+</div>
+<!-- Notification Lifecycle & Event Timeline -->
+<div>
+<p class="text-[10px] font-label-xs text-outline uppercase tracking-wider mb-2">Audit &amp; Dispatch Timeline</p>
+<div class="space-y-2 border-l border-surface-dim ml-2 pl-3 text-[11px] font-mono">
+<div class="relative">
+<span class="absolute -left-[17px] top-1 w-2 h-2 rounded-full bg-outline"></span>
+<p class="text-on-surface font-semibold">14:32 IST</p>
+<p class="text-on-surface-variant font-body-sm">Simulation SIM-0084 batch executed with high-altitude pass variables.</p>
+</div>
+<div class="relative">
+<span class="absolute -left-[17px] top-1 w-2 h-2 rounded-full bg-outline"></span>
+<p class="text-on-surface font-semibold">14:35 IST</p>
+<p class="text-on-surface-variant font-body-sm">Risk assessment model refreshed via automated ML pipeline.</p>
+</div>
+<div class="relative">
+<span class="absolute -left-[17px] top-1 w-2 h-2 rounded-full bg-[#C49A45]"></span>
+<p class="text-[#7A5B18] font-semibold">14:39 IST</p>
+<p class="text-on-surface-variant font-body-sm">Stockout probability crossed configured 70% threshold.</p>
+</div>
+<div class="relative">
+<span class="absolute -left-[17px] top-1 w-2 h-2 rounded-full bg-error"></span>
+<p class="text-error font-semibold">14:42 IST</p>
+<p class="text-on-surface-variant font-body-sm">Critical priority notification dispatched to Quartermaster channel.</p>
+</div>
+<div class="relative">
+<span class="absolute -left-[17px] top-1 w-2 h-2 rounded-full bg-secondary"></span>
+<p class="text-secondary font-semibold">14:46 IST (Current)</p>
+<p class="text-on-surface-variant font-body-sm">Viewed in Notification Center by Lt. Col. Arjun Mehta.</p>
+</div>
+</div>
+</div>
+<!-- Operational Action Triggers -->
+<div class="pt-3 border-t border-surface-dim space-y-2">
+<div class="grid grid-cols-2 gap-2">
+<button class="h-9 px-3 bg-primary-container hover:bg-secondary text-on-primary rounded text-label-sm font-label-sm uppercase flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">crisis_alert</span>
+                Review Risk RL-30
+              </button>
+<button class="h-9 px-3 bg-surface-container hover:bg-surface-container-high text-on-surface rounded text-label-sm font-label-sm uppercase border border-surface-dim flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">assignment_turned_in</span>
+                Inspect REC-2048
+              </button>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 h-8 px-2 bg-surface hover:bg-surface-container text-on-surface rounded text-label-xs font-label-xs uppercase border border-surface-dim flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">check_circle</span>
+                Mark as Resolved
+              </button>
+<button class="h-8 px-3 bg-surface hover:bg-surface-container text-outline hover:text-error rounded text-label-xs font-label-xs uppercase border border-surface-dim flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[14px]">archive</span>
+                Archive
+              </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- ================= 5. DEFENSE COMPLIANCE FOOTER ================= -->
+<footer class="w-full bg-surface-container-lowest border-t border-surface-dim px-gutter-desktop py-2.5 mt-6">
+<div class="flex flex-col md:flex-row items-center justify-between gap-2 text-[10px] font-mono text-outline text-center md:text-left">
+<div>
+<span>DEFENCE LOGISTICS INFORMATION SYSTEM (DLIS)</span>
+<span class="mx-1">•</span>
+<span>AUDITABLE NOTIFICATION BUS REF: <span class="text-primary font-semibold">NTF-BUS-042</span></span>
+<span class="mx-1">•</span>
+<span>MIL-STD-810H &amp; DISA STIG COMPLIANT</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-secondary font-semibold">ENCRYPTION: AES-256-GCM</span>
+<span>•</span>
+<span class="text-primary font-bold">HQ 14 CORPS LOGISTICS COMMAND</span>
+</div>
+</div>
+</footer>
+</main>
+</body></html>

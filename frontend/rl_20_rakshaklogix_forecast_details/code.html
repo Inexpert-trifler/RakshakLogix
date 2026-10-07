@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RL-20 Forecast Details | RakshakLogix Logistics Command</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-error-container": "#93000a",
+          "on-primary-fixed": "#111e16",
+          "on-secondary-fixed-variant": "#3a4c30",
+          "tertiary-fixed": "#d5e9be",
+          "primary": "#030e07",
+          "outline": "#737873",
+          "surface": "#f7faf2",
+          "secondary-container": "#d1e6c1",
+          "surface-bright": "#f7faf2",
+          "surface-container-low": "#f2f5ec",
+          "error": "#ba1a1a",
+          "tertiary": "#040e00",
+          "on-secondary-container": "#55684a",
+          "primary-fixed-dim": "#bacbbd",
+          "tertiary-container": "#17260a",
+          "secondary-fixed": "#d4e9c4",
+          "surface-dim": "#d8dbd3",
+          "error-container": "#ffdad6",
+          "secondary-fixed-dim": "#b8cda9",
+          "secondary": "#516446",
+          "on-primary": "#ffffff",
+          "surface-container": "#ecefe7",
+          "outline-variant": "#c3c8c2",
+          "surface-tint": "#536257",
+          "on-surface-variant": "#434844",
+          "surface-container-lowest": "#ffffff",
+          "on-primary-fixed-variant": "#3b4a40",
+          "surface-container-high": "#e6e9e1",
+          "on-tertiary-fixed": "#111f05",
+          "on-background": "#191d18",
+          "on-tertiary-fixed-variant": "#3b4c2c",
+          "on-primary-container": "#7d8d81",
+          "on-surface": "#191d18",
+          "tertiary-fixed-dim": "#b9cda3",
+          "on-secondary": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "surface-variant": "#e0e4dc",
+          "background": "#f7faf2",
+          "inverse-on-surface": "#eff2ea",
+          "surface-container-highest": "#e0e4dc",
+          "inverse-primary": "#bacbbd",
+          "primary-container": "#17251c",
+          "inverse-surface": "#2d312c",
+          "on-tertiary-container": "#7c8f69",
+          "primary-fixed": "#d6e7d8",
+          "on-secondary-fixed": "#0f1f08",
+          "on-error": "#ffffff"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "margin-desktop": "2rem",
+          "gutter-desktop": "1.5rem",
+          "space-xl": "2rem",
+          "margin": "1rem",
+          "space-md": "0.75rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "space-xs": "0.25rem",
+          "space-lg": "1.25rem"
+        },
+        "fontFamily": {
+          "label-sm": ["IBM Plex Sans"],
+          "label-xs": ["IBM Plex Sans"],
+          "headline-xl-mobile": ["IBM Plex Sans"],
+          "body-lg": ["IBM Plex Sans"],
+          "label-md": ["IBM Plex Sans"],
+          "headline-sm": ["IBM Plex Sans"],
+          "headline-xl": ["IBM Plex Sans"],
+          "body-md": ["IBM Plex Sans"],
+          "headline-lg": ["IBM Plex Sans"],
+          "body-sm": ["IBM Plex Sans"],
+          "mono": ["IBM Plex Mono", "monospace"]
+        },
+        "fontSize": {
+          "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600"}],
+          "label-xs": ["10px", {"lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700"}],
+          "headline-xl-mobile": ["26px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+          "label-md": ["13px", {"lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600"}],
+          "headline-xl": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+          "body-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400"}],
+          "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "body-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400"}]
+        }
+      }
+    }
+  }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #ecefe7;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c3c8c2;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #737873;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-sm text-body-sm overflow-x-hidden selection:bg-secondary selection:text-on-primary">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT 1: SideNavBar                                           -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-[280px] z-40 bg-primary-container dark:bg-primary-container border-r border-outline-variant/30 flex flex-col justify-between select-none">
+<!-- Top Block: Crest, Officer Identity & Navigation -->
+<div class="flex flex-col flex-1 overflow-y-auto custom-scrollbar">
+<!-- Brand Header -->
+<div class="p-4 border-b border-outline-variant/20 flex items-center gap-3">
+<div class="w-9 h-9 rounded bg-secondary flex items-center justify-center text-on-primary font-bold border border-secondary-container/40">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-md font-label-md font-bold text-on-primary tracking-wider uppercase">RakshakLogix</span>
+<span class="text-label-xs font-label-xs text-on-primary-container uppercase tracking-widest">HQ Logistics Command</span>
+</div>
+</div>
+<!-- Officer Badge -->
+<div class="mx-3 my-3 p-2.5 rounded bg-primary/40 border border-outline-variant/20 flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs tracking-tight border border-outline-variant/40">
+          BK
+        </div>
+<div class="flex flex-col min-w-0">
+<span class="text-label-sm font-label-sm font-semibold text-on-primary truncate">Lt. Col. B. Kumar BK</span>
+<span class="text-label-xs font-label-xs text-on-primary-container font-mono truncate">IC-78921K · DEF-ENC L4 · NORTH-LEH</span>
+</div>
+</div>
+<!-- Navigation Tree -->
+<nav class="flex flex-col gap-0.5 px-2 py-1">
+<!-- Command Overview -->
+<a class="text-on-primary-container hover:text-on-primary hover:bg-primary/50 px-3 py-2 rounded flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-sm font-body-sm">Command Overview</span>
+</a>
+<!-- Demand Forecasting Tree (Expanded) -->
+<div class="flex flex-col mt-0.5">
+<div class="text-on-primary font-semibold px-3 py-2 rounded flex items-center justify-between transition-colors bg-primary/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">query_stats</span>
+<span class="text-body-sm font-body-sm">Demand Forecasting</span>
+</div>
+<span class="material-symbols-outlined text-[14px] text-on-primary-container">expand_more</span>
+</div>
+<!-- Sub-items under Demand Forecasting -->
+<div class="ml-4 pl-3 border-l border-outline-variant/30 flex flex-col gap-0.5 my-1">
+<a class="text-on-primary-container hover:text-on-primary px-3 py-1.5 rounded text-body-sm transition-colors duration-150 flex items-center gap-2" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span>Overview (RL-18)</span>
+</a>
+<a class="text-on-primary-container hover:text-on-primary px-3 py-1.5 rounded text-body-sm transition-colors duration-150 flex items-center gap-2" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span>Generate Forecast (RL-19)</span>
+</a>
+<!-- ACTIVE: Forecast Details (RL-20) -->
+<a class="bg-secondary/40 text-on-primary border-l-2 border-secondary-container font-semibold px-3 py-1.5 rounded-r flex items-center justify-between text-body-sm transition-colors duration-150" href="#">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container"></span>
+<span>Forecast Details (RL-20)</span>
+</div>
+<span class="text-label-xs font-label-xs bg-secondary-container text-on-secondary-container px-1 py-0.5 rounded font-mono">ACTIVE</span>
+</a>
+<a class="text-on-primary-container hover:text-on-primary px-3 py-1.5 rounded text-body-sm transition-colors duration-150 flex items-center gap-2" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span>Model Performance (RL-21)</span>
+</a>
+</div>
+</div>
+<!-- Fleet & Convoys -->
+<a class="text-on-primary-container hover:text-on-primary hover:bg-primary/50 px-3 py-2 rounded flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">local_shipping</span>
+<span class="text-body-sm font-body-sm">Fleet &amp; Convoys</span>
+</a>
+<!-- Ordnance & Armament -->
+<a class="text-on-primary-container hover:text-on-primary hover:bg-primary/50 px-3 py-2 rounded flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">swords</span>
+<span class="text-body-sm font-body-sm">Ordnance &amp; Armament</span>
+</a>
+<!-- Cold-Chain Rations -->
+<a class="text-on-primary-container hover:text-on-primary hover:bg-primary/50 px-3 py-2 rounded flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="text-body-sm font-body-sm">Cold-Chain Rations</span>
+</a>
+<!-- Depot Readiness -->
+<a class="text-on-primary-container hover:text-on-primary hover:bg-primary/50 px-3 py-2 rounded flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">warehouse</span>
+<span class="text-body-sm font-body-sm">Depot Readiness</span>
+</a>
+</nav>
+<!-- Active Data Pipeline Status Telemetry -->
+<div class="mx-3 mt-4 p-3 rounded bg-primary/60 border border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-center justify-between text-label-xs font-label-xs text-on-primary-container">
+<span class="font-bold uppercase tracking-wider text-outline-variant">Pipeline Telemetry</span>
+<span class="flex items-center gap-1 text-secondary-container">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-container animate-pulse"></span> LIVE
+          </span>
+</div>
+<div class="flex flex-col gap-1.5 font-mono text-[11px] leading-tight">
+<div class="flex items-center justify-between text-on-primary">
+<span class="text-on-primary-container">RL-15 Consumption</span>
+<span class="text-secondary-fixed">OK (7D)</span>
+</div>
+<div class="flex items-center justify-between text-on-primary">
+<span class="text-on-primary-container">RL-16 Ingestion</span>
+<span class="text-secondary-fixed">SYNCED</span>
+</div>
+<div class="flex items-center justify-between text-on-primary">
+<span class="text-on-primary-container">RL-17 Quality QA</span>
+<span class="text-secondary-fixed">98.4% SCORE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar Bottom / Footer Actions -->
+<div class="p-3 border-t border-outline-variant/20 flex flex-col gap-2 bg-primary-container">
+<button class="w-full py-2 px-3 rounded bg-secondary hover:bg-on-secondary-container text-on-primary text-label-sm font-label-sm font-bold flex items-center justify-center gap-2 transition-colors duration-150 border border-secondary-container/30">
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+        Export Tactical Brief
+      </button>
+<div class="flex flex-col gap-0.5 pt-1">
+<a class="text-on-primary-container hover:text-on-primary px-3 py-1.5 rounded flex items-center gap-2.5 text-body-sm transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[16px]">radar</span>
+<span class="flex-1">DEFCON Telemetry</span>
+<span class="text-label-xs font-label-xs px-1.5 py-0.5 rounded bg-amber-900/60 text-amber-200 border border-amber-700/50">DEFCON 3</span>
+</a>
+<a class="text-on-primary-container hover:text-on-primary px-3 py-1.5 rounded flex items-center gap-2.5 text-body-sm transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[16px]">settings</span>
+<span>System Settings</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT 2: TopNavBar                                             -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-[280px] right-0 h-14 z-30 bg-surface-container-lowest dark:bg-surface-container-low border-b border-outline-variant flex items-center justify-between px-6">
+<!-- Left: Breadcrumbs & Classification Info -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5 text-body-sm font-body-sm">
+<span class="text-on-surface-variant font-medium">RakshakLogix</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface-variant font-medium">Demand Forecasting</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary dark:text-inverse-primary font-bold">Forecast Details (RL-20)</span>
+</div>
+<span class="h-4 w-px bg-outline-variant"></span>
+<!-- Tactical Sector & DEFCON status -->
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 text-label-xs font-label-xs font-bold uppercase rounded bg-amber-100 text-amber-900 border border-amber-300 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-ping"></span>
+          DEFCON 3: Yellow Alert
+        </span>
+<span class="font-mono text-label-xs font-label-xs text-on-surface-variant">GRID: NORTH-LEH // SEC IV-B</span>
+<span class="text-outline-variant">|</span>
+<span class="font-mono text-label-xs font-label-xs text-secondary font-bold">TEL: NOMINAL (14:40 IST)</span>
+</div>
+</div>
+<!-- Right: Trailing Actions, Sector Telemetry & Profile -->
+<div class="flex items-center gap-3">
+<!-- Primary / Secondary Action Triggers -->
+<button class="px-2.5 py-1.5 rounded bg-surface hover:bg-surface-container border border-outline-variant text-on-surface text-label-sm font-label-sm flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">compare_arrows</span>
+        Compare Versions
+      </button>
+<button class="px-3 py-1.5 rounded bg-primary-container hover:bg-primary text-on-primary text-label-sm font-label-sm font-semibold flex items-center gap-1.5 transition-colors border border-primary">
+<span class="material-symbols-outlined text-[16px]">sync</span>
+        Sync Telemetry
+      </button>
+<div class="flex items-center gap-1 border-l border-outline-variant pl-2">
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Notifications">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="w-8 h-8 rounded flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Documentation &amp; Help">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<div class="flex items-center gap-2 border-l border-outline-variant pl-3">
+<div class="w-7 h-7 rounded bg-secondary text-on-primary flex items-center justify-center font-bold text-xs">
+          BK
+        </div>
+<div class="flex flex-col text-left">
+<span class="text-label-xs font-label-xs font-semibold leading-none text-on-surface">Lt. Col. BK</span>
+<span class="text-[9px] font-mono text-on-surface-variant leading-none mt-0.5">QM-Staff</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CANVAS                                                     -->
+<!-- ========================================================================= -->
+<main class="ml-[280px] pt-14 min-h-screen bg-background pb-12">
+<div class="px-6 py-5 max-w-[1600px] mx-auto flex flex-col gap-4">
+<!-- ===================================================================== -->
+<!-- 1. FORECAST COMMAND HEADER                                            -->
+<!-- ===================================================================== -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded p-4 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+<div class="flex flex-col gap-1">
+<div class="flex flex-wrap items-center gap-2">
+<span class="text-label-xs font-label-xs uppercase px-2 py-0.5 rounded bg-primary-container text-on-primary font-mono tracking-wider">
+              SKU: FUEL-001 (POL)
+            </span>
+<span class="text-label-xs font-label-xs px-2 py-0.5 rounded bg-secondary/15 text-primary border border-secondary/40 font-bold uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              Active // Validated
+            </span>
+<span class="text-label-xs font-label-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant font-mono">
+              VERSION: FV-2026-10-05-03
+            </span>
+<span class="text-label-xs font-label-xs px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant font-mono">
+              TARGET: OP-CYCLE 2026-H2
+            </span>
+</div>
+<div class="flex items-baseline gap-3 mt-1">
+<h1 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">
+              Diesel Demand Forecast
+            </h1>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-mono">
+              Arctic Grade 50 Cetane High-Pour Point
+            </span>
+</div>
+<div class="flex items-center gap-2 text-body-sm text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px] text-secondary">location_on</span>
+<span class="font-medium text-on-surface">Forward Post Alpha (LOC-0042)</span>
+<span class="text-outline-variant">·</span>
+<span>Sector IV-B Northern Command</span>
+<span class="text-outline-variant">·</span>
+<span class="font-mono text-label-sm">High-Altitude Glacier Axis (3,500m MSL)</span>
+</div>
+</div>
+<!-- Action Controls -->
+<div class="flex flex-wrap items-center gap-2 self-stretch lg:self-center justify-start lg:justify-end">
+<button class="px-3 py-1.5 rounded bg-surface hover:bg-surface-container border border-outline-variant text-on-surface text-label-sm font-label-sm font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">history</span>
+            Compare (v02)
+          </button>
+<button class="px-3 py-1.5 rounded bg-surface hover:bg-surface-container border border-outline-variant text-on-surface text-label-sm font-label-sm font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+            Export Dossier
+          </button>
+<button class="px-3 py-1.5 rounded bg-surface hover:bg-surface-container border border-outline-variant text-on-surface text-label-sm font-label-sm font-medium flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[16px]">refresh</span>
+            Regenerate
+          </button>
+<button class="px-3.5 py-1.5 rounded bg-primary-container hover:bg-primary text-on-primary text-label-sm font-label-sm font-bold flex items-center gap-2 transition-colors border border-primary">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+            View Inventory Impact (RL-14)
+          </button>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 2. COMPACT METADATA TELEMETRY BAR                                     -->
+<!-- ===================================================================== -->
+<section class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 bg-surface-container-lowest border border-outline-variant/80 rounded p-2.5 text-body-sm">
+<div class="flex flex-col px-2 border-r border-outline-variant/40 last:border-r-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Forecast Horizon</span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface mt-0.5">06 Oct → 04 Nov 2026</span>
+<span class="text-[10px] text-on-surface-variant font-mono">30 Days Forward Forward-Look</span>
+</div>
+<div class="flex flex-col px-2 border-r border-outline-variant/40 last:border-r-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Ingestion Timestamp</span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface mt-0.5">05 Oct 2026 · 19:43 IST</span>
+<span class="text-[10px] text-on-surface-variant font-mono">Lt. Col. B. Kumar BK</span>
+</div>
+<div class="flex flex-col px-2 border-r border-outline-variant/40 last:border-r-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Deployed Model</span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface mt-0.5">DemandModel v2.4</span>
+<span class="text-[10px] text-on-surface-variant font-mono">LSTM-Attn Architecture</span>
+</div>
+<div class="flex flex-col px-2 border-r border-outline-variant/40 last:border-r-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Training Window</span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface mt-0.5">180 Days Scrubbed</span>
+<span class="text-[10px] text-on-surface-variant font-mono">RL-16 / RL-17 Audited</span>
+</div>
+<div class="flex flex-col px-2 border-r border-outline-variant/40 last:border-r-0">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Composite Confidence</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="font-mono text-label-sm font-label-sm font-bold text-secondary">91.4%</span>
+<span class="text-[9px] font-bold uppercase px-1 rounded bg-secondary-container text-on-secondary-container font-mono">High</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">±24.2 L Error Margin</span>
+</div>
+<div class="flex flex-col px-2">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">Operational Posture</span>
+<span class="font-mono text-label-sm font-label-sm font-bold text-error mt-0.5 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+            Critical Replenish
+          </span>
+<span class="text-[10px] text-error font-mono font-semibold">Breach &lt; 6 Days Projected</span>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- CORE SPLIT: PRIMARY VECTOR (65%) & INVENTORY RUNWAY (35%)             -->
+<!-- ===================================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+<!-- =================================================================== -->
+<!-- LEFT COLUMN: FORECAST VECTOR & UNCERTAINTY (8 Cols ≈ 66%)           -->
+<!-- =================================================================== -->
+<div class="lg:col-span-8 flex flex-col gap-4">
+<!-- Primary Chart Module -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded p-4 flex flex-col gap-3">
+<div class="flex flex-wrap items-center justify-between pb-3 border-b border-outline-variant/40 gap-2">
+<div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface flex items-center gap-2">
+                  Demand Forecast Vector &amp; Uncertainty Envelope
+                  <span class="text-label-xs font-label-xs text-on-surface-variant font-normal font-mono">(Liters / 24-Hour Cycle)</span>
+</h2>
+<p class="text-body-sm text-on-surface-variant mt-0.5">
+                  Multi-horizon trajectory incorporating meteorological telemetry and tactical convoys.
+                </p>
+</div>
+<!-- Time Horizon Tabs -->
+<div class="flex items-center bg-surface-container rounded p-0.5 border border-outline-variant/60 font-mono text-label-xs font-label-xs">
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">7D</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">14D</button>
+<button class="px-2.5 py-1 rounded bg-primary-container text-on-primary font-bold shadow-sm">30D Active</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface">60D</button>
+</div>
+</div>
+<!-- Chart Key / Legend -->
+<div class="flex flex-wrap items-center justify-between text-label-xs font-label-xs text-on-surface-variant pt-1 font-mono">
+<div class="flex flex-wrap items-center gap-4">
+<span class="flex items-center gap-1.5">
+<span class="w-3.5 h-0.5 bg-primary-container"></span>
+                  Historical Actuals (29 Sep - 05 Oct)
+                </span>
+<span class="flex items-center gap-1.5">
+<span class="w-3.5 h-0.5 bg-secondary border-b border-dashed border-secondary"></span>
+                  Forecast Vector (+17.6% Baseline Surge)
+                </span>
+<span class="flex items-center gap-1.5">
+<span class="w-3.5 h-2 bg-secondary/15 border border-secondary/30"></span>
+                  Confidence Interval (p=0.90 Envelope)
+                </span>
+</div>
+<div class="flex items-center gap-2 text-outline-variant">
+<span>05 OCT 19:43 IST [T0 DIVIDER]</span>
+</div>
+</div>
+<!-- Custom Vector SVG Chart Visualizer -->
+<div class="w-full h-80 bg-surface rounded border border-outline-variant/50 relative overflow-hidden flex flex-col justify-end p-2 select-none">
+<!-- Subtle Background Grid Lines & Y-Axis Reference -->
+<div class="absolute inset-0 flex flex-col justify-between p-4 pointer-events-none opacity-40">
+<div class="w-full border-b border-dashed border-outline-variant flex justify-between">
+<span class="text-[9px] font-mono text-outline">900 L</span>
+<span class="text-[9px] font-mono text-outline">UPPER CRITICAL BURN</span>
+</div>
+<div class="w-full border-b border-dashed border-outline-variant flex justify-between">
+<span class="text-[9px] font-mono text-outline">750 L</span>
+<span class="text-[9px] font-mono text-outline">SURGE THRESHOLD</span>
+</div>
+<div class="w-full border-b border-dashed border-outline-variant flex justify-between">
+<span class="text-[9px] font-mono text-outline">600 L</span>
+<span class="text-[9px] font-mono text-outline">NOMINAL REPO BASELINE</span>
+</div>
+<div class="w-full border-b border-dashed border-outline-variant flex justify-between">
+<span class="text-[9px] font-mono text-outline">450 L</span>
+<span class="text-[9px] font-mono text-outline">MINIMUM IDLE</span>
+</div>
+</div>
+<!-- Main SVG Canvas Rendering the Forecast Data Curve -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 800 320">
+<defs>
+<!-- Uncertainty Envelope Gradient -->
+<lineargradient id="envelopeGrad" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#516446" stop-opacity="0.10"></stop>
+<stop offset="100%" stop-color="#516446" stop-opacity="0.25"></stop>
+</lineargradient>
+<!-- Pattern for historical anomaly scrubbed -->
+<pattern height="4" id="scrubPattern" patternunits="userSpaceOnUse" width="4">
+<path d="M-1,1 l2,-2 M0,4 l4,-4 M3,5 l2,-2" opacity="0.3" stroke="#A49A78" stroke-width="0.8"></path>
+</pattern>
+</defs>
+<!-- Uncertainty Envelope Polygon (from X=220 to X=760) -->
+<!-- Widening band bounded: 650 L lower to 790 L upper -->
+<polygon fill="url(#envelopeGrad)" points="220,185 300,165 420,140 560,120 700,105 760,100 760,205 700,210 560,218 420,225 300,220 220,185"></polygon>
+<path d="M220,185 L300,165 L420,140 L560,120 L700,105 L760,100" fill="none" opacity="0.6" stroke="#516446" stroke-dasharray="2 2" stroke-width="1"></path>
+<path d="M220,185 L300,220 L420,225 L560,218 L700,210 L760,205" fill="none" opacity="0.6" stroke="#516446" stroke-dasharray="2 2" stroke-width="1"></path>
+<!-- Historical Actuals Curve (X=40 to X=220) -->
+<!-- Values: 29 Sep (605L -> y=188), 30 Sep (610L -> y=186), 01 Oct (612L -> y=185), 02 Oct surge (842L -> y=68), baseline scrubbed to 612L -->
+<!-- Real line with anomaly spike -->
+<path d="M40,188 L85,186 L130,185 L160,78 L175,185 L220,185" fill="none" stroke="#17251c" stroke-width="2.5"></path>
+<!-- Baseline Scrubbed Projection path shown during spike -->
+<path d="M130,185 L175,185" fill="none" stroke="#A49A78" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<!-- Forecast Vector Line (X=220 to X=760) -->
+<!-- Climbing from 612 L/day to 720 L/day (+17.6%) peaking at 760 L/day -->
+<path d="M220,185 L300,170 L380,150 L460,132 L540,125 L620,135 L700,142 L760,145" fill="none" stroke="#3F5135" stroke-dasharray="6 3" stroke-width="3"></path>
+<!-- Current Timestamp Divider T0 (X=220) -->
+<line stroke="#17251c" stroke-dasharray="4 2" stroke-width="1.5" x1="220" x2="220" y1="20" y2="295"></line>
+<circle cx="220" cy="185" fill="#17251c" r="4.5" stroke="#ffffff" stroke-width="1.5"></circle>
+<!-- Anomaly Point Marker (02 Oct - 842L) -->
+<circle cx="160" cy="78" fill="#C49A45" r="4" stroke="#17251c" stroke-width="1.5"></circle>
+<!-- Milestone Marker 1: 09 Oct Convoy Surge (X=360, Y=154) -->
+<line opacity="0.6" stroke="#516446" stroke-dasharray="2 3" stroke-width="1" x1="360" x2="360" y1="120" y2="295"></line>
+<circle cx="360" cy="154" fill="#516446" r="3.5"></circle>
+<!-- Milestone Marker 2: 10 Oct Scheduled Supply Inbound SHP-2048 (X=420) -->
+<line opacity="0.6" stroke="#516446" stroke-dasharray="2 3" stroke-width="1" x1="420" x2="420" y1="80" y2="295"></line>
+<circle cx="420" cy="140" fill="#516446" r="3.5"></circle>
+<!-- Milestone Marker 3: 11 Oct Safety Stock Breach Zero Point (X=480) -->
+<line stroke="#ba1a1a" stroke-dasharray="3 3" stroke-width="1.5" x1="480" x2="480" y1="40" y2="295"></line>
+<circle cx="480" cy="129" fill="#ba1a1a" r="4.5" stroke="#ffffff" stroke-width="1.5"></circle>
+</svg>
+<!-- Floating Tactical Annotations over Chart -->
+<!-- 1. Anomaly Tag -->
+<div class="absolute left-[85px] top-6 bg-surface-container-lowest border border-outline-variant p-1.5 rounded shadow-sm max-w-[210px] pointer-events-none">
+<div class="flex items-center gap-1 text-[10px] font-mono text-amber-800 font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
+                  02 OCT: 842 L SURGE
+                </div>
+<div class="text-[9px] text-on-surface-variant font-mono leading-tight mt-0.5">
+                  Sub-Zero Perimeter Activation. Scrubbed to 612 L baseline for training.
+                </div>
+</div>
+<!-- 2. T0 Current Marker Tag -->
+<div class="absolute left-[200px] bottom-14 -translate-x-1/2 bg-primary-container text-on-primary px-2 py-0.5 rounded text-[10px] font-mono font-bold shadow">
+                05 OCT · 19:43 IST
+              </div>
+<!-- 3. Key Milestone Badges Pinpointed on Horizon -->
+<div class="absolute left-[330px] top-28 bg-surface-container-high/90 border border-outline-variant px-1.5 py-0.5 rounded text-[9px] font-mono text-on-surface">
+                09 OCT: Convoy Refuel
+              </div>
+<div class="absolute left-[390px] top-12 bg-secondary-container/90 border border-secondary px-1.5 py-0.5 rounded text-[9px] font-mono text-on-secondary-container font-semibold">
+                10 OCT: Inbound SHP-2048
+              </div>
+<div class="absolute left-[450px] top-4 bg-error-container/95 border border-error px-2 py-1 rounded text-[9px] font-mono text-on-error-container font-bold shadow-sm">
+                ⚠ 11 OCT: SAFETY BREACH
+              </div>
+<!-- Bottom Timeline Axis (Dates) -->
+<div class="w-full flex justify-between text-[10px] font-mono text-on-surface-variant pt-2 border-t border-outline-variant/40 mt-auto bg-surface z-10 px-2">
+<span>29 Sep</span>
+<span>01 Oct</span>
+<span>03 Oct</span>
+<span class="font-bold text-primary">05 Oct (Today)</span>
+<span>08 Oct</span>
+<span class="text-error font-bold">11 Oct</span>
+<span>15 Oct</span>
+<span>20 Oct</span>
+<span>28 Oct</span>
+<span>04 Nov</span>
+</div>
+</div>
+<!-- Forecast Metric Comparison Strip -->
+<div class="overflow-x-auto border border-outline-variant/60 rounded bg-surface-container-lowest">
+<table class="w-full text-left text-body-sm font-mono">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant text-label-xs font-label-xs text-on-surface uppercase">
+<th class="py-1.5 px-3">Telemetry Metric</th>
+<th class="py-1.5 px-3 text-right">Historical (30D Actual)</th>
+<th class="py-1.5 px-3 text-right">Projected (30D Model)</th>
+<th class="py-1.5 px-3 text-right">Calibrated Variance</th>
+<th class="py-1.5 px-3 text-center">Confidence Posture</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30 text-body-sm">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 font-sans font-medium text-on-surface">Daily Consumption Average</td>
+<td class="py-2 px-3 text-right">612 L / day</td>
+<td class="py-2 px-3 text-right font-bold text-secondary">720 L / day</td>
+<td class="py-2 px-3 text-right text-error font-bold">+17.6% (+108 L)</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px]">NOMINAL HIGH</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 font-sans font-medium text-on-surface">Peak Daily Burn Velocity</td>
+<td class="py-2 px-3 text-right">842 L <span class="text-[10px] text-amber-800">(Anomaly)</span></td>
+<td class="py-2 px-3 text-right font-bold">790 L <span class="text-[10px] text-on-surface-variant">(Upper Bound)</span></td>
+<td class="py-2 px-3 text-right text-on-surface-variant">-6.1% vs peak spike</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant text-[10px]">BOUNDED 90%</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 font-sans font-medium text-on-surface">Variability (Std Dev σ)</td>
+<td class="py-2 px-3 text-right">68.4</td>
+<td class="py-2 px-3 text-right font-bold">54.2</td>
+<td class="py-2 px-3 text-right text-secondary">-20.7% (Stabilized)</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px]">CONSISTENT</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-2 px-3 font-sans font-medium text-on-surface">Demand Acceleration Trajectory</td>
+<td class="py-2 px-3 text-right">+12.4% linear</td>
+<td class="py-2 px-3 text-right font-bold text-error">+17.6% compounding</td>
+<td class="py-2 px-3 text-right text-error font-bold">+5.2% velocity</td>
+<td class="py-2 px-3 text-center"><span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300 text-[10px]">MONITORING</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- ================================================================= -->
+<!-- 4. EXPLAINABLE DEMAND DRIVERS & MODEL ATTRIBUTION                -->
+<!-- ================================================================= -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">psychology_alt</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">
+                  Why is Demand Expected to Change? (Model Attribution Factors)
+                </h3>
+</div>
+<span class="text-label-xs font-label-xs font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">
+                SHAPLEY VALUE DECOMPOSITION (±0.4% residual)
+              </span>
+</div>
+<!-- Causal Factor Decomposition Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Factor 1: Ambient Drop -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-mono font-bold text-xs">1</span>
+<div>
+<h4 class="text-body-sm font-body-sm font-bold text-on-surface">Sub-Zero Ambient Thermal Drop</h4>
+<span class="text-[10px] font-mono text-on-surface-variant">-21°C cold snap forecasted by Met Dept</span>
+</div>
+</div>
+<span class="font-mono text-label-sm font-label-sm font-bold text-error bg-error-container/40 text-on-error-container px-1.5 py-0.5 rounded">
+                    +11.2% burn
+                  </span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+                  Perimeter generator continuous high-idle schedule and fuel line electric tracing heaters automatically engaged below -18°C.
+                </p>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-error h-full" style="width: 63%"></div>
+</div>
+</div>
+<!-- Factor 2: Convoy Surge -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-mono font-bold text-xs">2</span>
+<div>
+<h4 class="text-body-sm font-body-sm font-bold text-on-surface">Sector Patrol Convoy Surge</h4>
+<span class="text-[10px] font-mono text-on-surface-variant">RL-08 Dispatch Matrix Active</span>
+</div>
+</div>
+<span class="font-mono text-label-sm font-label-sm font-bold text-secondary bg-secondary-container/50 text-on-secondary-container px-1.5 py-0.5 rounded">
+                    +4.1% burn
+                  </span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+                  Armored reconnaissance vehicle rotation frequency increased from 36h to 24h intervals across Sector IV-B ridgeline routes.
+                </p>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 23%"></div>
+</div>
+</div>
+<!-- Factor 3: Viscosity Penalty -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-mono font-bold text-xs">3</span>
+<div>
+<h4 class="text-body-sm font-body-sm font-bold text-on-surface">High-Altitude Viscosity Inefficiency</h4>
+<span class="text-[10px] font-mono text-on-surface-variant">3,500m MSL Altitude Drag Coefficient</span>
+</div>
+</div>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface bg-surface-container px-1.5 py-0.5 rounded">
+                    +1.8% burn
+                  </span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+                  Reduced atmospheric pressure causing rich fuel-to-air ratios on older Cummins generator units located at outpost observation posts.
+                </p>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 10%"></div>
+</div>
+</div>
+<!-- Factor 4: Baseline Trend Momentum -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-primary-container text-on-primary flex items-center justify-center font-mono font-bold text-xs">4</span>
+<div>
+<h4 class="text-body-sm font-body-sm font-bold text-on-surface">Baseline Seasonal Trend Shift</h4>
+<span class="text-[10px] font-mono text-on-surface-variant">Autoregressive historical seasonal drift</span>
+</div>
+</div>
+<span class="font-mono text-label-sm font-label-sm font-bold text-on-surface bg-surface-container px-1.5 py-0.5 rounded">
+                    +0.5% burn
+                  </span>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-relaxed">
+                  General heating schedule adjustments standard for early October calendar transitions across northern border posts.
+                </p>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-outline h-full" style="width: 4%"></div>
+</div>
+</div>
+</div>
+<!-- Total Calibrated Surge Summary -->
+<div class="p-3 rounded bg-secondary/10 border border-secondary/30 flex items-center justify-between text-body-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">verified</span>
+<span class="font-bold text-on-surface">Total Calibrated Demand Surge:</span>
+<span class="font-mono font-bold text-secondary">+17.6% Calibrated Increment</span>
+<span class="text-on-surface-variant font-mono text-xs">(612 L/day → 720 L/day base requirement)</span>
+</div>
+<div class="flex items-center gap-3 font-mono text-label-xs font-label-xs text-on-surface-variant">
+<span>Horizon Degradation:</span>
+<span class="text-secondary font-bold">7D: 96.2%</span>
+<span>→</span>
+<span class="text-secondary font-bold">14D: 93.1%</span>
+<span>→</span>
+<span class="text-amber-800 font-bold">21D: 88.7%</span>
+<span>→</span>
+<span class="text-amber-900 font-bold">30D: 84.0%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- =================================================================== -->
+<!-- RIGHT COLUMN: DOWNSTREAM INVENTORY IMPACT & STOCKOUT (4 Cols ≈ 34%) -->
+<!-- =================================================================== -->
+<div class="lg:col-span-4 flex flex-col gap-4">
+<!-- Urgent Stockout Warning Banner -->
+<div class="bg-error-container/20 border-2 border-error rounded p-4 flex flex-col gap-3">
+<div class="flex items-center gap-2 text-error font-bold uppercase tracking-wider text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[20px] animate-bounce">warning</span>
+<span>Critical Posture: Projected Stockout</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container-lowest border border-error/40 flex flex-col gap-1">
+<div class="flex items-baseline justify-between">
+<span class="text-body-sm font-body-sm font-semibold text-on-surface">Estimated Depletion Horizon:</span>
+<span class="font-mono text-headline-sm font-headline-sm font-bold text-error">11 OCT · 04:00 IST</span>
+</div>
+<span class="text-label-xs font-label-xs font-mono text-error font-semibold">
+                T-MINUS 5.8 DAYS REMAINING AT 720 L/DAY
+              </span>
+</div>
+<!-- Key Inventory Health Metrics -->
+<div class="grid grid-cols-2 gap-2 text-body-sm font-mono">
+<div class="p-2 rounded bg-surface-container-lowest border border-outline-variant/60 flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase font-sans">Available On-Hand</span>
+<span class="text-headline-sm font-headline-sm font-bold text-on-surface mt-0.5">4,200 L</span>
+<span class="text-[10px] text-outline">LOC-0042 Bunker Tanks</span>
+</div>
+<div class="p-2 rounded bg-surface-container-lowest border border-outline-variant/60 flex flex-col">
+<span class="text-[10px] text-on-surface-variant uppercase font-sans">Safety Floor Floor</span>
+<span class="text-headline-sm font-headline-sm font-bold text-error mt-0.5">2,000 L</span>
+<span class="text-[10px] text-error font-bold">Breached in 3.1 Days</span>
+</div>
+</div>
+<!-- Visual Inventory Depletion Simulation Bar -->
+<div class="flex flex-col gap-1.5 pt-1">
+<div class="flex justify-between text-label-xs font-label-xs font-mono text-on-surface-variant">
+<span>05 Oct (4,200 L)</span>
+<span class="text-amber-800 font-bold">08 Oct (Safety 2,000 L)</span>
+<span class="text-error font-bold">11 Oct (0 L Void)</span>
+</div>
+<div class="w-full h-3 bg-surface-container rounded-sm border border-outline-variant overflow-hidden flex">
+<div class="bg-secondary h-full" style="width: 52%" title="Operational Stock (2,200 L)"></div>
+<div class="bg-amber-600 h-full" style="width: 48%" title="Safety Buffer Stock (2,000 L)"></div>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono text-center">
+                Depletion rate accelerating from -612 L/day to -720 L/day
+              </span>
+</div>
+</div>
+<!-- Active Inbound Logistics Bridge (SHP-2048) -->
+<div class="bg-surface-container-lowest border border-outline-variant/80 rounded p-4 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">local_shipping</span>
+<h3 class="text-body-sm font-body-sm font-bold text-on-surface uppercase tracking-wide">
+                  Active Inbound Logistics Bridge
+                </h3>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container text-label-xs font-label-xs font-mono font-bold">
+                EN ROUTE
+              </span>
+</div>
+<div class="flex flex-col gap-2 font-mono text-body-sm">
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Consignment ID:</span>
+<span class="font-bold text-on-surface">SHP-2048 (Convoy C-04)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Payload Quantity:</span>
+<span class="font-bold text-secondary">1,200 Liters (Arctic Diesel)</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Estimated Arrival (ETA):</span>
+<span class="font-bold text-amber-800">09 Oct · 16:00 IST</span>
+</div>
+<div class="p-2 rounded bg-amber-50 border border-amber-200 text-[11px] text-amber-900 leading-tight">
+<strong>Transit Delay Advisory:</strong> +3h delay reported across Zojila Pass due to black ice telemetry (RL-08 tracking).
+              </div>
+</div>
+<div class="p-2.5 rounded bg-surface-container border border-outline-variant flex flex-col gap-1 text-[11px]">
+<div class="flex justify-between font-mono font-bold text-on-surface">
+<span>Adjusted Stockout with SHP-2048:</span>
+<span class="text-secondary">13 Oct · 02:00 IST</span>
+</div>
+<p class="text-on-surface-variant leading-snug">
+                Extends depot runway by +43 hours. Does not negate necessity for emergency bulk replenishment order.
+              </p>
+</div>
+</div>
+<!-- Prescriptive Replenishment Order Recommendation (RL-14 Bridge) -->
+<div class="bg-surface-container-lowest border-2 border-secondary rounded p-4 flex flex-col gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">assignment_turned_in</span>
+<h3 class="text-body-sm font-body-sm font-bold text-on-surface uppercase tracking-wide">
+                Prescriptive Order Recommendation
+              </h3>
+</div>
+<p class="text-body-sm text-on-surface-variant">
+              Automated logistics decision engine recommends immediate replenishment requisition to maintain 14-day operational safety cushion.
+            </p>
+<div class="p-3 rounded bg-surface-container-low border border-outline-variant/60 flex flex-col gap-2 font-mono text-body-sm">
+<div class="flex justify-between items-center">
+<span class="text-xs font-sans text-on-surface-variant">Recommended Order:</span>
+<span class="text-headline-sm font-headline-sm font-bold text-primary">2,500 Liters</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="font-sans text-on-surface-variant">Source Depot:</span>
+<span class="font-bold text-on-surface">LOC-0012 (Pathankot / Leh)</span>
+</div>
+<div class="flex justify-between items-center text-xs">
+<span class="font-sans text-on-surface-variant">Critical Dispatch Window:</span>
+<span class="font-bold text-error">Before 07 Oct · 08:00 IST</span>
+</div>
+</div>
+<button class="w-full py-2.5 px-3 rounded bg-primary-container hover:bg-primary text-on-primary text-label-sm font-label-sm font-bold flex items-center justify-center gap-2 transition-colors border border-primary shadow-sm">
+<span class="material-symbols-outlined text-[18px]">verified_user</span>
+              Authorize Replenishment Dispatch (RL-14)
+            </button>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- 6. FORECAST MODEL GOVERNANCE & QUALITY VERIFICATION                   -->
+<!-- ===================================================================== -->
+<section class="bg-surface-container-lowest border border-outline-variant/80 rounded p-4 flex flex-col gap-4">
+<div class="flex flex-wrap items-center justify-between pb-2 border-b border-outline-variant/40 gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">model_training</span>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">
+              Forecast Model Governance &amp; Data Integrity Verification
+            </h3>
+</div>
+<span class="text-label-xs font-label-xs font-mono text-on-surface-variant">
+            MIL-STD-188F CERTIFIED INFERENCE ENGINE · AUDITED BY CORPS SALS
+          </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Column 1: Model Diagnostics -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2.5">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase font-bold tracking-wider">
+              Architecture &amp; Performance Diagnostics
+            </span>
+<div class="flex flex-col gap-1.5 font-mono text-body-sm">
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Architecture:</span>
+<span class="font-bold text-on-surface text-xs">Bi-LSTM + Multi-Head Self-Attn</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Mean Absolute Error (MAE):</span>
+<span class="font-bold text-secondary">42.0 Liters</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Mean Abs % Error (MAPE):</span>
+<span class="font-bold text-secondary">7.8% (Target &lt; 10%)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant font-sans text-xs">Systemic Bias (MPE):</span>
+<span class="font-bold text-on-surface">+1.4% (Within MIL-STD)</span>
+</div>
+</div>
+</div>
+<!-- Column 2: RL-17 Telemetry Quality Context -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2.5">
+<div class="flex justify-between items-center">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase font-bold tracking-wider">
+                Telemetry Quality Bridge (RL-17)
+              </span>
+<span class="font-mono text-label-xs font-label-xs font-bold text-secondary bg-secondary-container px-1.5 py-0.5 rounded">
+                94.0% QA Score
+              </span>
+</div>
+<div class="flex flex-col gap-1.5 font-mono text-xs">
+<div class="flex items-center justify-between">
+<span class="font-sans text-on-surface-variant">Telemetry Completeness:</span>
+<span class="font-bold text-on-surface">97% [High]</span>
+</div>
+<div class="w-full bg-outline-variant/40 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 97%"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-sans text-on-surface-variant">Sensor Stream Validity:</span>
+<span class="font-bold text-on-surface">95% [High]</span>
+</div>
+<div class="w-full bg-outline-variant/40 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 95%"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-sans text-on-surface-variant">Stationary Consistency:</span>
+<span class="font-bold text-on-surface">92% [Nominal]</span>
+</div>
+<div class="w-full bg-outline-variant/40 h-1 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 92%"></div>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-sans text-on-surface-variant">Pipeline Timeliness:</span>
+<span class="font-bold text-on-surface">89% [Low Latency]</span>
+</div>
+</div>
+</div>
+<!-- Column 3: Version Comparison (v02 vs v03) -->
+<div class="p-3 rounded border border-outline-variant/60 bg-surface-container-low flex flex-col gap-2.5">
+<span class="text-label-xs font-label-xs text-on-surface-variant uppercase font-bold tracking-wider">
+              Differential: v02 vs Current v03
+            </span>
+<div class="flex flex-col gap-2 font-mono text-body-sm">
+<div class="p-1.5 rounded bg-surface-container-lowest border border-outline-variant/40 flex justify-between items-center text-xs">
+<span class="font-sans text-on-surface-variant">Projected Demand:</span>
+<span class="font-bold text-on-surface">690 L/d → <strong class="text-error">720 L/d</strong> (+30 L)</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest border border-outline-variant/40 flex justify-between items-center text-xs">
+<span class="font-sans text-on-surface-variant">Stockout Zero-Day:</span>
+<span class="font-bold text-on-surface">12 Oct → <strong class="text-error">11 Oct</strong> (-24h)</span>
+</div>
+<div class="p-1.5 rounded bg-surface-container-lowest border border-outline-variant/40 flex justify-between items-center text-xs">
+<span class="font-sans text-on-surface-variant">Prescribed Order:</span>
+<span class="font-bold text-on-surface">2,200 L → <strong class="text-secondary">2,500 L</strong> (+300 L)</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-sans italic">
+                *Delta caused by updated Northern Met Office blizzard advisory at 18:00 IST.
+              </span>
+</div>
+</div>
+</div>
+</section>
+<!-- ===================================================================== -->
+<!-- 7. FORECAST AUDIT TRAIL & COMPLIANCE FOOTER                           -->
+<!-- ===================================================================== -->
+<footer class="bg-surface-container border border-outline-variant/80 rounded p-3 flex flex-col md:flex-row items-center justify-between text-body-sm font-mono text-on-surface-variant gap-3">
+<div class="flex flex-wrap items-center gap-3 text-label-xs font-label-xs">
+<span class="flex items-center gap-1 text-on-surface font-semibold">
+<span class="material-symbols-outlined text-[14px] text-secondary">lock</span>
+            DEF-ENC L4 AUTHORIZED
+          </span>
+<span class="text-outline-variant">•</span>
+<span>SHA-256: 8a7c2...f490b</span>
+<span class="text-outline-variant">•</span>
+<span>AUDIT LOGGED: 05 OCT 19:44:12 IST</span>
+<span class="text-outline-variant">•</span>
+<span>MIL-STD-188F SECURE NODE</span>
+</div>
+<div class="flex items-center gap-2 text-[10px] font-sans text-on-surface uppercase tracking-widest font-bold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          RESTRICTED // HQ NORTHERN LOGISTICS COMMAND // FOR OFFICIAL USE ONLY
+        </div>
+</footer>
+</div>
+</main>
+<script>
+    // Lightweight Micro-Interactions for Tactical Command Feel
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle horizon tabs micro-interaction
+      const horizonButtons = document.querySelectorAll('div.flex.items-center.bg-surface-container button');
+      horizonButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          horizonButtons.forEach(b => {
+            b.className = 'px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface';
+          });
+          btn.className = 'px-2.5 py-1 rounded bg-primary-container text-on-primary font-bold shadow-sm';
+        });
+      });
+
+      // Quick feedback toast on dispatch click
+      const dispatchBtn = document.querySelector('button[title*="Authorize"], button:has(span:contains("Authorize"))');
+      if(dispatchBtn) {
+        dispatchBtn.addEventListener('click', () => {
+          alert('TACTICAL DISPATCH INITIATED: Requisition order 2,500 L arctic diesel submitted to RL-14 Inventory Routing Engine. Token DEF-ENC L4 Signed.');
+        });
+      }
+    });
+  </script>
+</body></html>

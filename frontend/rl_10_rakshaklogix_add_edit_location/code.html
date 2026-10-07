@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RL-10 — Add / Edit Location | RakshakLogix Command Platform</title>
+<!-- Google Fonts: IBM Plex Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed": "#111e16",
+            "primary": "#030e07",
+            "inverse-surface": "#2d312c",
+            "on-tertiary-fixed": "#111f05",
+            "on-surface-variant": "#434844",
+            "on-primary-container": "#7d8d81",
+            "on-error": "#ffffff",
+            "on-primary-fixed-variant": "#3b4a40",
+            "on-background": "#191d18",
+            "tertiary-fixed-dim": "#b9cda3",
+            "surface-container-low": "#f2f5ec",
+            "error": "#ba1a1a",
+            "surface-variant": "#e0e4dc",
+            "on-tertiary-container": "#7c8f69",
+            "primary-fixed-dim": "#bacbbd",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#17260a",
+            "on-secondary": "#ffffff",
+            "secondary": "#516446",
+            "on-secondary-fixed-variant": "#3a4c30",
+            "background": "#f7faf2",
+            "on-surface": "#191d18",
+            "on-primary": "#ffffff",
+            "secondary-container": "#d1e6c1",
+            "on-error-container": "#93000a",
+            "outline-variant": "#c3c8c2",
+            "on-secondary-container": "#55684a",
+            "secondary-fixed": "#d4e9c4",
+            "primary-fixed": "#d6e7d8",
+            "outline": "#737873",
+            "surface-container-highest": "#e0e4dc",
+            "surface-bright": "#f7faf2",
+            "tertiary": "#040e00",
+            "surface-container-high": "#e6e9e1",
+            "surface-container": "#ecefe7",
+            "primary-container": "#17251c",
+            "surface": "#f7faf2",
+            "secondary-fixed-dim": "#b8cda9",
+            "on-secondary-fixed": "#0f1f08",
+            "surface-dim": "#d8dbd3",
+            "tertiary-fixed": "#d5e9be",
+            "surface-container-lowest": "#ffffff",
+            "surface-tint": "#536257",
+            "inverse-on-surface": "#eff2ea",
+            "on-tertiary-fixed-variant": "#3b4c2c",
+            "inverse-primary": "#bacbbd"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "space-lg": "1.25rem",
+            "gutter": "1rem",
+            "margin": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "0.75rem"
+          },
+          "fontFamily": {
+            "label-sm": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"],
+            "body-lg": ["IBM Plex Sans"],
+            "label-xs": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "headline-sm": ["IBM Plex Sans"],
+            "headline-xl-mobile": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "label-xs": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Clean GIS grid canvas */
+    .tactical-grid {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(89, 107, 72, 0.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(89, 107, 72, 0.08) 1px, transparent 1px);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #ecefe7;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c3c8c2;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body-md antialiased min-h-screen flex selection:bg-secondary selection:text-on-secondary">
+<!-- ========================================================================= -->
+<!-- SIDE NAVIGATION (Shared Component: SideNavBar)                            -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-[240px] z-40 bg-primary-container dark:bg-primary-container border-r border-outline-variant flex flex-col justify-between p-space-md">
+<!-- Top Brand & Header Section -->
+<div class="space-y-space-md">
+<div class="flex items-center gap-space-sm pb-space-sm border-b border-outline-variant/30">
+<div class="w-8 h-8 rounded-DEFAULT bg-secondary flex items-center justify-center text-on-secondary font-headline-sm">
+<span class="material-symbols-outlined text-[20px]" data-icon="shield">shield</span>
+</div>
+<div class="leading-tight overflow-hidden">
+<div class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-primary dark:text-inverse-on-surface uppercase truncate">RAKSHAKLOGIX</div>
+<div class="font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider truncate">RL-10 LOGISTICS COMMAND</div>
+</div>
+</div>
+<!-- Quick Action CTA -->
+<button class="w-full flex items-center justify-between px-space-sm py-1.5 bg-surface-container/10 hover:bg-surface-container/20 text-inverse-on-surface rounded-DEFAULT border border-outline-variant/30 text-label-xs font-label-xs transition-colors">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed" data-icon="bolt">bolt</span>
+<span>Fast Audit</span>
+</span>
+<span class="font-mono text-[9px] text-on-primary-container">ALT+A</span>
+</button>
+<!-- Navigation Menus -->
+<nav class="space-y-space-md overflow-y-auto max-h-[calc(100vh-280px)] custom-scroll pr-1">
+<!-- Group: Command -->
+<div>
+<div class="px-space-md py-1 font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider">Command</div>
+<div class="space-y-0.5 mt-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="radar">radar</span>
+<span>GIS Command Center</span>
+</a>
+<a class="flex items-center justify-between px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="notification_important">notification_important</span>
+<span>Alerts &amp; Risk</span>
+</div>
+<span class="px-1.5 py-0.2 bg-error text-on-error font-label-xs text-[10px] rounded-DEFAULT">3</span>
+</a>
+</div>
+</div>
+<!-- Group: Operations (Active Section) -->
+<div>
+<div class="px-space-md py-1 font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider">Operations</div>
+<div class="space-y-0.5 mt-1">
+<!-- Active State Navigation Node: Locations -->
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT bg-primary dark:bg-primary text-primary-fixed dark:text-primary-fixed font-label-md text-label-md border-l-2 border-secondary-container dark:border-secondary-container" href="#">
+<span class="material-symbols-outlined text-[18px] text-tertiary-fixed" data-icon="pin_drop">pin_drop</span>
+<span class="font-semibold text-on-primary">Locations</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="inventory_2">inventory_2</span>
+<span>Inventory</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="trending_up">trending_up</span>
+<span>Consumption</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="local_shipping">local_shipping</span>
+<span>Fleet &amp; Shipments</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="alt_route">alt_route</span>
+<span>Routes</span>
+</a>
+</div>
+</div>
+<!-- Group: Intelligence -->
+<div>
+<div class="px-space-md py-1 font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider">Intelligence</div>
+<div class="space-y-0.5 mt-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="analytics">analytics</span>
+<span>Demand Forecasting</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="security">security</span>
+<span>Risk Intelligence</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="model_training">model_training</span>
+<span>Simulations</span>
+</a>
+</div>
+</div>
+<!-- Group: Administration -->
+<div>
+<div class="px-space-md py-1 font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider">Administration</div>
+<div class="space-y-0.5 mt-1">
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span>Users &amp; Roles</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="history_edu">history_edu</span>
+<span>Audit Trail</span>
+</a>
+<a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-DEFAULT text-on-primary-container dark:text-on-primary-container font-label-md text-label-md hover:text-on-primary dark:hover:text-on-primary hover:bg-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+<span>System Diagnostics</span>
+</a>
+</div>
+</div>
+</nav>
+</div>
+<!-- User Profile & Operational Station Lock -->
+<div class="pt-space-sm border-t border-outline-variant/30 space-y-2">
+<div class="flex items-center justify-between p-1.5 bg-surface-container/10 rounded-DEFAULT">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-DEFAULT bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs">
+            BK
+          </div>
+<div class="leading-none">
+<div class="font-label-sm text-[11px] text-inverse-on-surface font-semibold">Lt. Col. B. Kumar</div>
+<div class="font-mono text-[9px] text-on-primary-container">IC-78921K // LOG-PLNR</div>
+</div>
+</div>
+<div class="w-2 h-2 rounded-full bg-secondary-fixed ring-2 ring-primary"></div>
+</div>
+<div class="flex items-center justify-between text-on-primary-container font-label-xs text-[10px] px-1">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary-fixed" data-icon="verified_user">verified_user</span>
+          DEF-ENC LEVEL 4
+        </span>
+<button class="hover:text-inverse-on-surface transition-colors flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="lock">lock</span>
+<span>Sign Out</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER                                                  -->
+<!-- ========================================================================= -->
+<div class="ml-[240px] w-[calc(100%-240px)] min-h-screen flex flex-col bg-background">
+<!-- Top App Bar / Operational Control Strip -->
+<header class="h-14 border-b border-outline-variant bg-surface px-space-xl flex justify-between items-center sticky top-0 z-30">
+<!-- Left: Breadcrumb & Mode Pill -->
+<div class="flex items-center gap-space-md">
+<nav class="flex items-center gap-1.5 text-label-sm font-label-sm uppercase tracking-wide">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Locations</a>
+<span class="text-outline-variant">/</span>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Forward Post Alpha</a>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">Edit</span>
+</nav>
+<!-- Segmented Mode Pill -->
+<div class="hidden sm:flex items-center bg-surface-container border border-outline-variant rounded-DEFAULT p-0.5 text-label-xs">
+<button class="px-2 py-0.5 rounded-DEFAULT text-on-surface-variant hover:text-on-surface transition-colors">Add New</button>
+<button class="px-2 py-0.5 rounded-DEFAULT bg-surface-container-lowest font-semibold text-primary shadow-xs border border-outline-variant/60">Edit LOC-0042</button>
+</div>
+</div>
+<!-- Right: Action Bar -->
+<div class="flex items-center gap-space-sm">
+<button class="h-8 px-space-md border border-outline-variant bg-surface hover:bg-surface-container text-on-surface font-label-sm rounded-DEFAULT flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="history">history</span>
+<span>View Change History</span>
+</button>
+<button class="h-8 px-space-sm border border-outline-variant bg-surface hover:bg-surface-container text-on-surface-variant font-label-sm rounded-DEFAULT flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_vert">more_vert</span>
+<span>More</span>
+</button>
+<div class="h-4 w-px bg-outline-variant mx-1"></div>
+<button class="h-8 px-space-md border border-error/40 text-error hover:bg-error-container/20 font-label-sm rounded-DEFAULT flex items-center gap-1 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="block">block</span>
+<span>Deactivate Node</span>
+</button>
+<button class="h-8 px-space-lg bg-primary-container hover:bg-secondary text-on-primary font-label-sm rounded-DEFAULT flex items-center gap-1.5 transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]" data-icon="save">save</span>
+<span>Save Record</span>
+</button>
+</div>
+</header>
+<!-- Page Context Header Strip -->
+<div class="px-space-xl py-space-md bg-surface-container-low border-b border-outline-variant">
+<div class="flex flex-wrap items-baseline justify-between gap-y-2">
+<div class="space-y-0.5">
+<div class="flex items-center gap-3">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Edit Location — Forward Post Alpha</h1>
+<span class="px-2 py-0.5 bg-surface-container-highest border border-outline-variant text-on-surface-variant font-mono font-bold text-label-xs rounded-DEFAULT">
+              LOC-0042 • NORTHERN SECTOR // SECTOR IV-B
+            </span>
+<span class="px-2 py-0.5 bg-secondary-container/40 border border-secondary text-secondary font-label-xs rounded-DEFAULT flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+              OPERATIONAL
+            </span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Define the operational and geographic profile of this logistical location. Real-time changes trigger route matrix re-computation.
+          </p>
+</div>
+<div class="flex items-center gap-2 text-label-xs text-on-surface-variant font-mono bg-surface border border-outline-variant px-2.5 py-1 rounded-DEFAULT">
+<span class="material-symbols-outlined text-[14px] text-secondary" data-icon="verified">verified</span>
+<span>GIS GEO-REF: WGS-84 ACTIVE</span>
+</div>
+</div>
+</div>
+<!-- Main Operational Workspace Grid (Two-Column Master Layout) -->
+<main class="p-space-xl grid grid-cols-12 gap-gutter-desktop items-start">
+<!-- =================================================================== -->
+<!-- LEFT COLUMN: Main Location Form (~65% width = 8 cols)               -->
+<!-- =================================================================== -->
+<section class="col-span-12 lg:col-span-8 space-y-space-lg">
+<!-- SECTION 1: Location Information (Basic Info) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-lg">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="badge">badge</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">1. Location Information</h2>
+</div>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">PRIMARY IDENTIFIER CLUSTER</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Location Name -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="loc-name">
+                Location Name <span class="text-error">*</span>
+</label>
+<input class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary transition-all" id="loc-name" type="text" value="Forward Post Alpha"/>
+</div>
+<!-- Location ID -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="loc-id">
+                Location ID <span class="font-label-xs text-outline">(Auto-Generated)</span>
+</label>
+<div class="relative">
+<input class="w-full h-9 px-3 bg-surface-container-low border border-outline-variant rounded-DEFAULT font-mono text-body-sm text-on-surface-variant cursor-not-allowed" id="loc-id" readonly="" type="text" value="LOC-0042"/>
+<span class="material-symbols-outlined absolute right-2.5 top-2 text-outline text-[18px]" data-icon="lock">lock</span>
+</div>
+</div>
+<!-- Location Type -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="loc-type">
+                Location Type <span class="text-error">*</span>
+</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="loc-type">
+<option selected="">Forward Post</option>
+<option>Supply Depot</option>
+<option>Regional Depot</option>
+<option>Transit Point</option>
+<option>Distribution Point</option>
+</select>
+</div>
+<!-- Operational Region -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="loc-region">
+                Operational Region <span class="text-error">*</span>
+</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="loc-region">
+<option selected="">Northern Sector // Sector IV-B</option>
+<option>Northern Sector // Sector IV-A</option>
+<option>Eastern Sector // Sector II</option>
+<option>Western Sector // Desert Command</option>
+</select>
+</div>
+<!-- Operational Priority Radio Pills -->
+<div class="col-span-1 md:col-span-2 space-y-1.5 pt-1">
+<span class="block font-label-sm text-label-sm text-on-surface">Operational Priority</span>
+<div class="grid grid-cols-4 gap-2">
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-DEFAULT flex items-center justify-center gap-2 cursor-pointer transition-colors text-body-sm">
+<input class="accent-primary" name="priority" type="radio" value="critical"/>
+<span class="font-label-sm text-label-sm">Critical</span>
+</label>
+<label class="border-2 border-primary bg-primary/5 px-3 py-1.5 rounded-DEFAULT flex items-center justify-center gap-2 cursor-pointer transition-colors text-body-sm">
+<input checked="" class="accent-primary" name="priority" type="radio" value="high"/>
+<span class="font-label-sm text-label-sm font-semibold text-primary">High [Selected]</span>
+</label>
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-DEFAULT flex items-center justify-center gap-2 cursor-pointer transition-colors text-body-sm">
+<input class="accent-primary" name="priority" type="radio" value="medium"/>
+<span class="font-label-sm text-label-sm">Medium</span>
+</label>
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container px-3 py-1.5 rounded-DEFAULT flex items-center justify-center gap-2 cursor-pointer transition-colors text-body-sm">
+<input class="accent-primary" name="priority" type="radio" value="low"/>
+<span class="font-label-sm text-label-sm">Low</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Geographic Information -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-lg">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-outline-variant">
+<div class="space-y-0.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="explore">explore</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">2. Geographic Information</h2>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Feeds GIS cartography, route clearance matrices, and meteorological telemetry.</p>
+</div>
+<span class="hidden sm:inline-flex items-center gap-1 text-label-xs font-label-xs text-secondary bg-secondary/10 px-2 py-0.5 rounded-DEFAULT">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              GIS SYNCHRONIZED
+            </span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<!-- Latitude -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="lat">Latitude (°N)</label>
+<div class="relative">
+<input class="w-full h-9 pl-3 pr-8 font-mono bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="lat" type="text" value="34.1526"/>
+<span class="absolute right-2.5 top-2 text-outline text-label-xs font-mono">°N</span>
+</div>
+</div>
+<!-- Longitude -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="long">Longitude (°E)</label>
+<div class="relative">
+<input class="w-full h-9 pl-3 pr-8 font-mono bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="long" type="text" value="77.5771"/>
+<span class="absolute right-2.5 top-2 text-outline text-label-xs font-mono">°E</span>
+</div>
+</div>
+<!-- Elevation -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="elevation">Elevation (m MSL)</label>
+<div class="relative">
+<input class="w-full h-9 pl-3 pr-12 font-mono bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="elevation" type="text" value="2,840"/>
+<span class="absolute right-2.5 top-2 text-outline text-label-xs font-mono">m MSL</span>
+</div>
+</div>
+<!-- High Altitude Threshold Warning -->
+<div class="col-span-1 md:col-span-3 p-space-sm bg-surface-container-low border-l-2 border-secondary flex items-start gap-2 rounded-DEFAULT">
+<span class="material-symbols-outlined text-secondary text-[18px] shrink-0 mt-0.5" data-icon="ac_unit">ac_unit</span>
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="font-semibold text-secondary">High altitude threshold:</span> Winterization protocols &amp; cold-weather lubricants mandated. Standard payload allowances reduced by 15% across Route R-204.
+              </p>
+</div>
+<!-- Terrain Dropdown -->
+<div class="space-y-1 md:col-span-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="terrain-type">Terrain Profile</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="terrain-type">
+<option selected="">Mountainous // Glaciated Valley</option>
+<option>Hilly // Ridge Line</option>
+<option>Plains // Riverine</option>
+<option>High Plateau Desert</option>
+<option>Mixed Complex Terrain</option>
+</select>
+</div>
+<!-- Accessibility Dropdown -->
+<div class="space-y-1 md:col-span-2">
+<label class="block font-label-sm text-label-sm text-on-surface" for="access-rule">Road Accessibility Class</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="access-rule">
+<option selected="">Restricted (Winter Snow-Chain Mandate)</option>
+<option>Normal (All-Weather Heavy Motorized)</option>
+<option>Seasonal (4x4 Only During Monsoon/Thaw)</option>
+<option>Difficult (Convoy Escort &amp; Recovery Assets Required)</option>
+</select>
+</div>
+<!-- Sync confirmation chip -->
+<div class="col-span-1 md:col-span-3 flex items-center justify-between text-label-xs font-mono text-outline border-t border-outline-variant pt-2">
+<span class="flex items-center gap-1.5 text-secondary font-semibold">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                Coordinates synced with GIS Vector Engine
+              </span>
+<span>WGS-84 EPSG:4326 // GRID SQ: NL-44</span>
+</div>
+</div>
+</div>
+<!-- SECTION 3: Operational Capacity -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-lg">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="warehouse">warehouse</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">3. Operational Capacity</h2>
+</div>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">STORAGE &amp; LOGISTICAL FOOTPRINT</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Storage Capacity with Utilization -->
+<div class="space-y-1">
+<div class="flex justify-between items-baseline">
+<label class="block font-label-sm text-label-sm text-on-surface" for="storage-cap">Storage Capacity (Units)</label>
+<span class="font-mono text-label-xs text-secondary font-semibold">5,760 / 8,000 MT (72%)</span>
+</div>
+<input class="w-full h-9 px-3 font-mono bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="storage-cap" type="text" value="8,000"/>
+<!-- Visual Bar -->
+<div class="w-full h-1.5 bg-surface-container rounded-full overflow-hidden mt-1.5">
+<div class="h-full bg-secondary w-[72%]"></div>
+</div>
+</div>
+<!-- Personnel Capacity -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="personnel-cap">Personnel Capacity</label>
+<input class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="personnel-cap" type="text" value="120 Personnel"/>
+<p class="font-label-xs text-outline">Nominal compliment: 84 troops + 36 transit personnel.</p>
+</div>
+<!-- Vehicle Capacity -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="veh-cap">Vehicle Staging Capacity</label>
+<input class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="veh-cap" type="text" value="14 Heavy ALS / 4x4 Tankers"/>
+</div>
+<!-- Operating Status Dropdown -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="op-status">Operating Status</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="op-status">
+<option selected="">Operational</option>
+<option>Limited (Reduced Readiness)</option>
+<option>Temporarily Closed (Weather Cut-Off)</option>
+<option>Planned (Under Construction)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- SECTION 4: Logistics Configuration -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-lg">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="hub">hub</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">4. Logistics Configuration</h2>
+</div>
+<span class="font-label-xs text-label-xs uppercase tracking-wider text-outline">SUPPLY-CHAIN LINKAGE</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Primary Supply Function -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="supply-func">Primary Supply Function</label>
+<select class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="supply-func">
+<option selected="">Mixed // Fuel &amp; Subsistence Priority</option>
+<option>POL (Petroleum, Oils &amp; Lubricants) Depot</option>
+<option>Dry Rations &amp; Subsistence Reserve</option>
+<option>Medical &amp; Evacuation Staging</option>
+<option>Ordnance &amp; Ammunition Holding</option>
+</select>
+</div>
+<!-- Preferred Supply Depot -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="parent-depot">Preferred Supply Depot (Parent)</label>
+<input class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="parent-depot" type="text" value="Central Supply Depot Leh (Base 01)"/>
+</div>
+<!-- Standard Resupply Window -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface" for="lead-time">Standard Resupply Window</label>
+<input class="w-full h-9 px-3 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-md text-on-surface focus:outline-none focus:border-2 focus:border-primary" id="lead-time" type="text" value="18 Hours (via Route R-204)"/>
+</div>
+<!-- Resupply Priority -->
+<div class="space-y-1">
+<label class="block font-label-sm text-label-sm text-on-surface">Replenishment Escalation</label>
+<div class="grid grid-cols-4 gap-1.5 pt-0.5">
+<button class="h-8 border border-outline-variant text-label-xs rounded-DEFAULT hover:bg-surface-container" type="button">Crit</button>
+<button class="h-8 border-2 border-primary bg-primary text-on-primary font-bold text-label-xs rounded-DEFAULT" type="button">High</button>
+<button class="h-8 border border-outline-variant text-label-xs rounded-DEFAULT hover:bg-surface-container" type="button">Med</button>
+<button class="h-8 border border-outline-variant text-label-xs rounded-DEFAULT hover:bg-surface-container" type="button">Low</button>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 5: Operational Notes -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-lg">
+<div class="flex items-center justify-between pb-space-sm mb-space-md border-b border-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]" data-icon="description">description</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">5. Operational &amp; Tactical Notes</h2>
+</div>
+<span class="font-mono text-label-xs text-outline">MAX 500 CHARS</span>
+</div>
+<div class="space-y-1">
+<textarea class="w-full px-3 py-2 bg-surface-container-lowest border border-outline rounded-DEFAULT text-body-sm text-on-surface focus:outline-none focus:border-2 focus:border-primary leading-relaxed" rows="3">High-altitude tactical post subject to extreme winter temperature drop (-25°C). Critical POL arctic diesel heating reserve threshold strictly enforced at 6,500 L. Daily telemetry sync via GSAT-7A required at 06:00 and 18:00 hours.</textarea>
+<div class="flex justify-between text-label-xs text-outline font-mono">
+<span>Classified Military Telemetry Rule // Form SEC-LOC-42</span>
+<span>248 / 500</span>
+</div>
+</div>
+</div>
+<!-- SECTION 6: Main Action Footer Bar -->
+<div class="bg-surface-container-low border border-outline-variant rounded-DEFAULT p-space-md flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span>All parameters validated under MIL-STD-188F data protocol</span>
+</div>
+<div class="flex items-center gap-space-md">
+<a class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">
+              Cancel
+            </a>
+<button class="h-9 px-space-xl bg-primary-container hover:bg-secondary text-on-primary font-label-md rounded-DEFAULT shadow-xs flex items-center gap-2 transition-transform active:scale-[0.99]" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="save">save</span>
+<span>Save Changes</span>
+</button>
+</div>
+</div>
+</section>
+<!-- =================================================================== -->
+<!-- RIGHT COLUMN: Location Preview & Data Quality Intelligence (~35%)    -->
+<!-- =================================================================== -->
+<aside class="col-span-12 lg:col-span-4 space-y-space-lg">
+<!-- CARD 1: Live Tactical GIS Map Preview -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT overflow-hidden">
+<div class="p-space-md border-b border-outline-variant flex items-center justify-between bg-surface-container-low">
+<div class="leading-none">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Location Preview</h3>
+<span class="font-mono text-label-xs text-outline">LOC-0042 // SECTOR IV-B</span>
+</div>
+<span class="px-2 py-0.5 bg-surface border border-outline-variant text-label-xs font-mono text-secondary rounded-DEFAULT">
+              Interactive Map Preview
+            </span>
+</div>
+<!-- Tactical Map Visual Canvas Container -->
+<div class="relative h-64 bg-surface-container tactical-grid overflow-hidden border-b border-outline-variant">
+<!-- Map Topographic / Vector Graphic Representation -->
+<svg class="absolute inset-0 w-full h-full text-secondary/30" xmlns="http://www.w3.org/2000/svg">
+<!-- Contour Lines -->
+<path d="M-20,120 Q80,60 160,110 T340,90 T480,140" fill="none" stroke="currentColor" stroke-dasharray="3,3" stroke-width="1.2"></path>
+<path d="M-20,160 Q90,100 180,150 T360,130 T480,180" fill="none" stroke="currentColor" stroke-width="1"></path>
+<path d="M-20,200 Q100,140 200,190 T380,170 T480,220" fill="none" stroke="currentColor" stroke-width="1"></path>
+<!-- Supply Route R-204 Line -->
+<path d="M40,240 L110,180 L180,160 L240,115 L320,80" fill="none" stroke="#516446" stroke-linecap="round" stroke-width="2.5"></path>
+<text fill="#516446" font-family="monospace" font-size="9" font-weight="bold" x="75" y="195">ROUTE R-204</text>
+</svg>
+<!-- Coordinate Grid Labels -->
+<div class="absolute top-2 left-2 font-mono text-[9px] text-outline bg-surface/90 px-1 py-0.5 rounded-DEFAULT border border-outline-variant">
+              34°15'N, 77°35'E
+            </div>
+<div class="absolute bottom-2 right-2 font-mono text-[9px] text-outline bg-surface/90 px-1 py-0.5 rounded-DEFAULT border border-outline-variant">
+              SCALE: 1:50,000
+            </div>
+<!-- Targeted Tactical Crosshair & Marker -->
+<div class="absolute top-[42%] left-[58%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<!-- Pulse Ring -->
+<div class="relative flex items-center justify-center">
+<span class="absolute w-8 h-8 rounded-full border border-secondary animate-ping opacity-60"></span>
+<span class="w-6 h-6 rounded-full bg-primary-container text-tertiary-fixed flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[14px]" data-icon="location_searching">location_searching</span>
+</span>
+</div>
+<div class="mt-1 px-1.5 py-0.5 bg-primary-container text-on-primary font-mono text-[10px] rounded-DEFAULT shadow whitespace-nowrap">
+                Forward Post Alpha [LOC-0042]
+              </div>
+</div>
+<!-- Quick Map Interaction Tools Overlay -->
+<div class="absolute top-2 right-2 flex flex-col gap-1">
+<button class="w-6 h-6 bg-surface border border-outline-variant text-on-surface hover:bg-surface-container flex items-center justify-center rounded-DEFAULT font-bold text-xs" title="Zoom In">
+                +
+              </button>
+<button class="w-6 h-6 bg-surface border border-outline-variant text-on-surface hover:bg-surface-container flex items-center justify-center rounded-DEFAULT font-bold text-xs" title="Zoom Out">
+                -
+              </button>
+<button class="w-6 h-6 bg-surface border border-outline-variant text-on-surface hover:bg-surface-container flex items-center justify-center rounded-DEFAULT text-xs" title="Recenter Location">
+<span class="material-symbols-outlined text-[13px]" data-icon="my_location">my_location</span>
+</button>
+</div>
+<!-- Sub-overlay dragging prompt -->
+<div class="absolute bottom-2 left-2 text-[10px] text-on-surface-variant bg-surface/90 px-2 py-0.5 rounded-DEFAULT border border-outline-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-secondary" data-icon="pan_tool">pan_tool</span>
+<span>Drag marker to fine-tune coordinates</span>
+</div>
+</div>
+<!-- Context Telemetry Chip below Map -->
+<div class="p-space-sm bg-surface-container-low font-mono text-label-xs text-on-surface divide-y divide-outline-variant/60">
+<div class="flex justify-between py-1">
+<span class="text-outline">GEOGRAPHIC COORDS:</span>
+<span class="font-semibold">34.1526° N, 77.5771° E</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-outline">ELEVATION (MSL):</span>
+<span class="font-semibold">2,840 m (High Cold Zone)</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-outline">TERRAIN PROFILE:</span>
+<span class="font-semibold">Glaciated Mountainous</span>
+</div>
+<div class="flex justify-between py-1">
+<span class="text-outline">WEATHER CUTOFF RISK:</span>
+<span class="font-semibold text-secondary">MODERATE // T-MINUS 45 DAYS</span>
+</div>
+</div>
+</div>
+<!-- CARD 2: Data Quality & Readiness Engine -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-md space-y-space-md">
+<div class="flex items-center justify-between border-b border-outline-variant pb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="fact_check">fact_check</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Data Quality &amp; Audit</h3>
+</div>
+<span class="px-2 py-0.5 bg-secondary text-on-secondary font-label-xs font-bold rounded-DEFAULT">
+              100% Score
+            </span>
+</div>
+<!-- Readiness Checklist Items -->
+<ul class="space-y-2 font-label-sm text-label-sm text-on-surface">
+<li class="flex items-center justify-between p-1.5 bg-surface-container-low rounded-DEFAULT border border-outline-variant/40">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Location Identifier Unique &amp; Registered</span>
+</span>
+<span class="font-mono text-[10px] text-outline">LOC-0042</span>
+</li>
+<li class="flex items-center justify-between p-1.5 bg-surface-container-low rounded-DEFAULT border border-outline-variant/40">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Coordinates in Sector IV-B Boundary</span>
+</span>
+<span class="font-mono text-[10px] text-outline">PASS</span>
+</li>
+<li class="flex items-center justify-between p-1.5 bg-surface-container-low rounded-DEFAULT border border-outline-variant/40">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Terrain &amp; Elevation Correlated</span>
+</span>
+<span class="font-mono text-[10px] text-outline">VALID</span>
+</li>
+<li class="flex items-center justify-between p-1.5 bg-surface-container-low rounded-DEFAULT border border-outline-variant/40">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Storage &amp; Commodity Class Mapped</span>
+</span>
+<span class="font-mono text-[10px] text-outline">CLASS I/III</span>
+</li>
+<li class="flex items-center justify-between p-1.5 bg-surface-container-low rounded-DEFAULT border border-outline-variant/40">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="check_circle">check_circle</span>
+<span>Primary Depot Linkage Established</span>
+</span>
+<span class="font-mono text-[10px] text-outline">BASE-01</span>
+</li>
+</ul>
+<!-- Status Box -->
+<div class="p-space-sm bg-secondary/10 border border-secondary rounded-DEFAULT flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]" data-icon="task_alt">task_alt</span>
+<span class="font-label-md text-label-md font-bold text-secondary">Node Status: Ready to Commit</span>
+</div>
+<span class="font-mono text-label-xs text-secondary font-bold">READY</span>
+</div>
+<!-- Audit Metadata -->
+<div class="pt-1 text-[10px] font-mono text-on-surface-variant space-y-0.5 border-t border-outline-variant">
+<div>LAST MODIFIED: 05 Oct 2026 • 14:32 IST</div>
+<div>OPERATOR: Lt. Col. B. Kumar (IC-78921K)</div>
+<div>AUDIT HASH: SEC-LOC-9941-FPA-ND4</div>
+</div>
+</div>
+<!-- CARD 3: Node Deactivation & Safety Protocol Warning -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT p-space-md space-y-2">
+<div class="flex items-center gap-1.5 text-error">
+<span class="material-symbols-outlined text-[18px]" data-icon="warning">warning</span>
+<span class="font-label-sm text-label-sm font-bold uppercase tracking-wider">Deactivation Safety Protocol</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Deactivating Forward Post Alpha will immediately reroute <span class="font-semibold text-on-surface">3 active resupply convoys</span> to Transit Point Bravo and trigger automated rebalancing in the Northern Sector fuel grid.
+          </p>
+<div class="pt-1 flex items-center justify-between">
+<span class="font-mono text-label-xs text-outline">AUTHORIZATION REQUIRED</span>
+<button class="text-label-xs font-semibold text-error hover:underline flex items-center gap-1" type="button">
+<span>Review Impact Matrix</span>
+<span class="material-symbols-outlined text-[12px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</aside>
+</main>
+<!-- Operational System Global Footer Bar -->
+<footer class="mt-auto border-t border-outline-variant bg-surface px-space-xl py-2 flex flex-wrap items-center justify-between text-[11px] font-mono text-on-surface-variant">
+<div class="flex items-center gap-4">
+<span>RAKSHAKLOGIX RL-10 ENTERPRISE SYSTEM</span>
+<span>•</span>
+<span>MIL-SPEC SECURE LOGISTICS RUNTIME 4.8.2</span>
+<span>•</span>
+<span class="text-secondary font-semibold">ALL SENSORS NOMINAL</span>
+</div>
+<div class="flex items-center gap-4">
+<span>SESSION: #78921K-IVB-99</span>
+<span>ENCRYPTION: AES-256 GCM</span>
+<span>TIME: 14:38:12 IST</span>
+</div>
+</footer>
+</div>
+</body></html>

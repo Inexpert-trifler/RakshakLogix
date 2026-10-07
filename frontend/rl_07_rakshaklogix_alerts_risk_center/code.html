@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RakshakLogix // RL-07 Alerts &amp; Risk Center</title>
+<!-- Typography: IBM Plex Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#f2f5ec",
+            "tertiary": "#040e00",
+            "surface-variant": "#e0e4dc",
+            "inverse-on-surface": "#eff2ea",
+            "on-primary-container": "#7d8d81",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#e6e9e1",
+            "tertiary-fixed-dim": "#b9cda3",
+            "inverse-primary": "#bacbbd",
+            "background": "#f7faf2",
+            "inverse-surface": "#2d312c",
+            "on-tertiary": "#ffffff",
+            "primary": "#030e07",
+            "outline": "#737873",
+            "surface-container": "#ecefe7",
+            "surface": "#f7faf2",
+            "on-surface": "#191d18",
+            "primary-fixed-dim": "#bacbbd",
+            "on-secondary-fixed": "#0f1f08",
+            "on-primary-fixed": "#111e16",
+            "secondary-container": "#d1e6c1",
+            "on-error-container": "#93000a",
+            "secondary": "#516446",
+            "primary-fixed": "#d6e7d8",
+            "on-primary": "#ffffff",
+            "surface-dim": "#d8dbd3",
+            "on-primary-fixed-variant": "#3b4a40",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#111f05",
+            "tertiary-container": "#17260a",
+            "tertiary-fixed": "#d5e9be",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#3b4c2c",
+            "secondary-fixed": "#d4e9c4",
+            "error-container": "#ffdad6",
+            "error": "#8c2d19",
+            "surface-container-highest": "#e0e4dc",
+            "on-tertiary-container": "#7c8f69",
+            "outline-variant": "#c3c8c2",
+            "on-background": "#191d18",
+            "on-secondary-fixed-variant": "#3a4c30",
+            "surface-tint": "#536257",
+            "on-secondary-container": "#55684a",
+            "surface-bright": "#f7faf2",
+            "primary-container": "#17251c",
+            "secondary-fixed-dim": "#b8cda9",
+            "on-surface-variant": "#434844"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1rem",
+            "space-md": "0.75rem",
+            "margin-desktop": "2rem",
+            "space-xs": "0.25rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-lg": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "label-xs": ["IBM Plex Sans", "sans-serif"],
+            "body-md": ["IBM Plex Sans", "sans-serif"],
+            "body-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-xl": ["IBM Plex Sans", "sans-serif"],
+            "headline-sm": ["IBM Plex Sans", "sans-serif"],
+            "label-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-lg": ["IBM Plex Sans", "sans-serif"],
+            "label-md": ["IBM Plex Sans", "sans-serif"],
+            "body-lg": ["IBM Plex Sans", "sans-serif"],
+            "headline-xl-mobile": ["IBM Plex Sans", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"]
+          },
+          "fontSize": {
+            "label-xs": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .font-mono-tabular {
+      font-family: 'IBM Plex Mono', monospace;
+      font-feature-settings: 'tnum' on, 'zero' on;
+    }
+    /* Hairline borders as specified in operational design system */
+    .border-hairline {
+      border-color: #E5E3D9;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #F4F3ED;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #C3C8C2;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-x-hidden min-h-screen flex flex-col font-body-md text-body-md select-none">
+<!-- ======================================================== -->
+<!-- SHARED COMPONENT 1: SideNavBar (Fixed 240px)             -->
+<!-- ======================================================== -->
+<aside class="fixed top-0 left-0 h-full w-[240px] z-40 bg-primary-container border-r border-outline-variant text-on-primary">
+<div class="flex flex-col justify-between h-full w-[240px] py-4 px-2">
+<!-- Top Branding & Status Header -->
+<div>
+<div class="px-3 pb-3 mb-2 border-b border-primary-container/60 border-neutral-700/40">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary-fixed text-xl" data-icon="shield">shield</span>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-wider text-on-primary">RAKSHAKLOGIX</span>
+</div>
+<div class="flex items-center justify-between">
+<p class="text-label-xs font-label-xs text-on-primary-container">NORTHERN SECTOR COM-HUB</p>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded bg-primary text-[9px] font-mono tracking-widest text-secondary-fixed border border-secondary/40">SEC-LVL 4</span>
+</div>
+</div>
+<!-- System Altitude/Status Chip -->
+<div class="px-3 py-1.5 mb-3 mx-1 rounded bg-[#0e1711] border border-outline/30 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></span>
+<span class="text-label-xs font-label-xs text-on-primary-container">NODE DL-9941</span>
+</div>
+<span class="text-label-xs font-label-xs font-mono text-inverse-primary">ALT: 3,500M</span>
+</div>
+<!-- Nav Group: COMMAND (Strict Shared Component Labels) -->
+<div class="mb-4">
+<div class="px-3 mb-1.5 text-label-xs font-label-xs tracking-wider text-on-primary-container uppercase">Command Group</div>
+<nav class="space-y-0.5">
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-base" data-icon="dashboard">dashboard</span>
+<span>Command Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-base" data-icon="local_shipping">local_shipping</span>
+<span>Asset Movements</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-base" data-icon="inventory_2">inventory_2</span>
+<span>Depot Inventory</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-base" data-icon="directions_bus">directions_bus</span>
+<span>Convoy &amp; Fleet</span>
+</a>
+<!-- ACTIVE TAB PER CONFLICT RESOLUTION PROTOCOL (Exact matching: "Alerts & Risk") -->
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary text-on-secondary rounded font-label-sm text-label-sm border-l-2 border-secondary-fixed justify-between" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-base text-secondary-fixed" data-icon="warning">warning</span>
+<span class="text-on-secondary font-semibold">Alerts &amp; Risk</span>
+</div>
+<span class="px-1.5 py-0.2 bg-[#8C2D19] text-white text-[10px] font-bold rounded">3</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-base" data-icon="assignment">assignment</span>
+<span>Tactical Orders</span>
+</a>
+</nav>
+</div>
+<!-- Hotline CTA Box -->
+<div class="px-2 mb-3">
+<button class="w-full flex items-center justify-center gap-2 py-2 px-3 bg-[#0a120c] hover:bg-[#111f15] border border-secondary/30 rounded text-label-xs font-label-xs tracking-wider text-secondary-fixed transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="phone_in_talk">phone_in_talk</span>
+<span>LOGISTICS HOTLINE</span>
+</button>
+</div>
+</div>
+<!-- Footer Sub-Navigation & Operational User Profile -->
+<div>
+<div class="space-y-0.5 pt-2 border-t border-neutral-700/40 mb-3">
+<a class="flex items-center gap-3 px-3 py-1.5 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="satellite_alt">satellite_alt</span>
+<span>Depot Telemetry</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 text-on-primary-container hover:text-on-primary hover:bg-primary transition-colors duration-150 font-label-sm text-label-sm rounded" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="settings">settings</span>
+<span>Audit &amp; Settings</span>
+</a>
+</div>
+<!-- Duty Officer Signature Container -->
+<div class="p-2.5 rounded bg-[#0d1610] border border-neutral-800/80 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded bg-secondary text-on-secondary flex items-center justify-center text-label-sm font-bold border border-secondary-fixed/40">
+              BK
+            </div>
+<div class="leading-tight">
+<div class="text-[11px] font-semibold text-inverse-primary truncate max-w-[110px]">Lt. Col. B. Kumar</div>
+<div class="text-[9px] font-mono text-on-primary-container">IC-78921K // LOG-PLNR</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-primary-container hover:text-on-primary cursor-pointer text-base" data-icon="lock">lock</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ======================================================== -->
+<!-- SHARED COMPONENT 2: TopNavBar                            -->
+<!-- ======================================================== -->
+<header class="docked full-width top-0 z-30 bg-surface-container-lowest border-b border-outline-variant">
+<div class="flex justify-between items-center h-14 pl-[256px] pr-6 w-full">
+<!-- Left: Title, Product & Search -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md font-semibold tracking-wide text-primary">RakshakLogix // RL-07</span>
+<span class="text-outline-variant">|</span>
+<span class="text-body-sm font-body-sm font-medium text-on-surface-variant">Alerts &amp; Risk Center</span>
+</div>
+<!-- Tactical Operational Context Links (from JSON) -->
+<div class="hidden lg:flex items-center gap-3 font-mono text-[11px]">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container font-semibold border border-error/20 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+            DEFCON 3 (ELEVATED)
+          </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant">
+            GRID: NORTH-LEH SECTOR
+          </span>
+<span class="px-2 py-0.5 rounded bg-surface-container text-secondary font-semibold border border-outline-variant flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            COMM-LINK: ACTIVE SECURE
+          </span>
+</div>
+</div>
+<!-- Right: Trailing Actions & Icons -->
+<div class="flex items-center gap-3">
+<button class="px-2.5 py-1.5 rounded bg-surface-container-low hover:bg-surface-container border border-outline-variant text-on-surface font-label-xs text-label-xs uppercase tracking-wider flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="file_download">file_download</span>
+<span>EXPORT TELEMETRY</span>
+</button>
+<button class="px-3 py-1.5 rounded bg-primary hover:bg-secondary text-on-primary font-label-xs text-label-xs uppercase tracking-wider font-semibold flex items-center gap-1.5 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-sm text-secondary-fixed" data-icon="add_alert">add_alert</span>
+<span>NEW THREAT ASSESSMENT</span>
+</button>
+<div class="h-5 w-px bg-outline-variant mx-1"></div>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1">
+<button class="relative p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-xl" data-icon="notifications_active">notifications_active</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-[#8C2D19]"></span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Configure Thresholds">
+<span class="material-symbols-outlined text-xl" data-icon="tune">tune</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Commander Profile">
+<span class="material-symbols-outlined text-xl" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- ======================================================== -->
+<!-- MAIN WORKSPACE: Operational Risk Radar Canvas            -->
+<!-- ======================================================== -->
+<main class="ml-[240px] flex-1 flex flex-col p-6 space-y-4">
+<!-- Operational Context Bar / Directive Banner -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-3 flex flex-wrap items-center justify-between gap-4 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 bg-primary-container text-on-primary text-label-xs font-label-xs rounded font-mono">SECTOR IV-B DIRECTIVE</span>
+<p class="text-body-sm text-on-surface-variant max-w-3xl">
+<span class="font-semibold text-on-surface">OPERATIONAL MANDATE:</span> Integrated logistical lifecycle orchestration for forward depots, ration cold-chains, ordnance readiness, and active transit convoys across high-altitude and strategic border commands.
+        </p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-label-xs font-label-xs uppercase text-on-surface-variant">AUTO-SYNC (30S):</span>
+<span class="font-mono text-label-sm font-semibold text-secondary">ACTIVE 14:30:12 IST</span>
+</div>
+</div>
+<!-- 3. Risk Summary Strip & 7-Day Trend -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-4">
+<!-- Metrics Strip (7 Columns) -->
+<div class="xl:col-span-8 bg-surface-container-lowest border border-outline-variant rounded p-3.5 flex flex-wrap items-center justify-between gap-3 shadow-sm">
+<!-- Metric: Critical -->
+<div class="flex items-center gap-3 min-w-[120px] pr-4 border-r border-outline-variant">
+<div class="w-8 h-8 rounded bg-[#8C2D19]/10 border border-[#8C2D19]/30 flex items-center justify-center text-[#8C2D19]">
+<span class="material-symbols-outlined text-lg" data-icon="error">error</span>
+</div>
+<div>
+<div class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">CRITICAL</div>
+<div class="text-headline-lg font-headline-lg font-bold text-[#8C2D19] leading-none">03</div>
+</div>
+</div>
+<!-- Metric: High -->
+<div class="flex items-center gap-3 min-w-[120px] pr-4 border-r border-outline-variant">
+<div class="w-8 h-8 rounded bg-[#C49A45]/15 border border-[#C49A45]/40 flex items-center justify-center text-[#7A5B18]">
+<span class="material-symbols-outlined text-lg" data-icon="warning">warning</span>
+</div>
+<div>
+<div class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">HIGH RISK</div>
+<div class="text-headline-lg font-headline-lg font-bold text-[#7A5B18] leading-none">08</div>
+</div>
+</div>
+<!-- Metric: Medium -->
+<div class="flex items-center gap-3 min-w-[120px] pr-4 border-r border-outline-variant">
+<div class="w-8 h-8 rounded bg-surface-container border border-outline flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg" data-icon="info">info</span>
+</div>
+<div>
+<div class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">MEDIUM</div>
+<div class="text-headline-lg font-headline-lg font-bold text-on-surface leading-none">17</div>
+</div>
+</div>
+<!-- Metric: Resolved -->
+<div class="flex items-center gap-3 min-w-[130px] pr-4 border-r border-outline-variant">
+<div class="w-8 h-8 rounded bg-secondary-container/60 border border-secondary/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<div class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">RESOLVED 24H</div>
+<div class="text-headline-lg font-headline-lg font-bold text-secondary leading-none">24</div>
+</div>
+</div>
+<!-- Metric: Total Active -->
+<div class="flex items-center gap-3 min-w-[110px]">
+<div>
+<div class="text-label-xs font-label-xs text-on-surface-variant uppercase tracking-wider">TOTAL ACTIVE</div>
+<div class="text-headline-lg font-headline-lg font-bold text-primary font-mono leading-none">28</div>
+</div>
+</div>
+</div>
+<!-- 7-Day Risk Trend Sparkline Container (4 Columns) -->
+<div class="xl:col-span-4 bg-surface-container-lowest border border-outline-variant rounded p-3 flex items-center justify-between shadow-sm">
+<div class="flex-1 pr-3">
+<div class="flex items-center justify-between mb-1">
+<span class="text-label-xs font-label-xs uppercase tracking-wider text-on-surface-variant">7-DAY RISK VELOCITY</span>
+<span class="text-[10px] font-mono text-secondary font-bold">↓ 12% STABILIZING</span>
+</div>
+<div class="text-body-sm font-semibold text-primary">Critical: 3 <span class="text-on-surface-variant font-normal font-mono text-[11px]">(Down from 7 on Day -4)</span></div>
+<!-- Compact Trendline SVG Sparkline -->
+<div class="mt-2 h-7 w-full">
+<svg class="w-full h-full" fill="none" preserveaspectratio="none" viewbox="0 0 200 30">
+<!-- Active Risks Path (Muted Olive) -->
+<path d="M0,24 Q30,22 60,18 T120,12 T160,15 T200,9" fill="none" stroke="#A49A78" stroke-dasharray="2 2" stroke-width="1.5"></path>
+<!-- Critical Risks Path (Red Alert) -->
+<path d="M0,18 Q30,10 60,22 T120,16 T160,8 T200,5" fill="none" stroke="#8C2D19" stroke-width="2"></path>
+<!-- Marker dot for current day -->
+<circle cx="200" cy="5" fill="#8C2D19" r="3"></circle>
+</svg>
+</div>
+</div>
+<div class="border-l border-outline-variant pl-3 text-right">
+<span class="text-[9px] font-mono uppercase text-on-surface-variant block">CONFIDENCE</span>
+<span class="text-body-sm font-bold font-mono text-primary">89.4%</span>
+<span class="text-[9px] font-mono text-secondary block mt-1">LSTM RUN #41</span>
+</div>
+</div>
+</section>
+<!-- ======================================================== -->
+<!-- 4. MAIN OPERATIONAL WORKSPACE (TWO-COLUMN BENTO)         -->
+<!-- ======================================================== -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 items-start">
+<!-- ====================================================== -->
+<!-- LEFT COLUMN: ACTIVE RISK QUEUE (65-70% / 8 cols)       -->
+<!-- ====================================================== -->
+<section class="lg:col-span-7 xl:col-span-8 flex flex-col bg-surface-container-lowest border border-outline-variant rounded shadow-sm">
+<!-- Filter Toolbar & Search -->
+<div class="p-3 border-b border-outline-variant space-y-2.5">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<!-- Quick Search Input -->
+<div class="relative flex-1 min-w-[240px]">
+<span class="material-symbols-outlined absolute left-2.5 top-2 text-on-surface-variant text-sm" data-icon="search">search</span>
+<input class="w-full pl-8 pr-3 py-1.5 bg-background border border-outline-variant rounded text-body-sm text-on-surface focus:outline-none focus:border-primary focus:ring-0 placeholder:text-outline text-xs" placeholder="Search risks by location, cargo, route, ID (e.g. Forward Post Alpha, POL)..." type="text"/>
+</div>
+<!-- Operational Bulk Actions Bar -->
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-label-xs font-label-xs uppercase text-on-surface transition-colors">
+                Acknowledge All
+              </button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant hover:bg-surface-container-high text-label-xs font-label-xs uppercase text-on-surface transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="filter_list">filter_list</span>
+<span>Filters</span>
+</button>
+</div>
+</div>
+<!-- Multi-tier Filter Tags -->
+<div class="flex flex-wrap items-center gap-1.5 text-xs">
+<span class="text-label-xs font-label-xs uppercase text-on-surface-variant pr-1">SEVERITY:</span>
+<button class="px-2 py-0.5 rounded bg-primary text-on-primary font-semibold text-[11px]">All (28)</button>
+<button class="px-2 py-0.5 rounded bg-[#8C2D19]/10 text-[#8C2D19] border border-[#8C2D19]/30 font-semibold text-[11px] hover:bg-[#8C2D19]/20">Critical (3)</button>
+<button class="px-2 py-0.5 rounded bg-[#C49A45]/15 text-[#7A5B18] border border-[#C49A45]/40 font-semibold text-[11px] hover:bg-[#C49A45]/30">High (8)</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant text-[11px]">Medium (17)</button>
+<span class="text-outline-variant mx-1">|</span>
+<span class="text-label-xs font-label-xs uppercase text-on-surface-variant pr-1">TYPE:</span>
+<button class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high text-[11px]">Inventory (12)</button>
+<button class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high text-[11px]">Demand (6)</button>
+<button class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high text-[11px]">Transport (5)</button>
+<button class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant hover:bg-surface-container-high text-[11px]">Route (3)</button>
+</div>
+</div>
+<!-- Table Header -->
+<div class="grid grid-cols-12 bg-surface-container px-3 py-2 text-label-xs font-label-xs text-primary uppercase font-semibold border-b border-secondary/40 items-center">
+<div class="col-span-1 flex items-center gap-1.5">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span>SEV</span>
+</div>
+<div class="col-span-4">RISK ANCHOR &amp; IDENTIFIER</div>
+<div class="col-span-3">IMPACT PROJECTION</div>
+<div class="col-span-2 text-right">MODEL CONF.</div>
+<div class="col-span-2 text-right pr-2">STATUS / TIME</div>
+</div>
+<!-- Risk Queue Rows (Dense Operational Data Feed) -->
+<div class="divide-y divide-hairline custom-scroll max-h-[640px] overflow-y-auto">
+<!-- ROW 1 (SELECTED STATE - Forward Post Alpha) -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center bg-[#F4F3ED] border-l-4 border-l-[#8C2D19] hover:bg-[#EAE8DD] cursor-pointer transition-colors group">
+<div class="col-span-1 flex items-center gap-2">
+<input checked="" class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#8C2D19] text-white text-[9px] font-bold tracking-wider">CRIT</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Forward Post Alpha</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">POL-D</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Diesel stockout predicted in 6 days (Capacity: 12,000L)</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-error flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="trending_up">trending_up</span>
+<span>Consump. +32% (Sub-zero burn)</span>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Runway: 6 Days Remaining</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">91%</span>
+<span class="text-[10px] text-on-surface-variant block">LSTM-M4</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-[#8C2D19]/15 text-[#8C2D19] text-[10px] font-bold tracking-wide border border-[#8C2D19]/30">INVESTIGATING</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">14:26 IST</span>
+</div>
+</div>
+<!-- ROW 2: Zojila Pass Weather Threat -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#8C2D19] text-white text-[9px] font-bold tracking-wider">CRIT</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Zojila Pass Corridor</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">ROUTE</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Blizzard risk 68% - transit closure imminent within 12h</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Convoy SH-2051 holding at staging</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Delay window: +24 hrs</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">88%</span>
+<span class="text-[10px] text-on-surface-variant block">WRF-GFS</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-error-container text-on-error-container text-[10px] font-bold tracking-wide">NEW</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">14:12 IST</span>
+</div>
+</div>
+<!-- ROW 3: Sector Bravo Medical Kits -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#8C2D19] text-white text-[9px] font-bold tracking-wider">CRIT</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Sector Bravo Hub</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">MED-CL8</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Class VIII trauma kits runway below safety threshold (4d)</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Replenishment scheduled 5 days</div>
+<div class="text-[11px] text-error font-mono">Deficit buffer: -1.2 Days</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">84%</span>
+<span class="text-[10px] text-on-surface-variant block">BAYES-INV</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[10px] font-bold tracking-wide">ACKNOWLEDGED</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">13:45 IST</span>
+</div>
+</div>
+<!-- ROW 4: Forward Post Charlie Rations -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#C49A45] text-white text-[9px] font-bold tracking-wider">HIGH</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Forward Post Charlie</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">RAT-CL1</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Sudden surge Class I cold-weather pack consumption (+28%)</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Buffer drops to 9 days</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Exp. Depletion: D+11</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">86%</span>
+<span class="text-[10px] text-on-surface-variant block">TS-PROPHET</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-[#C49A45]/20 text-[#7A5B18] text-[10px] font-bold tracking-wide">INVESTIGATING</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">13:10 IST</span>
+</div>
+</div>
+<!-- ROW 5: Convoy SH-2048 Transit ETA Variance -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#C49A45] text-white text-[9px] font-bold tracking-wider">HIGH</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Convoy SH-2048 (4x ALS)</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">CONVOY</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Transit ETA variance +8.5 hrs on NH-1D arterial pass</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Mechanical brake check required</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Current Speed: 14 km/h</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">89%</span>
+<span class="text-[10px] text-on-surface-variant block">TELE-GPS</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-[#C49A45]/20 text-[#7A5B18] text-[10px] font-bold tracking-wide">INVESTIGATING</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">12:35 IST</span>
+</div>
+</div>
+<!-- ROW 6: Foxtrot Outpost Munitions Buffer -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-[#C49A45] text-white text-[9px] font-bold tracking-wider">HIGH</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Foxtrot Outpost</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">AMMO-CL5</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Class V Small Arms Munitions buffer at 14 days ceiling</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Safety minimum: 15 days</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Reserve: 38,000 rds</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">82%</span>
+<span class="text-[10px] text-on-surface-variant block">OR-CALC</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-error-container text-on-error-container text-[10px] font-bold tracking-wide">NEW</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">11:50 IST</span>
+</div>
+</div>
+<!-- ROW 7: Leh Depot Cluster Heavy Maintenance -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant border border-outline text-[9px] font-bold tracking-wider">MED</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Leh Depot Cluster</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">FLEET</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Heavy vehicle maintenance turnaround latency (+14%)</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">8 ALS 4x4 chassis docked</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Parts queue: 3 days</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">79%</span>
+<span class="text-[10px] text-on-surface-variant block">BAYES-REP</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[10px] font-bold tracking-wide">ACKNOWLEDGED</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">10:20 IST</span>
+</div>
+</div>
+<!-- ROW 8: Khardung La Black Ice -->
+<div class="grid grid-cols-12 px-3 py-2.5 items-center hover:bg-surface-container/60 cursor-pointer transition-colors">
+<div class="col-span-1 flex items-center gap-2">
+<input class="rounded border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-on-surface-variant border border-outline text-[9px] font-bold tracking-wider">MED</span>
+</div>
+<div class="col-span-4 pr-2">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary text-body-sm">Khardung La Passway</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container text-on-surface-variant text-[10px] font-mono">ROUTE</span>
+</div>
+<p class="text-xs text-on-surface-variant truncate">Surface black ice detected at km marker 42. Reduced axle cap.</p>
+</div>
+<div class="col-span-3">
+<div class="text-xs font-medium text-on-surface">Max speed capped 10 km/h</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Chains mandatory</div>
+</div>
+<div class="col-span-2 text-right font-mono text-xs">
+<span class="font-bold text-primary">93%</span>
+<span class="text-[10px] text-on-surface-variant block">SENSOR-IOT</span>
+</div>
+<div class="col-span-2 text-right pr-1">
+<span class="inline-block px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[10px] font-bold tracking-wide">MONITORING</span>
+<span class="block text-[10px] font-mono text-on-surface-variant mt-0.5">09:15 IST</span>
+</div>
+</div>
+</div>
+<!-- Table Pagination & Queue Status Footer -->
+<div class="p-2.5 bg-surface-container border-t border-outline-variant flex items-center justify-between text-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span>Showing 1–8 of 28 Active Tactical Risks</span>
+<span class="text-outline-variant">•</span>
+<span class="font-mono text-[11px]">Filter: SECTOR IV-B ENCLAVE</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-on-surface text-label-xs font-label-xs uppercase">Prev</button>
+<span class="px-2 py-0.5 font-mono text-xs font-bold text-primary">Page 1 of 4</span>
+<button class="px-2 py-1 rounded bg-surface-container-lowest border border-outline-variant hover:bg-surface-container text-on-surface text-label-xs font-label-xs uppercase">Next</button>
+</div>
+</div>
+</section>
+<!-- ====================================================== -->
+<!-- RIGHT COLUMN: SELECTED RISK INVESTIGATION & ACTION     -->
+<!-- ====================================================== -->
+<section class="lg:col-span-5 xl:col-span-4 flex flex-col bg-surface-container-lowest border border-secondary/40 rounded shadow-md overflow-hidden">
+<!-- Investigation Header -->
+<div class="p-4 bg-[#F4F3ED] border-b border-outline-variant">
+<div class="flex items-center justify-between gap-2 mb-2">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-[#8C2D19] text-white text-[10px] font-bold tracking-wider uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+              CRITICAL RISK • INVENTORY DEFICIT
+            </span>
+<div class="flex items-center gap-1">
+<button class="px-2 py-1 rounded bg-surface-container-lowest border border-outline-variant text-[11px] font-semibold text-on-surface hover:bg-surface-container" onclick="openAcknowledgeModal()">
+                Acknowledge
+              </button>
+<button class="px-2 py-1 rounded bg-primary text-on-primary text-[11px] font-semibold hover:bg-secondary" onclick="openResolveModal()">
+                Resolve...
+              </button>
+</div>
+</div>
+<h2 class="text-headline-sm font-headline-sm text-primary leading-tight font-bold">
+            Forward Post Alpha — POL Arctic Diesel Stockout
+          </h2>
+<div class="mt-1 flex flex-wrap items-center gap-2 text-label-xs font-label-xs text-on-surface-variant font-mono">
+<span>REF ID: RSK-LEH-0842</span>
+<span>•</span>
+<span>LOGGED: 14:26 IST</span>
+<span>•</span>
+<span class="text-primary font-bold">ASSIGNEE: BHAVYA KUMAR (BK)</span>
+</div>
+</div>
+<div class="p-4 space-y-4 overflow-y-auto max-h-[720px] custom-scroll">
+<!-- Primary Metric Quad -->
+<div class="grid grid-cols-2 gap-2">
+<div class="p-2.5 rounded bg-background border border-hairline">
+<span class="text-[10px] font-mono uppercase text-on-surface-variant block">PREDICTED STOCKOUT</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-2xl font-bold font-mono text-[#8C2D19]">06</span>
+<span class="text-xs font-bold text-[#8C2D19]">DAYS</span>
+</div>
+<span class="text-[10px] text-error font-medium">Critical buffer breach</span>
+</div>
+<div class="p-2.5 rounded bg-background border border-hairline">
+<span class="text-[10px] font-mono uppercase text-on-surface-variant block">CONFIDENCE SCORE</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-2xl font-bold font-mono text-primary">91%</span>
+</div>
+<span class="text-[10px] text-on-surface-variant">Ensemble LSTM (#41)</span>
+</div>
+<div class="p-2.5 rounded bg-background border border-hairline">
+<span class="text-[10px] font-mono uppercase text-on-surface-variant block">CURRENT RESERVE</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-xl font-bold font-mono text-primary">2,100</span>
+<span class="text-xs font-medium text-on-surface-variant">L</span>
+</div>
+<span class="text-[10px] text-on-surface-variant font-mono">Cap: 12,000 L (17.5%)</span>
+</div>
+<div class="p-2.5 rounded bg-background border border-hairline">
+<span class="text-[10px] font-mono uppercase text-on-surface-variant block">BURN RATE (VELOCITY)</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="text-xl font-bold font-mono text-[#8C2D19]">680</span>
+<span class="text-xs font-medium text-on-surface-variant">L/DAY</span>
+</div>
+<span class="text-[10px] text-error font-semibold">+32% over baseline</span>
+</div>
+</div>
+<!-- Risk Drivers (Root Cause Attribution) -->
+<div class="p-3 rounded bg-surface-container-low border border-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-label-xs font-label-xs uppercase tracking-wider text-primary font-bold">ROOT CAUSE ATTRIBUTION</h3>
+<span class="text-[10px] font-mono text-on-surface-variant">VARIANCE MODEL</span>
+</div>
+<div class="space-y-2 text-xs">
+<div>
+<div class="flex justify-between text-[11px] mb-0.5">
+<span class="text-on-surface font-medium">Sub-zero heating surge (-18°C ambient)</span>
+<span class="font-mono font-bold text-primary">45%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/40 rounded-full overflow-hidden">
+<div class="h-full bg-[#8C2D19] rounded-full" style="width: 45%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-0.5">
+<span class="text-on-surface font-medium">Convoy SH-2048 transit delay (+18h)</span>
+<span class="font-mono font-bold text-primary">30%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/40 rounded-full overflow-hidden">
+<div class="h-full bg-[#C49A45] rounded-full" style="width: 30%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-0.5">
+<span class="text-on-surface font-medium">Zojila pass weather closure probability</span>
+<span class="font-mono font-bold text-primary">15%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/40 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 15%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-[11px] mb-0.5">
+<span class="text-on-surface font-medium">Leh staging depot dispatch lag</span>
+<span class="font-mono font-bold text-primary">10%</span>
+</div>
+<div class="w-full h-1.5 bg-outline-variant/40 rounded-full overflow-hidden">
+<div class="h-full bg-outline rounded-full" style="width: 10%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Expected Impact Projection -->
+<div class="p-3 rounded border border-outline-variant bg-surface-container-lowest">
+<h3 class="text-label-xs font-label-xs uppercase tracking-wider text-primary font-bold mb-2">CONSEQUENCES OF INACTION</h3>
+<ul class="space-y-1.5 text-body-sm text-on-surface">
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#8C2D19]"></span>
+<span>Operational Readiness Impact: <strong class="text-error font-mono">↓ 8.4%</strong> in Sector IV-B.</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#8C2D19]"></span>
+<span>Complete Stockout Window: <strong class="font-mono text-primary">3.5 Days</strong> without dispatch.</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#8C2D19]"></span>
+<span>Impacted Strategic Assets: <strong>1 Forward Formation, 2 Attached Patrols</strong>.</span>
+</li>
+</ul>
+</div>
+<!-- AI Prescriptive Intelligence Assessment -->
+<div class="p-3 rounded bg-surface-container border-l-4 border-l-secondary space-y-2">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-mono font-bold text-secondary tracking-wider">AI PRESCRIPTIVE INTELLIGENCE</span>
+<span class="text-[9px] font-mono text-on-surface-variant">MIL-STD-188F</span>
+</div>
+<p class="text-body-sm text-on-surface italic">
+              "Unplanned thermal consumption at Forward Post Alpha is outpacing static allocation. Inbound convoy SH-2048 cannot bridge the depletion gap prior to Day 6 under current transit throttles."
+            </p>
+<div class="text-[10px] font-mono text-on-surface-variant uppercase font-semibold">
+              ● MANDATORY HUMAN-IN-THE-LOOP APPROVAL REQUIRED PRIOR TO DISPATCH EXECUTION
+            </div>
+</div>
+<!-- Recommended Tactical Action Box -->
+<div class="p-3.5 rounded bg-primary-container text-on-primary space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="text-label-xs font-label-xs uppercase tracking-wider text-secondary-fixed">RECOMMENDED TACTICAL PROTOCOL</span>
+<span class="px-1.5 py-0.5 rounded bg-secondary text-[9px] font-mono font-bold text-on-secondary">+8.2% READINESS</span>
+</div>
+<p class="text-body-sm text-inverse-on-surface font-medium">
+              Authorize Priority Dispatch of <strong>2,500 L Arctic Grade POL</strong> from Leh Central Reserve via Bypass Route B.
+            </p>
+<div class="flex items-center gap-2 pt-1">
+<button class="flex-1 py-2 px-3 rounded bg-secondary hover:bg-secondary/90 text-on-secondary font-label-xs text-label-xs uppercase font-bold tracking-wider transition-colors flex items-center justify-center gap-1.5">
+<span>APPROVE DISPATCH PROTOCOL</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="py-2 px-2.5 rounded bg-[#0e1711] hover:bg-[#1a2c1f] border border-outline/30 text-on-primary text-label-xs font-label-xs uppercase transition-colors" title="Simulate">
+                Sandbox
+              </button>
+</div>
+</div>
+<!-- Operational Timeline (Chronological Audit Trail) -->
+<div>
+<h3 class="text-label-xs font-label-xs uppercase tracking-wider text-on-surface-variant font-bold mb-2">OPERATIONAL AUDIT TRAIL</h3>
+<div class="relative pl-4 space-y-2.5 border-l border-outline-variant text-xs">
+<div class="relative">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-[#8C2D19] ring-2 ring-surface-container-lowest"></span>
+<div class="font-mono text-[10px] text-on-surface-variant">14:26 IST</div>
+<div class="font-medium text-primary">Risk escalated to CRITICAL by automated threshold daemon.</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-outline ring-2 ring-surface-container-lowest"></span>
+<div class="font-mono text-[10px] text-on-surface-variant">13:20 IST</div>
+<div class="text-on-surface">Stockout runway breached 7-day safety ceiling.</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-outline ring-2 ring-surface-container-lowest"></span>
+<div class="font-mono text-[10px] text-on-surface-variant">12:05 IST</div>
+<div class="text-on-surface">Predictive LSTM updated burn model following -18°C weather feed.</div>
+</div>
+<div class="relative">
+<span class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-outline ring-2 ring-surface-container-lowest"></span>
+<div class="font-mono text-[10px] text-on-surface-variant">10:42 IST</div>
+<div class="text-on-surface">Anomaly telemetry flag triggered by Leh Depot Telemetry Gateway.</div>
+</div>
+</div>
+</div>
+<!-- Related Logistics Entities (Cross-Navigation Links) -->
+<div class="pt-2 border-t border-hairline">
+<h3 class="text-label-xs font-label-xs uppercase tracking-wider text-on-surface-variant font-bold mb-2">LINKED TACTICAL ENTITIES</h3>
+<div class="grid grid-cols-2 gap-1.5 text-[11px] font-mono">
+<a class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary flex items-center justify-between" href="#">
+<span>LOC: FWD Post Alpha</span>
+<span class="material-symbols-outlined text-xs" data-icon="north_east">north_east</span>
+</a>
+<a class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary flex items-center justify-between" href="#">
+<span>CARGO: POL Class III</span>
+<span class="material-symbols-outlined text-xs" data-icon="north_east">north_east</span>
+</a>
+<a class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary flex items-center justify-between" href="#">
+<span>CONVOY: SH-2048</span>
+<span class="material-symbols-outlined text-xs" data-icon="north_east">north_east</span>
+</a>
+<a class="p-1.5 rounded bg-surface-container hover:bg-surface-container-high text-primary flex items-center justify-between" href="#">
+<span>ROUTE: Bypass B</span>
+<span class="material-symbols-outlined text-xs" data-icon="north_east">north_east</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- ======================================================== -->
+<!-- 6. MODALS / WORKFLOW DRAWERS (INTERACTION PREVIEW)        -->
+<!-- ======================================================== -->
+<!-- Acknowledge Risk Modal -->
+<div class="fixed inset-0 z-50 bg-primary/60 backdrop-blur-sm hidden items-center justify-center p-4" id="ackModal">
+<div class="bg-surface-container-lowest border border-outline rounded w-full max-w-md shadow-2xl p-5 space-y-4">
+<div class="flex items-center justify-between border-b border-hairline pb-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="assignment_turned_in">assignment_turned_in</span>
+<h3 class="text-headline-sm font-headline-sm text-primary">Acknowledge Risk Protocol</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="closeModals()">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+<p class="text-body-sm text-on-surface-variant">
+        Acknowledging assigns risk <span class="font-mono font-bold text-primary">RSK-LEH-0842</span> to your command queue and pauses automated escalation daemons for 4 hours.
+      </p>
+<div class="space-y-1.5">
+<label class="text-label-xs font-label-xs uppercase text-on-surface font-semibold">Priority Assignment</label>
+<select class="w-full text-body-sm bg-background border border-outline-variant rounded p-2 focus:ring-0 focus:border-primary">
+<option>High Priority (Forward Post Alpha Support Unit)</option>
+<option>Emergency High Altitude Rapid Response</option>
+<option>Standard Logistical Queue</option>
+</select>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-hairline">
+<button class="px-3 py-1.5 rounded bg-surface-container text-body-sm hover:bg-surface-container-high" onclick="closeModals()">Cancel</button>
+<button class="px-4 py-1.5 rounded bg-primary text-on-primary text-body-sm font-semibold hover:bg-secondary" onclick="closeModals()">Confirm Acknowledgement</button>
+</div>
+</div>
+</div>
+<!-- Resolve Risk Modal -->
+<div class="fixed inset-0 z-50 bg-primary/60 backdrop-blur-sm hidden items-center justify-center p-4" id="resolveModal">
+<div class="bg-surface-container-lowest border border-outline rounded w-full max-w-lg shadow-2xl p-5 space-y-4">
+<div class="flex items-center justify-between border-b border-hairline pb-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="task_alt">task_alt</span>
+<h3 class="text-headline-sm font-headline-sm text-primary">Resolve &amp; Log Risk Manifest</h3>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" onclick="closeModals()">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+</button>
+</div>
+<div class="p-2.5 rounded bg-surface-container text-xs text-on-surface-variant font-mono">
+        LOGGED ENTITY: RSK-LEH-0842 // DIESEL POL DEFICIT // SECTOR IV-B
+      </div>
+<div class="space-y-1.5">
+<label class="text-label-xs font-label-xs uppercase text-on-surface font-semibold">Mitigation Strategy Executed *</label>
+<select class="w-full text-body-sm bg-background border border-outline-variant rounded p-2 focus:ring-0 focus:border-primary">
+<option>Emergency Fuel Air Drop Initiated (Chushul Detachment)</option>
+<option selected="">Rerouted Inbound Reserve via Bypass B (2,500 L)</option>
+<option>Depot Load Reallocation from Forward Post Beta</option>
+<option>Tactical Consumption Rationing Order Signed</option>
+</select>
+</div>
+<div class="space-y-1.5">
+<label class="text-label-xs font-label-xs uppercase text-on-surface font-semibold">Operational Audit Note (Permanent Sign-off) *</label>
+<textarea class="w-full text-body-sm bg-background border border-outline-variant rounded p-2 focus:ring-0 focus:border-primary text-xs" placeholder="Enter commander authorization code, convoy dispatch serial number, or rationale..." rows="3"></textarea>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t border-hairline">
+<button class="px-3 py-1.5 rounded bg-surface-container text-body-sm hover:bg-surface-container-high" onclick="closeModals()">Cancel</button>
+<button class="px-4 py-1.5 rounded bg-secondary text-on-secondary text-body-sm font-semibold hover:bg-secondary/90" onclick="closeModals()">Sign &amp; Archive Resolution</button>
+</div>
+</div>
+</div>
+<!-- Inline Script for UI Micro-Interactions -->
+<script>
+    function openAcknowledgeModal() {
+      const modal = document.getElementById('ackModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openResolveModal() {
+      const modal = document.getElementById('resolveModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeModals() {
+      document.getElementById('ackModal').classList.add('hidden');
+      document.getElementById('ackModal').classList.remove('flex');
+      document.getElementById('resolveModal').classList.add('hidden');
+      document.getElementById('resolveModal').classList.remove('flex');
+    }
+
+    // Close on escape key
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModals();
+      }
+    });
+  </script>
+</body></html>

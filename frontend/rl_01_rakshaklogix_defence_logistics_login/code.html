@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RakshakLogix — Secure Gateway // Defence Logistics Command</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#bacbbd",
+            "secondary-container": "#d1e6c1",
+            "on-primary-container": "#7d8d81",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "secondary": "#516446",
+            "on-error": "#ffffff",
+            "primary-fixed-dim": "#bacbbd",
+            "surface-dim": "#d8dbd3",
+            "on-primary-fixed": "#111e16",
+            "on-background": "#191d18",
+            "on-surface": "#191d18",
+            "on-secondary-fixed-variant": "#3a4c30",
+            "primary": "#030e07",
+            "inverse-on-surface": "#eff2ea",
+            "on-surface-variant": "#434844",
+            "background": "#f7faf2",
+            "tertiary": "#040e00",
+            "secondary-fixed-dim": "#b8cda9",
+            "surface-container-highest": "#e0e4dc",
+            "on-primary-fixed-variant": "#3b4a40",
+            "primary-container": "#17251c",
+            "on-secondary-container": "#55684a",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed": "#111f05",
+            "surface-variant": "#e0e4dc",
+            "surface-container-low": "#f2f5ec",
+            "error-container": "#ffdad6",
+            "surface-tint": "#536257",
+            "tertiary-fixed-dim": "#b9cda3",
+            "outline-variant": "#c3c8c2",
+            "outline": "#737873",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#d4e9c4",
+            "tertiary-container": "#17260a",
+            "on-tertiary-container": "#7c8f69",
+            "tertiary-fixed": "#d5e9be",
+            "surface": "#f7faf2",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#2d312c",
+            "surface-bright": "#f7faf2",
+            "on-secondary-fixed": "#0f1f08",
+            "surface-container-high": "#e6e9e1"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-lg": "1.25rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-md": "0.75rem",
+            "margin": "1rem",
+            "margin-desktop": "2rem"
+          },
+          "fontFamily": {
+            "body-lg": ["IBM Plex Sans"],
+            "headline-sm": ["IBM Plex Sans"],
+            "label-md": ["IBM Plex Sans"],
+            "label-sm": ["IBM Plex Sans"],
+            "headline-xl": ["IBM Plex Sans"],
+            "body-sm": ["IBM Plex Sans"],
+            "body-md": ["IBM Plex Sans"],
+            "headline-xl-mobile": ["IBM Plex Sans"],
+            "label-xs": ["IBM Plex Sans"],
+            "headline-lg": ["IBM Plex Sans"]
+          },
+          "fontSize": {
+            "body-lg": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "600" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }],
+            "headline-xl": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-xl-mobile": ["26px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "label-xs": ["10px", { "lineHeight": "12px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+
+    /* Muted hairline tactical grid pattern */
+    .tactical-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(209, 230, 193, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(209, 230, 193, 0.05) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md min-h-screen flex flex-col selection:bg-secondary selection:text-on-secondary">
+<!-- Main Viewport Shell: Destination rule suppresses standard TopAppBar and Footer per Transactional/Login rule -->
+<main class="flex-1 flex flex-col lg:flex-row w-full min-h-screen">
+<!-- LEFT PANEL: Identity & Operational Command Telemetry (~42% desktop) -->
+<section class="relative w-full lg:w-[42%] bg-primary-container text-surface-bright flex flex-col justify-between p-space-lg md:p-space-xl overflow-hidden border-b lg:border-b-0 lg:border-r border-outline/30">
+<!-- Vector Topographic & Latitude/Longitude Underlay (5-8% opacity, pure mathematical rigor) -->
+<div class="absolute inset-0 pointer-events-none tactical-grid">
+<svg class="absolute inset-0 w-full h-full opacity-[0.06] stroke-secondary-container" fill="none" xmlns="http://www.w3.org/2000/svg">
+<!-- Topographic Contours (Northern Sector Elevation) -->
+<path d="M-100,120 C150,80 320,260 550,140 C780,20 900,240 1200,180" stroke-dasharray="3,3" stroke-width="1.2"></path>
+<path d="M-80,240 C180,180 350,380 620,280 C840,190 980,390 1250,320" stroke-width="1"></path>
+<path d="M-50,390 C220,310 410,510 700,430 C920,360 1020,530 1300,480" stroke-width="1.4"></path>
+<path d="M-20,540 C260,460 480,640 780,580 C990,520 1080,680 1380,630" stroke-dasharray="6,4" stroke-width="1"></path>
+<path d="M10,690 C290,610 520,790 850,710 C1040,650 1140,820 1420,770" stroke-width="1.2"></path>
+<path d="M50,840 C340,760 590,920 920,850 C1100,800 1200,950 1480,900" stroke-width="0.8"></path>
+</svg>
+<!-- Coordinate Callouts (Northern Command / Leh-Ladakh Logistics Sector) -->
+<div class="absolute top-12 right-8 font-label-xs text-label-xs text-secondary-fixed-dim/30 tracking-widest uppercase select-none pointer-events-none text-right">
+          LAT 34°08'44"N<br/>
+          LON 77°34'02"E<br/>
+          ALT 3,500M MSL
+        </div>
+<div class="absolute bottom-24 left-8 font-label-xs text-label-xs text-secondary-fixed-dim/20 tracking-widest uppercase select-none pointer-events-none">
+          COORD-REF // SQ-HQ-NC-04<br/>
+          SURVEILLANCE SECTOR: NORTH-01
+        </div>
+</div>
+<!-- Top Brand & Telemetry Header -->
+<header class="relative z-10 space-y-space-md">
+<!-- Node & Classification Badges -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm border-b border-outline/30 pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-fixed"></span>
+<span class="font-label-xs text-label-xs tracking-wider text-secondary-fixed uppercase">● SYSTEM READY</span>
+</div>
+<div class="px-space-xs py-0.5 rounded bg-surface-container-highest/10 border border-outline-variant/30 text-on-primary-fixed-variant font-label-xs text-label-xs">
+            MOD-ILMS NODE REF: RL-N941 // SEC-LVL 4
+          </div>
+</div>
+<!-- Brand Identity Block -->
+<div>
+<div class="flex items-center gap-space-xs text-secondary-fixed mb-space-xs">
+<span class="material-symbols-outlined text-secondary-fixed" data-icon="shield">shield</span>
+<span class="font-label-xs text-label-xs uppercase tracking-widest text-on-primary-container">Ministry of Defence Supply Node</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-surface-bright tracking-wider uppercase font-semibold">
+            RAKSHAKLOGIX
+          </h1>
+<p class="font-label-sm text-label-sm uppercase tracking-widest text-secondary-fixed-dim font-medium mt-1">
+            Predictive Logistics &amp; Forward Supply Chain
+          </p>
+</div>
+</header>
+<!-- Central Operational Context Note (Desktop Only) -->
+<div class="relative z-10 my-space-lg hidden lg:block border-l-2 border-secondary pl-space-md">
+<p class="font-label-xs text-label-xs text-on-primary-container uppercase tracking-wider mb-1">Operational Mandate</p>
+<p class="font-body-sm text-body-sm text-inverse-on-surface/90 leading-relaxed">
+          Integrated logistical lifecycle orchestration for forward depots, ration cold-chains, ordnance readiness, and active transit convoys across high-altitude and strategic border commands.
+        </p>
+</div>
+<!-- Lower Brand Statement & Telemetry Metrics Box -->
+<footer class="relative z-10 space-y-space-md">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-tertiary-fixed font-semibold tracking-tight">
+            Predict. Prepare. Deliver.
+          </h2>
+<p class="font-body-md text-body-md text-surface-container-highest/80 mt-1">
+            Decision intelligence for mission-critical logistics.
+          </p>
+</div>
+<!-- Telemetry Hairline Box -->
+<div class="rounded-xl border border-outline/40 bg-surface-container-highest/5 p-space-sm">
+<div class="grid grid-cols-3 gap-space-xs text-left divide-x divide-outline/30">
+<div class="px-space-xs">
+<span class="block font-label-xs text-label-xs text-on-primary-container uppercase">Active Corridors</span>
+<span class="font-headline-sm text-headline-sm text-surface-bright font-semibold">14</span>
+<span class="font-label-xs text-label-xs text-secondary-fixed-dim block">NOMINAL</span>
+</div>
+<div class="px-space-xs">
+<span class="block font-label-xs text-label-xs text-on-primary-container uppercase">Forward Depots</span>
+<span class="font-headline-sm text-headline-sm text-surface-bright font-semibold">48</span>
+<span class="font-label-xs text-label-xs text-secondary-fixed-dim block">ONLINE</span>
+</div>
+<div class="px-space-xs">
+<span class="block font-label-xs text-label-xs text-on-primary-container uppercase">Cryptography</span>
+<span class="font-headline-sm text-headline-sm text-surface-bright font-semibold">AES-256</span>
+<span class="font-label-xs text-label-xs text-secondary-fixed-dim block">GCM MIL-SPEC</span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-primary-container font-label-xs text-label-xs tracking-wider">
+<span>MIL-STD-188F INTEROPERABLE</span>
+<span>STATION CLUSTERING: ACTIVE</span>
+</div>
+</footer>
+</section>
+<!-- RIGHT PANEL: Login Workspace (~58% desktop) -->
+<section class="w-full lg:w-[58%] bg-surface flex flex-col justify-between p-space-md md:p-space-lg lg:p-space-xl">
+<!-- Top Right Terminal Utility Bar -->
+<div class="w-full flex items-center justify-between text-on-surface-variant text-label-xs font-label-xs border-b border-outline-variant/60 pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-outline" data-icon="terminal">terminal</span>
+<span class="uppercase tracking-wider">PORTAL GATEWAY RL-V2.4</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="hidden sm:inline-block text-outline uppercase">TLS 1.3 HARDENED</span>
+<span class="inline-flex items-center gap-1 text-secondary font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            NODE AUTH: ACTIVE
+          </span>
+</div>
+</div>
+<!-- Main Central Login Card Workspace -->
+<div class="w-full max-w-[420px] mx-auto my-auto py-space-lg">
+<!-- Eyebrow & Headline Header -->
+<div class="mb-space-lg">
+<div class="inline-flex items-center gap-space-xs px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant text-on-surface-variant font-label-xs text-label-xs tracking-wider uppercase mb-space-sm">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="shield">shield</span>
+<span>SECURE ACCESS</span>
+</div>
+<h2 class="font-headline-xl text-headline-xl text-primary font-bold tracking-tight">
+            Sign in to RakshakLogix
+          </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+            Access your logistics operations workspace.
+          </p>
+</div>
+<!-- Login Form -->
+<form class="space-y-space-md" id="loginForm" onsubmit="handleFormSubmit(event)">
+<!-- Field 1: Email / Service ID -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface font-medium mb-1" for="serviceId">
+              Email / Service ID
+            </label>
+<div class="relative">
+<input autocomplete="username" class="w-full h-11 px-3.5 bg-surface-container-lowest border border-outline-variant text-on-surface placeholder:text-outline font-body-md text-body-md rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="serviceId" name="serviceId" placeholder="IC-78921K / army.mil.in" required="" type="text"/>
+<div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="badge">badge</span>
+</div>
+</div>
+<p class="font-label-xs text-label-xs text-on-surface-variant mt-1">Accepts Military Service Number or Defence Enterprise Email</p>
+</div>
+<!-- Field 2: Password -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="font-label-md text-label-md text-on-surface font-medium" for="authPassword">
+                Password
+              </label>
+<a class="font-label-xs text-label-xs text-secondary hover:text-primary underline font-medium transition-colors" href="#reset-dialog">
+                Forgot password?
+              </a>
+</div>
+<div class="relative">
+<input autocomplete="current-password" class="w-full h-11 px-3.5 pr-11 bg-surface-container-lowest border border-outline-variant text-on-surface placeholder:text-outline font-body-md text-body-md rounded-xl focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-colors" id="authPassword" name="authPassword" placeholder="Enter authorized credential" required="" type="password"/>
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 flex items-center pr-3 text-outline hover:text-on-surface transition-colors focus:outline-none" id="passwordToggleBtn" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-sm" data-icon="visibility" id="eyeIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center justify-between pt-0.5">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-secondary focus:ring-offset-0 transition-colors" id="rememberDevice" name="rememberDevice" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Remember this device</span>
+</label>
+<span class="font-label-xs text-label-xs text-outline tracking-wider">HARDWARE TOKEN SUPPORTED</span>
+</div>
+<!-- Primary Action Button -->
+<div class="pt-2">
+<button class="w-full h-11 px-space-md bg-primary-container hover:bg-secondary active:bg-primary text-on-primary font-headline-sm text-headline-sm rounded-xl transition-all duration-150 flex items-center justify-center gap-space-xs border border-primary-container shadow-sm" id="signInBtn" type="submit">
+<span>Sign In</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+<!-- Security Verification Badge -->
+<div class="flex items-center justify-center gap-1.5 py-1 text-center font-label-xs text-label-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="lock">lock</span>
+<span>Secure access • Encrypted session (MIL-STD-188F)</span>
+</div>
+<!-- Prototype / SIH Evaluator Fast Access Section -->
+<div class="relative py-2">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-center">
+<span class="bg-surface px-space-sm font-label-xs text-label-xs uppercase tracking-widest text-outline">
+                OR PROTOTYPE EVALUATION
+              </span>
+</div>
+</div>
+<!-- Secondary Tactical Demo Button -->
+<div>
+<button class="w-full h-11 px-space-md bg-surface-container-low hover:bg-surface-container-high active:bg-surface-container-highest border border-secondary/40 text-secondary font-headline-sm text-headline-sm rounded-xl transition-colors flex items-center justify-center gap-space-xs" onclick="loadDemoCredentials()" type="button">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="key">key</span>
+<span>Continue as Demo User</span>
+</button>
+<div class="mt-1.5 text-center">
+<span class="font-label-xs text-label-xs text-on-surface-variant">
+                Quick access with Logistics Officer (HQ Northern Command) test credentials
+              </span>
+</div>
+</div>
+</form>
+<!-- Dynamic Feedback Banner (Hidden by default) -->
+<div class="hidden mt-space-md p-space-sm rounded-xl border border-secondary bg-secondary-container/20 text-on-surface font-body-sm text-body-sm flex items-start gap-space-xs" id="statusMessage">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<div id="statusText">Credentials verified. Initiating command session...</div>
+</div>
+</div>
+<!-- Right Footer: Metadata and Classification Notice -->
+<footer class="w-full pt-space-md border-t border-outline-variant/60 flex flex-col sm:flex-row justify-between items-center gap-2 text-on-surface-variant font-label-xs text-label-xs">
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-primary">RakshakLogix</span>
+<span>•</span>
+<span>Operational Logistics Intelligence</span>
+</div>
+<div class="text-center sm:text-right">
+          © 2026 Ministry of Defence Logistics Directorate • Classification: Restricted
+        </div>
+</footer>
+</section>
+</main>
+<!-- Interactive Logic for Login and Demo Credentials -->
+<script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('authPassword');
+      const eyeIcon = document.getElementById('eyeIcon');
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        eyeIcon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        eyeIcon.textContent = 'visibility';
+      }
+    }
+
+    function loadDemoCredentials() {
+      const serviceIdInput = document.getElementById('serviceId');
+      const passwordInput = document.getElementById('authPassword');
+      const statusBox = document.getElementById('statusMessage');
+      const statusText = document.getElementById('statusText');
+
+      // Populate test officer credentials for evaluators
+      serviceIdInput.value = 'IC-88412M // COL. S. VERMA (HQ NC)';
+      passwordInput.value = '••••••••••••';
+      
+      statusBox.className = "mt-space-md p-space-sm rounded-xl border border-secondary bg-secondary-container/30 text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs transition-all";
+      statusText.innerHTML = "<strong>Demo Profile Activated:</strong> Logistics Officer (HQ Northern Command - Leh Depot 48). Click <em>Sign In</em> to proceed.";
+      statusBox.classList.remove('hidden');
+    }
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const serviceId = document.getElementById('serviceId').value;
+      const statusBox = document.getElementById('statusMessage');
+      const statusText = document.getElementById('statusText');
+      const signInBtn = document.getElementById('signInBtn');
+
+      signInBtn.disabled = true;
+      signInBtn.innerHTML = `
+        <span class="material-symbols-outlined text-sm animate-spin" data-icon="sync">sync</span>
+        <span>Authenticating...</span>
+      `;
+
+      setTimeout(() => {
+        statusBox.className = "mt-space-md p-space-sm rounded-xl border border-secondary bg-secondary-container/50 text-on-surface font-body-sm text-body-sm flex items-center gap-space-xs";
+        statusText.innerHTML = "<strong>Access Granted.</strong> Redirecting to Strategic Telemetry Dashboard...";
+        statusBox.classList.remove('hidden');
+        
+        setTimeout(() => {
+          signInBtn.innerHTML = `
+            <span>Access Verified</span>
+            <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+          `;
+        }, 800);
+      }, 900);
+    }
+  </script>
+</body></html>
