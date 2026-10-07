@@ -39,12 +39,8 @@ class Settings(BaseSettings):
     # ------------------------------------------------------------------
     # Database — PostgreSQL/PostGIS
     # ------------------------------------------------------------------
-    database_url: str = (
-        "postgresql+asyncpg://rakshak:rakshak_dev@localhost:5432/rakshaklogix"
-    )
-    database_sync_url: str = (
-        "postgresql+psycopg2://rakshak:rakshak_dev@localhost:5432/rakshaklogix"
-    )
+    database_url: str = "postgresql+asyncpg://rakshak:rakshak_dev@localhost:5432/rakshaklogix"
+    database_sync_url: str = "postgresql+psycopg2://rakshak:rakshak_dev@localhost:5432/rakshaklogix"
     database_pool_size: int = 10
     database_max_overflow: int = 20
     database_echo: bool = False
@@ -96,9 +92,7 @@ class Settings(BaseSettings):
     @model_validator(mode="after")
     def warn_insecure_jwt_secret(self) -> Settings:
         if self.app_env == "production" and self.jwt_secret_key.startswith("CHANGE_ME"):
-            raise ValueError(
-                "JWT_SECRET_KEY must be changed before running in production mode."
-            )
+            raise ValueError("JWT_SECRET_KEY must be changed before running in production mode.")
         return self
 
     # ------------------------------------------------------------------
