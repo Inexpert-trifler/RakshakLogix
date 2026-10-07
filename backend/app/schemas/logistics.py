@@ -37,7 +37,6 @@ class ShipmentUpdate(BaseModel):
 
 
 class ShipmentItemCreate(BaseModel):
-
     item_id: uuid.UUID
     quantity: float = Field(..., gt=0.0)
 
