@@ -27,9 +27,7 @@ class AuditLog(UUIDPrimaryKeyMixin, Base):
         index=True,
     )
     action: Mapped[str] = mapped_column(String(128), nullable=False, index=True)
-    entity_type: Mapped[str | None] = mapped_column(
-        String(64), nullable=True, index=True
-    )
+    entity_type: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     entity_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), nullable=True, index=True
     )

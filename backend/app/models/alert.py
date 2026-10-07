@@ -38,9 +38,7 @@ class Alert(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     alert_type: Mapped[str] = mapped_column(String(64), nullable=False, index=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
     message: Mapped[str | None] = mapped_column(Text, nullable=True)
-    entity_type: Mapped[str | None] = mapped_column(
-        String(32), nullable=True, index=True
-    )
+    entity_type: Mapped[str | None] = mapped_column(String(32), nullable=True, index=True)
     entity_id: Mapped[uuid.UUID | None] = mapped_column(
         UUID(as_uuid=True), nullable=True, index=True
     )
