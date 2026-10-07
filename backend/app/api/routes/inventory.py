@@ -153,9 +153,7 @@ async def create_inventory_transaction(
         inv.quantity += payload.quantity
     elif ttype == "ISSUE":
         if inv.available_quantity < payload.quantity:
-            raise ValidationError(
-                "Insufficient available quantity for issue transaction."
-            )
+            raise ValidationError("Insufficient available quantity for issue transaction.")
         inv.quantity -= payload.quantity
     elif ttype == "RESERVATION":
         if inv.available_quantity < payload.quantity:
@@ -213,9 +211,7 @@ async def import_consumption_csv(
     current_user: User = Depends(get_current_user),
 ) -> dict[str, Any]:
     """Imports historical consumption time series from CSV file with data quality validation."""
-    if not file.filename or not (
-        file.filename.endswith(".csv") or file.filename.endswith(".txt")
-    ):
+    if not file.filename or not (file.filename.endswith(".csv") or file.filename.endswith(".txt")):
         raise ValidationError("File must be a CSV format document.")
 
     content = await file.read()
