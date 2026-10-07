@@ -58,9 +58,7 @@ class Item(UUIDPrimaryKeyMixin, TimestampMixin, Base):
 
     name: Mapped[str] = mapped_column(String(255), nullable=False, index=True)
     category: Mapped[str] = mapped_column(String(64), nullable=False)
-    unit: Mapped[str] = mapped_column(
-        String(32), nullable=False, default=ItemUnit.UNIT.value
-    )
+    unit: Mapped[str] = mapped_column(String(32), nullable=False, default=ItemUnit.UNIT.value)
     criticality: Mapped[str] = mapped_column(
         String(32), nullable=False, default=ItemCriticality.MEDIUM.value
     )
@@ -71,9 +69,7 @@ class Item(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
     # Relationships
-    inventory: Mapped[list] = relationship(
-        "Inventory", back_populates="item", lazy="select"
-    )
+    inventory: Mapped[list] = relationship("Inventory", back_populates="item", lazy="select")
     consumption_records: Mapped[list] = relationship(
         "ConsumptionRecord", back_populates="item", lazy="select"
     )

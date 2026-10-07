@@ -69,10 +69,7 @@ class Inventory(UUIDPrimaryKeyMixin, TimestampMixin, Base):
         return max(0.0, qty - reserved)
 
     def __repr__(self) -> str:
-        return (
-            f"<Inventory location={self.location_id} item={self.item_id} "
-            f"qty={self.quantity}>"
-        )
+        return f"<Inventory location={self.location_id} item={self.item_id} qty={self.quantity}>"
 
 
 class InventoryTransaction(UUIDPrimaryKeyMixin, Base):
@@ -95,9 +92,7 @@ class InventoryTransaction(UUIDPrimaryKeyMixin, Base):
         nullable=False,
         index=True,
     )
-    transaction_type: Mapped[str] = mapped_column(
-        String(32), nullable=False, index=True
-    )
+    transaction_type: Mapped[str] = mapped_column(String(32), nullable=False, index=True)
     quantity: Mapped[float] = mapped_column(Float, nullable=False)
     reference_id: Mapped[str | None] = mapped_column(String(255), nullable=True)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
