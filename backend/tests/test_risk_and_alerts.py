@@ -24,12 +24,10 @@ from app.services.consumption_import import ConsumptionImporter
 
 
 class TestInventoryRunwayEngine:
-
     def test_runway_calculation(self) -> None:
         today = date.today()
         forecast_pts = [
-            {"target_date": today + timedelta(days=i), "prediction": 100.0}
-            for i in range(1, 11)
+            {"target_date": today + timedelta(days=i), "prediction": 100.0} for i in range(1, 11)
         ]
 
         res = InventoryRunwayEngine.calculate_runway(
@@ -46,7 +44,6 @@ class TestInventoryRunwayEngine:
 
 
 class TestCompositeRiskCalculator:
-
     def test_risk_scoring_and_explanation(self) -> None:
         res = CompositeRiskCalculator.calculate_risk(
             days_to_stockout=2.0,
@@ -65,7 +62,6 @@ class TestCompositeRiskCalculator:
 
 
 class TestAlertDetector:
-
     @pytest.mark.asyncio
     async def test_alert_generation(self, db_session: AsyncSession) -> None:
         location_id = uuid.uuid4()
@@ -93,7 +89,6 @@ class TestAlertDetector:
 
 
 class TestConsumptionImporter:
-
     @pytest.mark.asyncio
     async def test_csv_import_validation(self, db_session: AsyncSession) -> None:
         loc_res = await db_session.execute(select(Location))
