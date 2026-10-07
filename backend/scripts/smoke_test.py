@@ -72,10 +72,7 @@ async def run_smoke_test(base_url: str = "http://localhost:8000") -> None:
         transport = httpx.ASGITransport(app=app)
         base_url = "http://testserver"
 
-    async with httpx.AsyncClient(
-        transport=transport, base_url=base_url, timeout=15.0
-    ) as client:
-
+    async with httpx.AsyncClient(transport=transport, base_url=base_url, timeout=15.0) as client:
         # 1. Health & Readiness
         res_h = await client.get("/health")
         assert res_h.status_code == 200, f"Health check failed: {res_h.text}"
@@ -99,9 +96,7 @@ async def run_smoke_test(base_url: str = "http://localhost:8000") -> None:
         users_res = await client.get("/api/v1/users", headers=headers)
         assert users_res.status_code == 200, f"List users failed: {users_res.text}"
         assert len(users_res.json()) > 0
-        print(
-            " [PASS] Authentication, Users & JWT Tokens (/auth/login, /auth/me, /users)"
-        )
+        print(" [PASS] Authentication, Users & JWT Tokens (/auth/login, /auth/me, /users)")
 
         # 3. Dashboard Summary, Map & Trends
         dash_sum = await client.get("/api/v1/dashboard/summary", headers=headers)
@@ -114,12 +109,8 @@ async def run_smoke_test(base_url: str = "http://localhost:8000") -> None:
         assert len(dash_map.json()["locations"]) > 0
         print(" [PASS] Dashboard GIS Overlay (/dashboard/map)")
 
-        dash_trends = await client.get(
-            "/api/v1/dashboard/trends?days=30", headers=headers
-        )
-        assert (
-            dash_trends.status_code == 200
-        ), f"Dashboard trends failed: {dash_trends.text}"
+        dash_trends = await client.get("/api/v1/dashboard/trends?days=30", headers=headers)
+        assert dash_trends.status_code == 200, f"Dashboard trends failed: {dash_trends.text}"
         assert len(dash_trends.json()["trends"]) > 0
         print(" [PASS] Dashboard Time-Series Trends (/dashboard/trends)")
 
@@ -142,9 +133,7 @@ async def run_smoke_test(base_url: str = "http://localhost:8000") -> None:
         print(" [PASS] Inventory Levels (/inventory)")
 
         inv_risk = await client.get("/api/v1/inventory/risk", headers=headers)
-        assert (
-            inv_risk.status_code == 200
-        ), f"Evaluate inventory risk failed: {inv_risk.text}"
+        assert inv_risk.status_code == 200, f"Evaluate inventory risk failed: {inv_risk.text}"
         assert len(inv_risk.json()) > 0
         print(" [PASS] Inventory Runway Risk Engine (/inventory/risk)")
 
@@ -219,26 +208,18 @@ async def run_smoke_test(base_url: str = "http://localhost:8000") -> None:
             },
             headers=headers,
         )
-        assert (
-            create_sim.status_code == 201
-        ), f"Create simulation failed: {create_sim.text}"
+        assert create_sim.status_code == 201, f"Create simulation failed: {create_sim.text}"
         sim_id = create_sim.json()["id"]
 
-        run_sim = await client.post(
-            f"/api/v1/simulations/{sim_id}/run", headers=headers
-        )
+        run_sim = await client.post(f"/api/v1/simulations/{sim_id}/run", headers=headers)
         assert run_sim.status_code == 200, f"Run simulation failed: {run_sim.text}"
         sim_res = run_sim.json()
         assert sim_res["status"] == "COMPLETED"
         assert len(sim_res["summary"]["mitigation_options"]) > 0
         print(" [PASS] Disruption Simulation Engine Execution (/simulations/{id}/run)")
 
-        res_metrics = await client.get(
-            f"/api/v1/simulations/{sim_id}/results", headers=headers
-        )
-        assert (
-            res_metrics.status_code == 200
-        ), f"Get simulation results failed: {res_metrics.text}"
+        res_metrics = await client.get(f"/api/v1/simulations/{sim_id}/results", headers=headers)
+        assert res_metrics.status_code == 200, f"Get simulation results failed: {res_metrics.text}"
         assert len(res_metrics.json()) > 0
         print(
             " [PASS] Simulation Comparative Results & Mitigation Analysis (/simulations/{id}/results)"
