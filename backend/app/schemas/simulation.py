@@ -16,9 +16,7 @@ class SimulationCreate(BaseModel):
         description="ROUTE_UNAVAILABLE, DEMAND_SPIKE, SEVERE_WEATHER, VEHICLE_UNAVAILABLE",
     )
     name: str | None = Field(default=None, description="Human-readable title")
-    description: str | None = Field(
-        default=None, description="Detailed scenario rationale"
-    )
+    description: str | None = Field(default=None, description="Detailed scenario rationale")
     parameters: dict = Field(
         ...,
         description="Structured scenario parameters (e.g., {'route_id': '...', 'duration_hours': 24})",
