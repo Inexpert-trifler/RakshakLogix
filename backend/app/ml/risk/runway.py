@@ -123,9 +123,7 @@ class InventoryRunwayEngine:
                 round(days_to_stockout, 1) if days_to_stockout is not None else 999.0
             ),
             "days_to_safety_breach": (
-                round(days_to_safety_breach, 1)
-                if days_to_safety_breach is not None
-                else None
+                round(days_to_safety_breach, 1) if days_to_safety_breach is not None else None
             ),
             "safety_breach_date": safety_breach_date,
             "stockout_date": stockout_date,
