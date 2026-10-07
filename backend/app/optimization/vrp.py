@@ -173,9 +173,7 @@ class ORToolsLogisticsSolver:
 
         return {
             "status": "FEASIBLE",
-            "solver_status": (
-                "OPTIMAL" if solve_status == pywraplp.Solver.OPTIMAL else "FEASIBLE"
-            ),
+            "solver_status": ("OPTIMAL" if solve_status == pywraplp.Solver.OPTIMAL else "FEASIBLE"),
             "selected_path": selected_path,
             "allocated_vehicles": allocated_vehicles,
             "total_allocated_capacity_kg": total_allocated_cap,
