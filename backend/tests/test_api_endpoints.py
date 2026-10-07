@@ -19,7 +19,6 @@ from httpx import AsyncClient
 
 
 class TestAPIIntegration:
-
     @pytest.mark.asyncio
     async def test_health_endpoints(self, client: AsyncClient) -> None:
         r = await client.get("/health")
@@ -175,9 +174,7 @@ class TestAPIIntegration:
         assert create_sim.status_code == 201
         sim_id = create_sim.json()["id"]
 
-        run_sim = await client.post(
-            f"/api/v1/simulations/{sim_id}/run", headers=headers
-        )
+        run_sim = await client.post(f"/api/v1/simulations/{sim_id}/run", headers=headers)
         assert run_sim.status_code == 200
         res_data = run_sim.json()
         assert res_data["status"] == "COMPLETED"

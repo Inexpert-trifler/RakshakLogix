@@ -62,18 +62,14 @@ class TestVersionedHealth:
         assert response.status_code == 200
 
     @pytest.mark.asyncio
-    async def test_versioned_health_contains_dependencies(
-        self, client: AsyncClient
-    ) -> None:
+    async def test_versioned_health_contains_dependencies(self, client: AsyncClient) -> None:
         response = await client.get("/api/v1/health")
         data = response.json()
         assert "dependencies" in data
         assert "database" in data["dependencies"]
 
     @pytest.mark.asyncio
-    async def test_versioned_health_database_status_present(
-        self, client: AsyncClient
-    ) -> None:
+    async def test_versioned_health_database_status_present(self, client: AsyncClient) -> None:
         response = await client.get("/api/v1/health")
         data = response.json()
         db_info = data["dependencies"]["database"]
@@ -86,9 +82,7 @@ class TestVersionedHealth:
         assert data["status"] in ("ok", "degraded")
 
     @pytest.mark.asyncio
-    async def test_versioned_health_version_matches_root(
-        self, client: AsyncClient
-    ) -> None:
+    async def test_versioned_health_version_matches_root(self, client: AsyncClient) -> None:
         root = await client.get("/health")
         versioned = await client.get("/api/v1/health")
         assert root.json()["version"] == versioned.json()["version"]

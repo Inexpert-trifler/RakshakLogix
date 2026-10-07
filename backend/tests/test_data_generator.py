@@ -19,11 +19,8 @@ from app.services.data_generation.generator import SyntheticDataGenerator
 
 
 class TestSyntheticDataGenerator:
-
     @pytest.mark.asyncio
-    async def test_synthetic_data_generation_counts(
-        self, db_session: AsyncSession
-    ) -> None:
+    async def test_synthetic_data_generation_counts(self, db_session: AsyncSession) -> None:
         """Verifies synthetic dataset counts for locations, items, vehicles, consumption, shipments."""
         # Query pre-seeded locations and items
         loc_res = await db_session.execute(select(Location))
