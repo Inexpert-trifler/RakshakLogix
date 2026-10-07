@@ -34,12 +34,8 @@ async def run_data_generation(
         from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
         print("ℹ️ Using local SQLite database file (rakshaklogix_demo.db)...")
-        current_engine = create_async_engine(
-            "sqlite+aiosqlite:///rakshaklogix_demo.db", echo=False
-        )
-        session_factory = async_sessionmaker(
-            bind=current_engine, expire_on_commit=False
-        )
+        current_engine = create_async_engine("sqlite+aiosqlite:///rakshaklogix_demo.db", echo=False)
+        session_factory = async_sessionmaker(bind=current_engine, expire_on_commit=False)
     else:
         # Probe PostgreSQL connection
         try:
@@ -60,9 +56,7 @@ async def run_data_generation(
             current_engine = create_async_engine(
                 "sqlite+aiosqlite:///rakshaklogix_demo.db", echo=False
             )
-            session_factory = async_sessionmaker(
-                bind=current_engine, expire_on_commit=False
-            )
+            session_factory = async_sessionmaker(bind=current_engine, expire_on_commit=False)
 
     if reset:
         print("⚠️ Resetting database schema...")
@@ -86,9 +80,7 @@ async def run_data_generation(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="RakshakLogix Synthetic Data Generator"
-    )
+    parser = argparse.ArgumentParser(description="RakshakLogix Synthetic Data Generator")
     parser.add_argument(
         "--seed",
         type=int,
@@ -107,9 +99,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    asyncio.run(
-        run_data_generation(seed=args.seed, reset=args.reset, use_sqlite=args.sqlite)
-    )
+    asyncio.run(run_data_generation(seed=args.seed, reset=args.reset, use_sqlite=args.sqlite))
 
 
 if __name__ == "__main__":

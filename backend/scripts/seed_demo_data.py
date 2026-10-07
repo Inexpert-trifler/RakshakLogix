@@ -39,9 +39,7 @@ async def seed_database() -> None:
 
     async with AsyncSessionLocal() as session:
         # Check if already seeded
-        res = await session.execute(
-            select(User).where(User.email == "admin@rakshaklogix.dev")
-        )
+        res = await session.execute(select(User).where(User.email == "admin@rakshaklogix.dev"))
         if res.scalar_one_or_none():
             print("⚠️ Database already seeded. Skipping...")
             return
@@ -496,12 +494,12 @@ async def seed_database() -> None:
                 capacity_kg=(
                     15000.0
                     if vtype == VehicleType.HEAVY_TRUCK
-                    else 5000.0 if vtype == VehicleType.MEDIUM_TRUCK else 2500.0
+                    else 5000.0
+                    if vtype == VehicleType.MEDIUM_TRUCK
+                    else 2500.0
                 ),
                 availability_status=(
-                    VehicleStatus.AVAILABLE.value
-                    if i % 4 != 0
-                    else VehicleStatus.IN_TRANSIT.value
+                    VehicleStatus.AVAILABLE.value if i % 4 != 0 else VehicleStatus.IN_TRANSIT.value
                 ),
                 home_location_id=loc_objects[i % len(loc_objects)].id,
             )
@@ -516,9 +514,7 @@ async def seed_database() -> None:
 
         for loc in loc_objects[:15]:
             for item in item_objects[:10]:
-                init_qty = random.uniform(
-                    item.safety_stock * 1.5, item.safety_stock * 4.0
-                )
+                init_qty = random.uniform(item.safety_stock * 1.5, item.safety_stock * 4.0)
                 inv = Inventory(
                     location_id=loc.id,
                     item_id=item.id,
@@ -596,9 +592,7 @@ async def seed_database() -> None:
                     WeatherSeverity.SEVERE.value
                     if temp < -15.0
                     else (
-                        WeatherSeverity.MODERATE.value
-                        if temp < -5.0
-                        else WeatherSeverity.LOW.value
+                        WeatherSeverity.MODERATE.value if temp < -5.0 else WeatherSeverity.LOW.value
                     )
                 )
                 wr = WeatherRecord(

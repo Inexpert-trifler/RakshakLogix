@@ -49,9 +49,7 @@ class SyntheticDataGenerator:
         self.set_seed()
 
         # Check existing data
-        res = await db.execute(
-            select(User).where(User.email == "admin@rakshaklogix.dev")
-        )
+        res = await db.execute(select(User).where(User.email == "admin@rakshaklogix.dev"))
         if res.scalar_one_or_none():
             return {"status": 0, "message": "Database already seeded."}
 
@@ -515,12 +513,12 @@ class SyntheticDataGenerator:
                 capacity_kg=(
                     15000.0
                     if vtype == VehicleType.HEAVY_TRUCK
-                    else 5000.0 if vtype == VehicleType.MEDIUM_TRUCK else 2500.0
+                    else 5000.0
+                    if vtype == VehicleType.MEDIUM_TRUCK
+                    else 2500.0
                 ),
                 availability_status=(
-                    VehicleStatus.AVAILABLE.value
-                    if i % 5 != 0
-                    else VehicleStatus.IN_TRANSIT.value
+                    VehicleStatus.AVAILABLE.value if i % 5 != 0 else VehicleStatus.IN_TRANSIT.value
                 ),
                 home_location_id=loc_objects[i % len(loc_objects)].id,
             )
@@ -543,14 +541,10 @@ class SyntheticDataGenerator:
                 # Scenario A: Demand Spike for location 0, item 0
                 # Scenario B: Low Initial Inventory for location 1, item 0
                 if loc_idx == 1 and item_idx == 0:
-                    init_qty = round(
-                        item.safety_stock * 0.4, 1
-                    )  # Low stock breach scenario
+                    init_qty = round(item.safety_stock * 0.4, 1)  # Low stock breach scenario
                 else:
                     init_qty = round(
-                        random.uniform(
-                            item.safety_stock * 1.5, item.safety_stock * 3.5
-                        ),
+                        random.uniform(item.safety_stock * 1.5, item.safety_stock * 3.5),
                         1,
                     )
 
@@ -643,11 +637,7 @@ class SyntheticDataGenerator:
         for r_idx, r_name in enumerate(route_names):
             r = Route(
                 name=r_name,
-                status=(
-                    RouteStatus.ACTIVE.value
-                    if r_idx != 2
-                    else RouteStatus.RESTRICTED.value
-                ),
+                status=(RouteStatus.ACTIVE.value if r_idx != 2 else RouteStatus.RESTRICTED.value),
                 base_risk_score=round(0.15 + (r_idx * 0.03), 2),
             )
             db.add(r)
@@ -684,9 +674,7 @@ class SyntheticDataGenerator:
                     WeatherSeverity.SEVERE.value
                     if temp < -15.0
                     else (
-                        WeatherSeverity.MODERATE.value
-                        if temp < -5.0
-                        else WeatherSeverity.LOW.value
+                        WeatherSeverity.MODERATE.value if temp < -5.0 else WeatherSeverity.LOW.value
                     )
                 )
                 wr = WeatherRecord(
