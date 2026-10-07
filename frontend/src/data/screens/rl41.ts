@@ -1,0 +1,568 @@
+// Screen: RL-41 — My Profile & Account Management
+// Route: /profile
+export const rl41Html = `<main  class="w-full flex-1 min-h-0 overflow-y-auto flex-1 overflow-y-auto p-space-lg space-y-space-md">
+<!-- PROFILE IDENTITY & READINESS HEADER BANNER -->
+<div class="bg-surface-container-lowest border border-outline-variant p-space-md rounded shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Identity Meta -->
+<div class="flex items-start space-x-4">
+<div class="w-16 h-16 rounded bg-primary-container text-on-primary border-2 border-secondary flex flex-col items-center justify-center font-mono font-bold text-xl flex-shrink-0 shadow-inner">
+<span>AM</span>
+<span class="text-[9px] font-normal tracking-widest text-secondary-container">OF-5</span>
+</div>
+<div class="space-y-1">
+<div class="flex flex-wrap items-center gap-2">
+<h1 class="text-headline-sm font-headline-sm text-primary tracking-tight font-bold">Lt. Col. Arjun Mehta</h1>
+<span class="text-label-sm font-mono bg-surface-container px-2 py-0.5 border border-outline-variant text-on-surface-variant rounded">USR-0148</span>
+<span class="text-label-xs font-mono uppercase px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container border border-secondary font-bold">STATUS: ACTIVE / VERIFIED</span>
+<span class="text-label-xs font-mono uppercase px-2 py-0.5 rounded bg-surface-container-high text-on-surface border border-outline-variant">CLEARANCE: SECRET / DEF-ENC L4</span>
+<span class="text-label-xs font-mono uppercase px-2 py-0.5 rounded bg-tertiary-fixed text-on-tertiary-fixed border border-secondary font-bold">MFA: HARDWARE FIDO2 ENFORCED</span>
+</div>
+<div class="text-body-md font-body-md text-on-surface-variant">
+<span class="font-medium text-on-surface">Logistics Officer (Operations Lead)</span> — HQ Northern Command · Sector IV-B (Leh-Ladakh)
+              </div>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-label-sm font-label-sm text-outline font-mono pt-1">
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="mail">mail</span>
+<span class="text-on-surface">arjun.mehta@army.logix.mil</span>
+</span>
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="pin_drop">pin_drop</span>
+<span>Duty Station: Forward Post Alpha (LOC-0042)</span>
+</span>
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+<span>Last Active: 4 min ago</span>
+</span>
+<span class="flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="verified_user">verified_user</span>
+<span>Profile Integrity: 90% Complete</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex flex-wrap lg:flex-col items-end gap-2 flex-shrink-0 border-t lg:border-t-0 pt-2 lg:pt-0 border-outline-variant">
+<button class="px-3 py-1.5 bg-primary text-on-primary hover:bg-secondary transition-colors rounded text-label-sm font-label-sm uppercase tracking-wider flex items-center space-x-1.5 shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Edit Permitted Fields</span>
+</button>
+<button class="px-3 py-1.5 bg-surface-container text-on-surface border border-outline-variant hover:bg-surface-container-high transition-colors rounded text-label-sm font-label-sm uppercase tracking-wider flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-sm" data-icon="lock_open">lock_open</span>
+<span>Request Access Elevation</span>
+</button>
+<button class="px-3 py-1 text-outline hover:text-on-surface transition-colors text-label-xs font-label-xs uppercase tracking-wider flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="badge">badge</span>
+<span>Download Cryptographic ID Badge</span>
+</button>
+</div>
+</div>
+</div>
+<!-- MAIN 2-COLUMN OPERATIONAL WORKSPACE -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-md">
+<!-- ================= LEFT COLUMN (~58% - 7 Columns) ================= -->
+<div class="lg:col-span-7 space-y-space-md">
+<!-- SECTION 1: Professional Assignment & Operational Hierarchy (Read-Only) -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="lock">lock</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Professional Assignment &amp; Operational Hierarchy</span>
+</div>
+<span class="text-label-xs font-mono px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant text-on-surface-variant">READ-ONLY // MIL-STD-810H</span>
+</div>
+<div class="p-space-md space-y-space-md">
+<div class="p-2 bg-surface-container-low border border-outline-variant rounded text-body-sm font-body-sm text-on-surface-variant flex items-start space-x-2">
+<span class="material-symbols-outlined text-sm text-outline mt-0.5" data-icon="info">info</span>
+<span>Parameters governed by Northern Command Administration under MIL-STD-810H &amp; DISA STIG. Cannot be altered by user.</span>
+</div>
+<!-- Field Values Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md font-mono text-body-sm font-body-sm">
+<div class="border border-outline-variant p-2.5 rounded bg-surface">
+<div class="text-label-xs text-outline uppercase">Operational Role</div>
+<div class="font-bold text-on-surface mt-0.5">Logistics Officer (ROLE-002)</div>
+<div class="text-[10px] text-secondary">Built-In Provisioning Template</div>
+</div>
+<div class="border border-outline-variant p-2.5 rounded bg-surface">
+<div class="text-label-xs text-outline uppercase">Assigned Command / Formation</div>
+<div class="font-bold text-on-surface mt-0.5">Northern Logistics Command</div>
+<div class="text-[10px] text-on-surface-variant">14 Corps Logistics Wing</div>
+</div>
+<div class="border border-outline-variant p-2.5 rounded bg-surface">
+<div class="text-label-xs text-outline uppercase">Station Coordinate / Base</div>
+<div class="font-bold text-on-surface mt-0.5">Forward Post Alpha (LOC-0042)</div>
+<div class="text-[10px] text-outline">High-Altitude Zone (4,820m MSL)</div>
+</div>
+<div class="border border-outline-variant p-2.5 rounded bg-surface">
+<div class="text-label-xs text-outline uppercase">Account Provisioned / Last Audit</div>
+<div class="font-bold text-on-surface mt-0.5">12 Jun 2026 · Audit: 01 Oct 2026</div>
+<div class="text-[10px] text-secondary">Passed Stage-IV Recertification</div>
+</div>
+</div>
+<!-- Scope Details -->
+<div class="border border-outline-variant p-2.5 rounded bg-surface font-mono">
+<div class="text-label-xs text-outline uppercase">Assigned Operational Scope &amp; Corridors</div>
+<div class="text-body-sm font-bold text-primary mt-1">Sector IV-B Tactical Axis</div>
+<div class="text-body-sm text-on-surface-variant mt-0.5">
+                  14 Frontline Nodes · 3 Regimental Depots · 2 High-Altitude Corridors: RTE-018 (Zoji La - Kargil) &amp; RTE-021 (Fotu La Axis)
+                </div>
+</div>
+<!-- Hierarchy Visual Tree Widget -->
+<div class="border border-outline-variant rounded p-space-sm bg-surface-container-low font-mono text-body-sm">
+<div class="text-label-xs text-outline uppercase mb-2">Scope Hierarchy Visualization</div>
+<div class="space-y-1.5 text-on-surface text-xs">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="account_tree">account_tree</span>
+<span class="font-bold">Northern Logistics Network</span>
+<span class="text-outline text-[10px]">[TOP LEVEL]</span>
+</div>
+<div class="pl-4 flex items-center space-x-2 border-l border-outline-variant ml-1.5">
+<span class="text-outline">└──</span>
+<span class="font-semibold text-primary">Sector IV-B Forward Nodes</span>
+<span class="text-[10px] text-outline">(LOC-0042 Alpha, Bodhkharbu DEP-0002, Khangral CP)</span>
+</div>
+<div class="pl-8 flex items-center space-x-2 border-l border-outline-variant ml-1.5">
+<span class="text-outline">└──</span>
+<span class="text-on-surface-variant">Allocated Assets: Class III POL, Arctic Diesel, Stallion 4x4 Bowsers VH-0087</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: Effective Access & Module Authorization Matrix -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="policy">policy</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Effective Access &amp; Module Authorization Matrix</span>
+</div>
+<a class="text-label-xs font-mono text-secondary hover:underline flex items-center space-x-1" href="#">
+<span>View Matrix in RL-38</span>
+<span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left font-mono text-body-sm">
+<thead>
+<tr class="bg-surface-container-high border-b border-outline-variant text-[11px] font-bold text-primary uppercase">
+<th class="py-2 px-space-md">Module / Resource Domain</th>
+<th class="py-2 px-space-md">Granted Privileges</th>
+<th class="py-2 px-space-md text-right">Effective Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">Command Dashboard (RL-05)</td>
+<td class="py-2 px-space-md text-on-surface-variant">View Telemetry, Filter Logistics Grids</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">AUTHORIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">GIS Command Center (RL-11)</td>
+<td class="py-2 px-space-md text-on-surface-variant">View Routes, Plot Tactical Waypoints</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">AUTHORIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">Depot Inventory (RL-15)</td>
+<td class="py-2 px-space-md text-on-surface-variant">View Stocks, Create Dispatches, Approve Replenishment</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container border border-secondary text-[10px] font-bold">PRIVILEGED L3</span>
+</td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">Demand Forecasting (RL-20)</td>
+<td class="py-2 px-space-md text-on-surface-variant">View Weather-Indexed Models, Trigger Forecast</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">AUTHORIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">Fleet &amp; Convoys (RL-25)</td>
+<td class="py-2 px-space-md text-on-surface-variant">Track Sorties, Reroute Convoys, Driver Reassignment</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">AUTHORIZED</span>
+</td>
+</tr>
+<tr class="hover:bg-surface">
+<td class="py-2 px-space-md font-semibold text-on-surface">AI Recommendations (RL-32)</td>
+<td class="py-2 px-space-md text-on-surface-variant">View Recommendations, Execute Operator Overrides</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container border border-secondary text-[10px] font-bold">PRIVILEGED L3</span>
+</td>
+</tr>
+<tr class="hover:bg-surface bg-surface-container-high/40">
+<td class="py-2 px-space-md font-semibold text-outline">System Administration (RL-37 - RL-40)</td>
+<td class="py-2 px-space-md text-outline">Modify Users, System Hardening, Audit Purging</td>
+<td class="py-2 px-space-md text-right">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container border border-error/30 text-[10px] font-bold">RESTRICTED (403)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- SECTION 3: Personal Identity & Editable Details Form -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="person">person</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Personal Identity &amp; Editable User Details</span>
+</div>
+<span class="text-[11px] font-mono text-outline">FORM REF: MOD-USR-0148</span>
+</div>
+<form class="p-space-md space-y-space-md">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Editable: Display Name -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1 font-bold">Preferred Display Name</label>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0" type="text" value="Arjun Mehta"/>
+<span class="text-[10px] text-outline font-mono">Appears on signature blocks and dispatch vouchers</span>
+</div>
+<!-- Read-Only: Official Email -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-label-sm font-label-sm text-outline font-bold">Official Military Email</label>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="lock">lock</span>
+</div>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface-container border border-outline-variant/60 rounded text-outline cursor-not-allowed font-mono" disabled="" type="text" value="arjun.mehta@army.logix.mil"/>
+<span class="text-[10px] text-outline font-mono">Locked to Armed Forces Directory (NIC-MOD)</span>
+</div>
+<!-- Editable: Tactical Field Comms -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1 font-bold">Direct Tactical Field Comms (TAC-NET)</label>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0 font-mono" type="text" value="+91 94190 ••••• [SEC-SAT-04]"/>
+<span class="text-[10px] text-outline font-mono">Encrypted satellite dialer routing</span>
+</div>
+<!-- Read-Only: Service ID -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-label-sm font-label-sm text-outline font-bold">Service Commission ID</label>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="lock">lock</span>
+</div>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface-container border border-outline-variant/60 rounded text-outline cursor-not-allowed font-mono" disabled="" type="text" value="IC-78921K"/>
+<span class="text-[10px] text-outline font-mono">Verified against Army Personnel Records</span>
+</div>
+<!-- Editable: Alternate Email -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1 font-bold">Alternate Emergency Alert Email</label>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0 font-mono" type="email" value="a.mehta.qmg@leh.nic.in"/>
+<span class="text-[10px] text-outline font-mono">Receives secondary operational broadcast digests</span>
+</div>
+<!-- Read-Only: Clearance Level -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-label-sm font-label-sm text-outline font-bold">Clearance Level &amp; Node</label>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="lock">lock</span>
+</div>
+<input class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface-container border border-outline-variant/60 rounded text-outline cursor-not-allowed font-mono" disabled="" type="text" value="Level 4 (SEC-L4) / Forward Post Alpha (LOC-0042)"/>
+<span class="text-[10px] text-outline font-mono">Security enclave: NORTH-LEH-042</span>
+</div>
+<!-- Editable: Timezone -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1 font-bold">Operational Timezone</label>
+<select class="w-full h-9 px-2.5 text-body-md font-body-md bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0 font-mono">
+<option selected="">Indian Standard Time (IST — UTC+05:30)</option>
+<option>Zulu Time (UTC+00:00)</option>
+</select>
+</div>
+<!-- Editable: Date & Density -->
+<div>
+<label class="block text-label-sm font-label-sm text-on-surface mb-1 font-bold">Interface Density &amp; Format</label>
+<div class="grid grid-cols-2 gap-2">
+<select class="w-full h-9 px-2 text-body-sm font-body-sm bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0">
+<option selected="">Compact (Enterprise)</option>
+<option>Default Grid</option>
+</select>
+<select class="w-full h-9 px-2 text-body-sm font-body-sm bg-surface border border-outline-variant rounded text-on-surface focus:border-primary focus:ring-0 font-mono">
+<option selected="">DD MMM YYYY</option>
+<option>YYYY-MM-DD (ISO)</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Form Action Footer -->
+<div class="pt-3 border-t border-outline-variant flex items-center justify-between">
+<span class="text-label-xs font-mono text-outline flex items-center space-x-1">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>No unsaved modifications</span>
+</span>
+<div class="flex items-center space-x-2">
+<button class="px-3 py-1.5 text-label-sm font-label-sm text-on-surface hover:bg-surface-container-high rounded transition-colors border border-outline-variant" type="button">
+                    Discard
+                  </button>
+<button class="px-4 py-1.5 text-label-sm font-label-sm bg-primary text-on-primary hover:bg-secondary rounded transition-colors font-bold uppercase tracking-wider" type="submit">
+                    Save Personal Changes
+                  </button>
+</div>
+</div>
+</form>
+</div>
+<!-- SECTION 4: Display & Regional Preferences -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-space-md space-y-3">
+<div class="flex items-center justify-between pb-2 border-b border-outline-variant">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="tune">tune</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Display &amp; Regional Preferences</span>
+</div>
+<span class="text-[10px] font-mono text-outline">ENV: DESKTOP TACTICAL WORKSTATION</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 font-mono text-body-sm">
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-[10px] text-outline uppercase font-bold">Theme Mode</div>
+<div class="mt-1 flex items-center space-x-1">
+<span class="px-1.5 py-0.5 rounded bg-secondary text-on-secondary text-[11px] font-bold">TACTICAL LIGHT</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-container text-outline text-[11px]">DARK ENCLAVE</span>
+</div>
+</div>
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-[10px] text-outline uppercase font-bold">Default Landing View</div>
+<div class="mt-1 text-on-surface font-semibold text-xs">Command Dashboard (RL-05)</div>
+<div class="text-[9px] text-outline">Auto-routes upon login</div>
+</div>
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-[10px] text-outline uppercase font-bold">Default Layer Stacks</div>
+<div class="mt-1 text-xs text-on-surface">Routes + Fleet Saturation</div>
+<div class="text-[9px] text-secondary">Elevation: High-Res Map</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RIGHT COLUMN (~42% - 5 Columns) ================= -->
+<div class="lg:col-span-5 space-y-space-md">
+<!-- SECTION 5: Cryptographic Security & Credential Governance -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="security">security</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Cryptographic Security Governance</span>
+</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container border border-secondary font-bold">L4 HARDENED</span>
+</div>
+<div class="p-space-md space-y-3 font-mono text-body-sm">
+<div class="flex items-center justify-between p-2 border border-outline-variant rounded bg-surface">
+<div>
+<div class="text-label-xs text-outline uppercase">Multi-Factor Authentication (MFA)</div>
+<div class="font-bold text-on-surface mt-0.5">ACTIVE &amp; ENFORCED</div>
+<div class="text-[10px] text-secondary">FIDO2 Hardware Token (YubiKey 5 NFC) + TOTP</div>
+</div>
+<button class="px-2 py-1 text-label-xs font-label-xs bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high rounded uppercase">
+                  Manage Token
+                </button>
+</div>
+<div class="flex items-center justify-between p-2 border border-outline-variant rounded bg-surface">
+<div>
+<div class="text-label-xs text-outline uppercase">Military Password Rotation</div>
+<div class="font-bold text-on-surface mt-0.5">Last rotated 24 days ago</div>
+<div class="text-[10px] text-outline">Complies with DISA 90-day cycle policy</div>
+</div>
+<button class="px-2 py-1 text-label-xs font-label-xs bg-surface-container border border-outline-variant text-on-surface hover:bg-surface-container-high rounded uppercase">
+                  Rotate Password
+                </button>
+</div>
+<div class="flex items-center justify-between text-xs p-2 bg-surface-container-low rounded border border-outline-variant">
+<span class="text-outline">Security Health Status:</span>
+<span class="font-bold text-secondary flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+<span>NOMINAL · 0 Policy Breaches</span>
+</span>
+</div>
+</div>
+</div>
+<!-- SECTION 6: Active Authenticated Sessions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="devices">devices</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Active Authenticated Sessions</span>
+</div>
+<span class="text-label-xs font-mono text-outline">2 CONCURRENT NODES</span>
+</div>
+<div class="p-space-md space-y-2.5 font-mono text-body-sm">
+<!-- Session 1: Current -->
+<div class="p-2.5 border-2 border-secondary bg-surface rounded space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-base text-primary" data-icon="laptop_chromebook">laptop_chromebook</span>
+<span class="font-bold text-primary">MacBook Pro 16" / Chrome 128</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[10px] font-bold">CURRENT SESSION</span>
+</div>
+<div class="text-[11px] text-outline flex items-center justify-between">
+<span>HQ Northern Enclave · IP: 10.24.12.8</span>
+<span class="text-secondary">Active 4m ago</span>
+</div>
+</div>
+<!-- Session 2: Field PDU -->
+<div class="p-2.5 border border-outline-variant bg-surface rounded space-y-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-base text-on-surface-variant" data-icon="tablet_android">tablet_android</span>
+<span class="font-bold text-on-surface">Rugged Mobile Field PDU / Chromium</span>
+</div>
+<button class="text-error hover:underline text-[10px] uppercase font-bold">Revoke</button>
+</div>
+<div class="text-[11px] text-outline flex items-center justify-between">
+<span>Forward Post Alpha · IP: 10.24.19.44</span>
+<span>Active 2h ago</span>
+</div>
+</div>
+<div class="pt-1 flex justify-end">
+<button class="text-label-xs font-mono text-error hover:underline uppercase tracking-wider flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="cancel">cancel</span>
+<span>Revoke All Other Sessions</span>
+</button>
+</div>
+</div>
+</div>
+<!-- SECTION 7: My Operational Work Queue & Pending Actions -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="pending_actions">pending_actions</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Operational Work Queue &amp; Pending Actions</span>
+</div>
+<span class="text-label-xs font-mono px-2 py-0.5 rounded bg-error-container text-on-error-container font-bold">4 PENDING</span>
+</div>
+<div class="p-space-md space-y-2.5 font-mono">
+<!-- Urgent Recommendation Alert -->
+<div class="p-2.5 border-l-4 border-error bg-surface border-t border-r border-b border-outline-variant rounded-r space-y-1.5">
+<div class="flex items-center justify-between">
+<span class="text-label-xs font-bold text-error uppercase">REC-2048 · CRITICAL DISPATCH</span>
+<span class="text-[10px] text-outline">94% Confidence</span>
+</div>
+<div class="text-body-sm font-bold text-primary">
+                  Fuel Replenishment: +2,500 L Arctic POL at Forward Post Alpha
+                </div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-[10px] text-outline">Trigger: Fotu La Weather Window Closing</span>
+<button class="px-2.5 py-1 text-label-xs font-bold bg-primary text-on-primary hover:bg-secondary rounded transition-colors uppercase">
+                    Review &amp; Sign
+                  </button>
+</div>
+</div>
+<!-- Scope Quick Stats Grid -->
+<div class="grid grid-cols-3 gap-2 text-center pt-1">
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">5</div>
+<div class="text-[9px] uppercase text-outline">Active Sorties</div>
+</div>
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-headline-sm font-headline-sm font-bold text-primary">4</div>
+<div class="text-[9px] uppercase text-outline">Assigned Depots</div>
+</div>
+<div class="p-2 border border-outline-variant rounded bg-surface">
+<div class="text-headline-sm font-headline-sm font-bold text-secondary">1</div>
+<div class="text-[9px] uppercase text-outline">Live Simulation</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 8: Notification Rules & Quiet Hours Schedule -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="notifications_active">notifications_active</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Notification Rules &amp; Quiet Hours</span>
+</div>
+<span class="text-[10px] font-mono text-outline">POLICY ENFORCED</span>
+</div>
+<div class="p-space-md space-y-2.5 font-mono text-body-sm">
+<div class="flex items-center justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface font-medium text-xs">Critical Risk &amp; Threat Alerts</span>
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container text-[10px] font-bold">ALWAYS ON (INVIOLABLE)</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface text-xs">Stockout Probability &gt;70%</span>
+<span class="text-secondary text-xs font-semibold">In-App + Tactical SMS</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-outline-variant/60">
+<span class="text-on-surface text-xs">Convoy Transit Delay &gt;30m</span>
+<span class="text-on-surface-variant text-xs font-semibold">In-App Only</span>
+</div>
+<div class="flex items-center justify-between py-1">
+<span class="text-on-surface text-xs">Weather Advisories</span>
+<span class="text-on-surface-variant text-xs font-semibold">In-App + Email</span>
+</div>
+<!-- Quiet Hours Scheduler -->
+<div class="p-2 border border-outline-variant rounded bg-surface space-y-1">
+<div class="flex items-center justify-between text-xs">
+<span class="text-outline uppercase text-[10px] font-bold">Scheduled Quiet Hours</span>
+<span class="font-bold text-primary">22:00 — 06:00 IST</span>
+</div>
+<div class="text-[10px] text-outline leading-tight">
+                  Notice: Critical Operational Dispatches and DEFCON escalations bypass quiet hours unconditionally.
+                </div>
+</div>
+</div>
+</div>
+<!-- SECTION 9: Personal Activity & Immutable Audit Log Snippet -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded">
+<div class="px-space-md py-2.5 border-b border-outline-variant flex items-center justify-between bg-surface-container">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="history">history</span>
+<span class="text-label-sm font-label-sm font-bold uppercase tracking-wider text-primary">Personal Activity Ledger (RL-39)</span>
+</div>
+<a class="text-[10px] font-mono text-secondary hover:underline flex items-center space-x-0.5" href="#">
+<span>Complete Audit</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+<div class="p-space-md space-y-2 font-mono text-xs">
+<div class="flex items-start space-x-2 pb-1.5 border-b border-outline-variant/40">
+<span class="text-outline text-[11px] font-semibold w-16 flex-shrink-0">14:46 IST</span>
+<span class="text-on-surface">Formally approved recommendation <strong class="text-primary">REC-2048</strong> (+3,000 L fuel override)</span>
+</div>
+<div class="flex items-start space-x-2 pb-1.5 border-b border-outline-variant/40">
+<span class="text-outline text-[11px] font-semibold w-16 flex-shrink-0">14:38 IST</span>
+<span class="text-on-surface">Inspected Fotu La weather radar in Risk Intelligence</span>
+</div>
+<div class="flex items-start space-x-2 pb-1.5 border-b border-outline-variant/40">
+<span class="text-outline text-[11px] font-semibold w-16 flex-shrink-0">14:32 IST</span>
+<span class="text-on-surface">Opened simulation SIM-0084 evidence dossier</span>
+</div>
+<div class="flex items-start space-x-2 pb-1.5 border-b border-outline-variant/40">
+<span class="text-outline text-[11px] font-semibold w-16 flex-shrink-0">13:54 IST</span>
+<span class="text-on-surface">Updated dispatch manifest for Convoy SHP-2048</span>
+</div>
+<div class="flex items-start space-x-2">
+<span class="text-outline text-[11px] font-semibold w-16 flex-shrink-0">12:12 IST</span>
+<span class="text-on-surface">Authenticated via Hardware Token (Leh Enclave)</span>
+</div>
+</div>
+</div>
+<!-- SECTION 10: Help & Administrative Support Desk -->
+<div class="bg-surface-container-low border border-outline-variant rounded p-space-md space-y-3 font-mono">
+<div class="text-label-xs text-outline uppercase font-bold flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-sm text-secondary" data-icon="support_agent">support_agent</span>
+<span>Command Directory &amp; Support</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Need changes to your role or operational command boundary? Contact HQ Northern Command Logistics Directorate.
+            </p>
+<div class="flex flex-wrap gap-2 pt-1">
+<button class="px-2.5 py-1 text-label-xs font-label-xs bg-surface border border-outline-variant text-on-surface hover:bg-surface-container-high rounded uppercase font-bold">
+                Request Scope Adjustment
+              </button>
+<button class="px-2.5 py-1 text-label-xs font-label-xs bg-surface border border-outline-variant text-on-surface hover:bg-surface-container-high rounded uppercase font-bold">
+                Report Security Concern
+              </button>
+</div>
+<div class="pt-2 border-t border-outline-variant/60 flex items-center justify-between text-[11px]">
+<span class="text-outline">Account Deactivation:</span>
+<button class="text-error hover:underline uppercase font-bold text-[10px]">
+                Request Deactivation (Requires Cmdr Review)
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- DEFENSE COMPLIANCE FOOTER -->
+<footer class="pt-4 pb-2 border-t border-outline-variant text-center font-mono text-[10px] text-outline uppercase tracking-wider space-y-0.5">
+<div>RESTRICTED CLASSIFIED // HQ NORTHERN COMMAND LOGISTICS ENCLAVE • MIL-STD-188F &amp; ISO/IEC 27001 AUDITED</div>
+<div>USR-0148 SEC-L4 SESSION • ENCRYPTION: AES-256-GCM • INTEGRITY CERT: 0x9AF4812C</div>
+</footer>
+</main>`;
