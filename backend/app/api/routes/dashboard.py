@@ -66,9 +66,7 @@ async def get_dashboard_summary(
     ).scalar() or 0
 
     n_delayed_shipments = (
-        await db.execute(
-            select(func.count(Shipment.id)).where(Shipment.status == "DELAYED")
-        )
+        await db.execute(select(func.count(Shipment.id)).where(Shipment.status == "DELAYED"))
     ).scalar() or 0
 
     # 4. Critical alerts count
@@ -92,32 +90,24 @@ async def get_dashboard_summary(
     ).scalar() or 0
 
     # 6. Inventory aggregations
-    inv_total_qty = (
-        await db.execute(select(func.sum(Inventory.quantity)))
-    ).scalar() or 0.0
+    inv_total_qty = (await db.execute(select(func.sum(Inventory.quantity)))).scalar() or 0.0
     inv_count_total = (await db.execute(select(func.count(Inventory.id)))).scalar() or 0
     inv_below_safety = (
         await db.execute(
-            select(func.count(Inventory.id)).where(
-                Inventory.quantity <= Inventory.safety_stock
-            )
+            select(func.count(Inventory.id)).where(Inventory.quantity <= Inventory.safety_stock)
         )
     ).scalar() or 0
 
     # 7. Fleet vehicle stats
     vehicles_avail = (
         await db.execute(
-            select(func.count(Vehicle.id)).where(
-                Vehicle.availability_status == "AVAILABLE"
-            )
+            select(func.count(Vehicle.id)).where(Vehicle.availability_status == "AVAILABLE")
         )
     ).scalar() or 0
 
     vehicles_unavail = (
         await db.execute(
-            select(func.count(Vehicle.id)).where(
-                Vehicle.availability_status != "AVAILABLE"
-            )
+            select(func.count(Vehicle.id)).where(Vehicle.availability_status != "AVAILABLE")
         )
     ).scalar() or 0
 
@@ -134,9 +124,7 @@ async def get_dashboard_summary(
     safety_breach_ratio = (
         (inv_below_safety / max(1, inv_count_total)) if inv_count_total > 0 else 0.0
     )
-    route_risk_ratio = (
-        (n_high_risk_routes / max(1, n_total_routes)) if n_total_routes > 0 else 0.0
-    )
+    route_risk_ratio = (n_high_risk_routes / max(1, n_total_routes)) if n_total_routes > 0 else 0.0
     alert_penalty = min(0.3, n_critical_alerts * 0.05)
 
     raw_readiness = 100.0 * (
@@ -310,16 +298,12 @@ async def get_dashboard_trends(
     f_rows = (await db.execute(f_stmt)).all()
 
     cons_by_date = {
-        r.date.isoformat() if isinstance(r.date, date) else str(r.date): float(
-            r.daily_cons or 0.0
-        )
+        r.date.isoformat() if isinstance(r.date, date) else str(r.date): float(r.daily_cons or 0.0)
         for r in c_rows
     }
     fc_by_date = {
         (
-            r.target_date.isoformat()
-            if isinstance(r.target_date, date)
-            else str(r.target_date)
+            r.target_date.isoformat() if isinstance(r.target_date, date) else str(r.target_date)
         ): float(r.daily_fc or 0.0)
         for r in f_rows
     }
