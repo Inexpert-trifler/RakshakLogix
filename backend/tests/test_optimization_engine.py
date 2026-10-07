@@ -28,7 +28,6 @@ from app.optimization.vrp import ORToolsLogisticsSolver
 
 
 class TestRouteGraphBuilder:
-
     def test_build_graph_and_find_paths(self) -> None:
         loc_1 = str(uuid.uuid4())
 
@@ -79,7 +78,6 @@ class TestRouteGraphBuilder:
 
 
 class TestVehicleAssignmentEngine:
-
     def test_allocate_vehicles_feasible(self) -> None:
         vehicles = [
             {
@@ -102,9 +100,7 @@ class TestVehicleAssignmentEngine:
             },
         ]
 
-        res = VehicleAssignmentEngine.allocate_vehicles(
-            vehicles, required_load_kg=6000.0
-        )
+        res = VehicleAssignmentEngine.allocate_vehicles(vehicles, required_load_kg=6000.0)
         assert res["status"] == "FEASIBLE"
         assert len(res["allocated_vehicles"]) == 2  # 5000 + 1000 from second truck
         assert res["unfulfilled_load_kg"] == 0.0
@@ -119,15 +115,12 @@ class TestVehicleAssignmentEngine:
             },
         ]
 
-        res = VehicleAssignmentEngine.allocate_vehicles(
-            vehicles, required_load_kg=3000.0
-        )
+        res = VehicleAssignmentEngine.allocate_vehicles(vehicles, required_load_kg=3000.0)
         assert res["status"] == "NO_FEASIBLE_VEHICLE"
         assert res["unfulfilled_load_kg"] == 2000.0
 
 
 class TestORToolsLogisticsSolver:
-
     def test_solve_shipment_optimization(self) -> None:
         vehicles = [
             {
@@ -160,11 +153,8 @@ class TestORToolsLogisticsSolver:
 
 
 class TestShipmentPlannerIntegration:
-
     @pytest.mark.asyncio
-    async def test_end_to_end_replenishment_planning(
-        self, db_session: AsyncSession
-    ) -> None:
+    async def test_end_to_end_replenishment_planning(self, db_session: AsyncSession) -> None:
         loc_res = await db_session.execute(select(Location))
         locations = loc_res.scalars().all()
         assert len(locations) >= 2
@@ -190,11 +180,8 @@ class TestShipmentPlannerIntegration:
 
 
 class TestLogisticsEndpoints:
-
     @pytest.mark.asyncio
-    async def test_vehicle_and_shipment_crud_endpoints(
-        self, client: AsyncClient
-    ) -> None:
+    async def test_vehicle_and_shipment_crud_endpoints(self, client: AsyncClient) -> None:
         login = await client.post(
             "/api/v1/auth/login",
             json={"email": "admin@rakshaklogix.dev", "password": "Admin@123456"},
