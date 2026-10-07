@@ -101,18 +101,12 @@ class CompositeRiskCalculator:
         # Generate dynamic explanation
         reasons = []
         if days_to_stockout <= 3.0:
-            reasons.append(
-                f"Imminent stockout projected in {days_to_stockout:.1f} days."
-            )
+            reasons.append(f"Imminent stockout projected in {days_to_stockout:.1f} days.")
         elif is_safety_breached:
-            reasons.append(
-                "Current inventory is projected below safety stock threshold."
-            )
+            reasons.append("Current inventory is projected below safety stock threshold.")
 
         if demand_cv >= 0.3:
-            reasons.append(
-                "High demand volatility / spike detected in recent consumption history."
-            )
+            reasons.append("High demand volatility / spike detected in recent consumption history.")
 
         if weather_severity.upper() in ("SEVERE", "EXTREME"):
             reasons.append(
@@ -120,9 +114,7 @@ class CompositeRiskCalculator:
             )
 
         if route_risk_score >= 0.5:
-            reasons.append(
-                f"Elevated terrain/road risk on supply route ({route_risk_score:.2f})."
-            )
+            reasons.append(f"Elevated terrain/road risk on supply route ({route_risk_score:.2f}).")
 
         if delivery_delay_hours >= 12.0:
             reasons.append(
@@ -135,7 +127,7 @@ class CompositeRiskCalculator:
             )
 
         explanation = f"Risk: {severity}. Primary contributors:\n" + "\n".join(
-            f"{i+1}. {r}" for i, r in enumerate(reasons)
+            f"{i + 1}. {r}" for i, r in enumerate(reasons)
         )
 
         return {
