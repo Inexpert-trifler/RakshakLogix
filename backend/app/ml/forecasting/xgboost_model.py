@@ -38,12 +38,8 @@ class MLFeatureForecaster(BaseForecaster):
         df["rolling_mean_14"] = df["y"].shift(1).rolling(14, min_periods=1).mean()
         df["rolling_mean_28"] = df["y"].shift(1).rolling(28, min_periods=1).mean()
 
-        df["rolling_std_7"] = (
-            df["y"].shift(1).rolling(7, min_periods=1).std().fillna(0.0)
-        )
-        df["rolling_std_14"] = (
-            df["y"].shift(1).rolling(14, min_periods=1).std().fillna(0.0)
-        )
+        df["rolling_std_7"] = df["y"].shift(1).rolling(7, min_periods=1).std().fillna(0.0)
+        df["rolling_std_14"] = df["y"].shift(1).rolling(14, min_periods=1).std().fillna(0.0)
 
         df = df.bfill().fillna(0.0)
         X = df.drop(columns=["y"]).values
@@ -60,9 +56,7 @@ class MLFeatureForecaster(BaseForecaster):
             return NaiveForecaster().fit_predict(train_y, val_y, horizon_days)
 
         try:
-            full_series = (
-                np.concatenate([train_y, val_y]) if val_y is not None else train_y
-            )
+            full_series = np.concatenate([train_y, val_y]) if val_y is not None else train_y
             X, y = self.build_features(full_series)
 
             n_train = len(train_y)
