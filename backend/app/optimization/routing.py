@@ -19,7 +19,6 @@ import networkx as nx
 
 
 class RouteOptimizer:
-
     @classmethod
     def optimize_route(
         cls,
@@ -99,9 +98,7 @@ class RouteOptimizer:
         # Find k-shortest simple paths
         candidates = []
         try:
-            raw_paths = list(
-                nx.shortest_simple_paths(G, source_str, dest_str, weight="weight")
-            )[:5]
+            raw_paths = list(nx.shortest_simple_paths(G, source_str, dest_str, weight="weight"))[:5]
         except (nx.NetworkXNoPath, nx.NodeNotFound):
             raw_paths = []
 
@@ -146,9 +143,7 @@ class RouteOptimizer:
             candidates.append(
                 {
                     "route_id": uuid.uuid4(),
-                    "name": (
-                        " → ".join(route_names) if route_names else f"Option {idx+1}"
-                    ),
+                    "name": (" → ".join(route_names) if route_names else f"Option {idx + 1}"),
                     "total_distance_km": round(total_dist, 1),
                     "total_travel_time_hours": round(total_time, 1),
                     "risk_score": composite_risk,
@@ -163,7 +158,9 @@ class RouteOptimizer:
                 (
                     0
                     if x["feasibility_status"] == "FEASIBLE"
-                    else 1 if x["feasibility_status"] == "HIGH_RISK" else 2
+                    else 1
+                    if x["feasibility_status"] == "HIGH_RISK"
+                    else 2
                 ),
                 x["risk_score"],
                 x["total_travel_time_hours"],
