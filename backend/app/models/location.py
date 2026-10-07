@@ -82,9 +82,7 @@ class Location(UUIDPrimaryKeyMixin, TimestampMixin, Base):
     geom = _geom_column
 
     # Relationships
-    inventory: Mapped[list] = relationship(
-        "Inventory", back_populates="location", lazy="select"
-    )
+    inventory: Mapped[list] = relationship("Inventory", back_populates="location", lazy="select")
     consumption_records: Mapped[list] = relationship(
         "ConsumptionRecord", back_populates="location", lazy="select"
     )
