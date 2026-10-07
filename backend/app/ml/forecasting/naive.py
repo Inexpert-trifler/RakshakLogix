@@ -23,9 +23,7 @@ class NaiveForecaster(BaseForecaster):
         val_y: np.ndarray | None,
         horizon_days: int,
     ) -> tuple[np.ndarray, dict[str, float]]:
-        recent_vals = (
-            train_y[-self.window :] if len(train_y) >= self.window else train_y
-        )
+        recent_vals = train_y[-self.window :] if len(train_y) >= self.window else train_y
         mean_val = float(np.mean(recent_vals)) if len(recent_vals) > 0 else 0.0
 
         if val_y is not None and len(val_y) > 0:
@@ -58,14 +56,14 @@ class SeasonalNaiveForecaster(BaseForecaster):
         seasonal_pattern = train_y[-self.season_length :]
 
         if val_y is not None and len(val_y) > 0:
-            val_pred = np.tile(
-                seasonal_pattern, int(np.ceil(len(val_y) / self.season_length))
-            )[: len(val_y)]
+            val_pred = np.tile(seasonal_pattern, int(np.ceil(len(val_y) / self.season_length)))[
+                : len(val_y)
+            ]
             metrics = evaluate_forecast(val_y, val_pred)
         else:
             metrics = {"mae": 0.0, "rmse": 0.0, "mape": 0.0}
 
-        predictions = np.tile(
-            seasonal_pattern, int(np.ceil(horizon_days / self.season_length))
-        )[:horizon_days]
+        predictions = np.tile(seasonal_pattern, int(np.ceil(horizon_days / self.season_length)))[
+            :horizon_days
+        ]
         return np.maximum(0.0, predictions), metrics
