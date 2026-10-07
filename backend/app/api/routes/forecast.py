@@ -65,9 +65,7 @@ async def list_forecast_models(
     ]
 
 
-@router.post(
-    "/demand", response_model=ForecastResponse, status_code=status.HTTP_201_CREATED
-)
+@router.post("/demand", response_model=ForecastResponse, status_code=status.HTTP_201_CREATED)
 async def generate_demand_forecast(
     payload: ForecastRequest,
     db: AsyncSession = Depends(get_db),
