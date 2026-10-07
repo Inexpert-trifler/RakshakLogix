@@ -32,9 +32,7 @@ class RakshakLogixError(Exception):
     http_status: int = status.HTTP_500_INTERNAL_SERVER_ERROR
     error_code: str = "INTERNAL_ERROR"
 
-    def __init__(
-        self, message: str = "An unexpected error occurred.", details: Any = None
-    ) -> None:
+    def __init__(self, message: str = "An unexpected error occurred.", details: Any = None) -> None:
         super().__init__(message)
         self.message = message
         self.details = details or {}
@@ -119,9 +117,7 @@ def _error_envelope(
 # ──────────────────────────────────────────────────────────────────────────────
 
 
-async def domain_exception_handler(
-    request: Request, exc: RakshakLogixError
-) -> JSONResponse:
+async def domain_exception_handler(request: Request, exc: RakshakLogixError) -> JSONResponse:
     request_id = str(uuid.uuid4())
     logger.warning(
         "domain_error",
@@ -139,9 +135,7 @@ async def domain_exception_handler(
     )
 
 
-async def http_exception_handler(
-    request: Request, exc: StarletteHTTPException
-) -> JSONResponse:
+async def http_exception_handler(request: Request, exc: StarletteHTTPException) -> JSONResponse:
     request_id = str(uuid.uuid4())
     logger.info(
         "http_exception",
