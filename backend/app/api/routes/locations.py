@@ -47,9 +47,7 @@ async def list_locations(
     "/locations",
     response_model=LocationResponse,
     status_code=(
-        status.HTTP_211_CREATED
-        if hasattr(status, "HTTP_211_CREATED")
-        else status.HTTP_201_CREATED
+        status.HTTP_211_CREATED if hasattr(status, "HTTP_211_CREATED") else status.HTTP_201_CREATED
     ),
 )
 async def create_location(
